@@ -1,0 +1,1414 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<title>Übersicht</title>
+
+<!-- Metainformation laden -->
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="CoMedius Presenter  -  Author: CoMedius - Business Solutions">
+<meta name="description" content="Der CoMedius Presenter ist eine reine Internetanwendung, mit der Sie mit einfachen Klicks Produkte und Dienstleitungen im Internet präsentieren können. Variable Inhalte, eigenes Design und schnelle Änderungsmöglichkeiten ohne Programmierkenntnisse sind mit dem CoMedius Presenter möglich und für jedermann umsetzbar.">
+<meta name="keywords" content="Internetauftritt,Internetlösung,Weblösung,Tools,Tool,Auswertungen,variable Inhalte,Content Management System,CMS,Webverwaltung,einfache Bedienung,Webhosting,Internetauftritt,individuelles Design,einfache Erstellung,Seitenerstellung,Verein,Vereine,Selbständige,Unternehmen,Mittelstand,Tierschutzverein,Tierheim,Tierpension,Verband,Verbände">
+<meta name="robots" content="index">
+<meta name="robots" content="follow">
+
+<!-- CSS laden -->
+<!-- CSS liegt in der Datei: formate.css -->
+<link rel="stylesheet" type="text/css" href="sys_formate.css">
+
+
+
+<!-- Java-Script Funktionen -->
+
+
+
+
+<script type="text/javascript">
+<!--
+var f_link = "";
+var f_form_variablen = "form_variablen";
+
+var f_variablen_anzahl = 0;
+var f_variablen_name = new Array();
+var f_variablen_inhalt = new Array();
+
+
+
+
+function form_mail_abschicken(string_href)
+{
+         //Felder überprüfen
+         document.form_mail.method = "post";
+         document.form_mail.action = string_href;
+         document.form_mail.submit();
+}
+
+
+
+
+function suche_starten(string_href)
+{
+         document.form_suche.method = "post";
+         document.form_suche.action = string_href;
+         document.form_suche.submit();
+}
+
+
+
+
+function fenster_schliessen()
+{
+
+        window.open('','_parent','');
+        window.close();
+        //self.close();
+}
+
+
+
+
+function einblenden_bild(bild_object_id,bild_speicher_autowert_id,bild_speicher_name_id,bild_autowert,bild_name)
+{
+        //Objekt einblenden
+        document.getElementById(bild_object_id).src = bild_name;
+        document.getElementById(bild_speicher_autowert_id).value = bild_autowert;
+        document.getElementById(bild_speicher_name_id).value = bild_name;
+}
+
+
+
+
+function einblenden_bereich()
+{
+        //Objekt einblenden
+        formular_bereich.style.display = 'block';
+}
+
+
+
+
+function einblenden_objekt(objekt_name,objekt_eigenschaft)
+{
+        //Objekt einblenden
+        document.getElementById(objekt_name).removeAttribute(objekt_eigenschaft);
+}
+
+
+
+
+function vorschau_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	vorschau_seite = window.open(f_link,"CoMedius","width=990,height=580,left=0,top=0,locationbar=yes,menubar=yes,scrollbars=yes");
+	vorschau_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function upload_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	upload_seite = window.open(f_link,"CoMedius","width=500,height=500,left=262,top=134,scrollbars=yes");
+	upload_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function link_jmp(f_link)
+{
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+}
+
+
+
+
+function link_par_jmp(f_link,f_variablen_anzahl)
+{
+
+	//testen: alert(f_variablen_name[0]);
+	//testen: alert(f_variablen_inhalt[0]);
+	//testen: alert(f_variablen_anzahl);
+
+	//Alle übergegebenen Variablen durchlaufen
+	for (var i=0; i<f_variablen_anzahl; i++)
+	{
+		//testen: alert("Variablencounter: "+i);
+		//testen: alert(window.document.forms[0].elements[0].value);
+
+		//Alle Elemente im Formular überprüfen
+		for (var i2=0;window.document.forms[0].elements[i2].value != "Variablen Ende";i2++)
+		{
+			//testen: alert("Elementecounter: "+i2);
+
+			//Vergleichen, ob Formularelement die übergegeben Variable ist
+			//testen: alert("Elements Name: "+window.document.forms[0].elements[i2].name);
+			//testen: alert("Variablenname: "+f_variablen_name[i]);
+			if(window.document.forms[0].elements[i2].name == f_variablen_name[i])
+			{
+				//Ja, gefunden - Wert speichern
+				window.document.forms[0].elements[i2].value = f_variablen_inhalt[i];
+				//testen: alert(window.document.forms[0].elements[i2].value);
+			}
+		}
+	}
+
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	//testen: alert(f_link);
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+
+}
+
+//-->
+</script>
+<noscript>Diese Internetseite benötigt Java-Script. Bitte aktivieren Sie im Browser die Java-Script Unterstützung.</noscript>
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------- -->
+<!--- Body Start: design_kundenweb_00_body_start.inc.php -- -->
+<!--------------------------------------------------------- -->
+
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- Variablen laden -->
+
+
+
+
+
+
+
+<!-- Verbindungsdaten / Presenter Werberpartner -->
+
+
+
+
+
+<!-- Verbindung mit MySQL-Server aufbauen / Presenter Werberpartner -->
+
+
+
+
+
+<!------- -->
+<!-- Code -->
+<!------- -->
+
+
+
+
+
+<!-- URL-Variablen auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Formularsuche starten lassen: design_kundenweb_01_suchform_starten.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Standard-Variablen -->
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern --- -->
+<!---------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- Anzeigendaten auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern: design_kundenweb_02_suchfunktion.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------- -->
+<!--- Übersicht: design_kundenweb_04_funktion_uebersicht.inc.php -- -->
+<!----------------------------------------------------------------- -->
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+
+<img style="border-style:none;background-color:#ece9e2;vertical-align:top" galleryimg="no" src="./.././design/bmt_hamburg_standard_10001.jpg" width="958">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<!-- Leerzeile -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+<td width="994" valign="top">
+<!-- Überschrift -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:994px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:18px;font-style:normal;font-weight:bold;color:#756d58">
+Diese Katzen suchen bei uns ein neues Zuhause</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+
+<div style="clear:left">
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="994" valign="top">
+
+<!-- Einleitung -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:994px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+Unsere Katzen sind tierärztlich untersucht, ggf. behandelt, ggf. kastriert, ggf. entfloht, entwurmt, geimpft und mit einem Mikrochip gekennzeichnet. Freigänger und Fundkatzen sind auf die Viruserkrankungen, FIV und Leukose getestet.<br />
+<br />
+SCHUTZGEBÜHREN: <br />
+<br />
+Katze/Kater ggf. inkl. späterer Kastration  <br />
+EURO 100  <br />
+ <br />
+<br>
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:10px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Start ---------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+<!--------------------------------------------------------------------- -->
+<!--- Such- und Filterfunktion                                      --- -->
+<!--------------------------------------------------------------------- -->
+<!-- Feldbeschreibung: f_suche -->
+<form name="form_suche" action="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht" method="post">
+<div style="position:static;width:1024px;border-width:1px;border-style:solid;border-color:#3A5470;background-color:#BBD6F6;padding:10px">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1" valign="top">
+</td>
+
+<td width="80" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+Suche:
+</span>
+</td>
+
+<!-- Eingabe: f_suche 300 -->
+<td width="300" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<input id="f_suche" name="f_e_suche" type="text" size="40" maxlength="255" value="">
+</span>
+</td>
+
+<!-- Link: Suche starten 120 -->
+<td width="120" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" target="_self">
+     <b>Suche starten</b>
+</a>
+</span>
+</td>
+
+<!-- Link: Alle DS anzeigen 100 -->
+<td width="100" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" onclick="javascript: document.form_suche.f_e_suche.value = '';" target="_self">
+     <b>Alle anzeigen</b>
+</a>
+</span>
+</td>
+
+</tr>
+</table>
+</div>
+</form>
+
+
+
+<!----------------------------------------- -->
+<!--- Seitenanzeige der Vorgänge (oben) --- -->
+<!----------------------------------------- -->
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seitenanzeigen_oben" style="position:static;width:1024px">
+<br>
+<p id="TextSeitenanzeige">
+<br>Anzahl: 17<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=3&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          3          </a>
+     <br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+<br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_0" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375630458_2112a81e5e8b2a3fab00" width="150">
+<p align="center">
+Erstellt am: 04.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Snowy, weiße Pracht</b><br><br>EKH, weiblich kastriert<br />
+geb. 8. April 2007<br />
+Snowy ist eine sehr freundliche Katze, leider taub<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53663&f_aktueller_ds_select=0&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    <div style="text-align:right;font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+    Werbeanzeige:<br><br>
+    <a style="text-align:right;text-decoration:none;background-color:#ece9e2" target="_blank" title="www.happy-miez.de" href="http://www.mobile-katzenschule.de/buch.html">
+    <img style="text-align:right;border-style:none;" galleryimg="no" src="http://www.comedius-server2.de/webs/ssl/webs/comedius_presenter_werbepartner/anzeigen/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/001_anzeige_happymiez_300x190_buch.jpg" width="187" title="www.happy-miez.de">
+    </a>
+
+    </div>
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_1" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375451316_5f5a06a9ad6a5dbcf223" width="150">
+<p align="center">
+Erstellt am: 02.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Die lütte Wilma</b><br><br>weiblich kastriert<br />
+geb. 8. Juni 2011<br />
+eine liebe soziale Wohnungskatze, kein Einzeltier<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53634&f_aktueller_ds_select=1&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    <div style="text-align:right;font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+    Werbeanzeige:<br><br>
+    <a style="text-align:right;text-decoration:none;background-color:#ece9e2" target="_blank" title="www.happy-miez.de" href="http://www.happy-miez.de">
+    <img style="text-align:right;border-style:none;" galleryimg="no" src="http://www.comedius-server2.de/webs/ssl/webs/comedius_presenter_werbepartner/anzeigen/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/001_anzeige_happymiez_200x190_v5.jpg" width="200" title="www.happy-miez.de">
+    </a>
+
+    </div>
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_2" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375451178_2f104f3047fd8c65f8b8" width="150">
+<p align="center">
+Erstellt am: 02.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Pooh, ein netter Tiger</b><br><br>männlich kastriert<br />
+geb. 16. Juli 2011<br />
+ein lieber Wohnungskater, kommt mit netten Katzen klar<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53633&f_aktueller_ds_select=2&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_3" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375450925_abb5e9a7d5e96bb5dda5" width="150">
+<p align="center">
+Erstellt am: 02.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Pia, liebe Tigerin</b><br><br>weiblich kastriert<br />
+geb. 2. Juni 2011<br />
+liebe soziale Wohnungskatze, kein Einzeltier<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53632&f_aktueller_ds_select=3&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_4" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375450636_25bb72621347439870e8" width="150">
+<p align="center">
+Erstellt am: 02.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Die Erika</b><br><br>weiblich kastriert<br />
+geb. 11.06.2011<br />
+eine liebe soziale Wohnungskatze, kein Einzeltier<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53628&f_aktueller_ds_select=4&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_5" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1375450297_49297b3584a277d404bd" width="150">
+<p align="center">
+Erstellt am: 02.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Toni, der Tiger</b><br><br>EKH, männlich kastriert<br />
+geb. 3. Juli 2011<br />
+ein superlieber Wohnungskater<br />
+kommt gut mit netten Katzen aus<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=53625&f_aktueller_ds_select=5&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_6" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1372691325_ed94063e4c301ef7bff1" width="150">
+<p align="center">
+Erstellt am: 01.07.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Flecki und Schwarznase</b><br><br>männlich kastriert<br />
+geb. Herbst 2009<br />
+Zwei Gourmet-Kater, die sich prima verstehen<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=52915&f_aktueller_ds_select=6&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_7" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5/file_1372691072_fe162c9d52f82292c046" width="150">
+<p align="center">
+Erstellt am: 01.07.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Blacky und Stromerle</b><br><br>männlich und weiblich kastriert<br />
+Geb. Herbst 2009<br />
+Zwei liebe sanfte zierliche Katzen<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=52914&f_aktueller_ds_select=7&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+</p>
+</div>
+
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+<!------------------------------------------ -->
+<!--- Seitenanzeige der Vorgänge (unten) --- -->
+<!------------------------------------------ -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seitenanzeigen_unten" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+<br>Anzahl: 17<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&f_bereich=Vermittlungstiere+Katzen&f_seite_max_ds=8&f_aktuelle_seite=3&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          3          </a>
+     </p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+    <!-- Werbeanzeigen am unteren Ende der Übersicht -->
+    
+    <!-- bmt-Anzeigen am unteren Ende der Übersicht -->
+    <div style="clear:left">
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+    <div style="clear:left">
+    <br>
+    <br>
+    <br>
+    </div>
+
+    <div style="margin-left:30px">
+    <span style="color:#756d58" width="1024" valign="top">
+
+    
+    </span>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!------------------------------------------------------------------------- -->
+<!--- Detailansicht: design_kundenweb_05_funktion_detailansicht.inc.php --- -->
+<!------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------------------------------- -->
+<!--- Detailansicht drucken: design_kundenweb_06_funktion_detailansicht_drucken.inc.php --- -->
+<!----------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------------- -->
+<!--- Ende: design_kundenweb_07_ende.inc.php --- -->
+<!---------------------------------------------- -->
+
+<!--------------------------------- -->
+<!--- Rahmen für Vorgänge (Ende)--- -->
+<!--------------------------------- -->
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Ende ----------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Fußzeile laden -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+<!-- Fusszeile -->
+<!-- Copyright -->
+<div style="width:1024px">
+<span style="font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000;text-align:center">
+<br>
+<br>
+<br>
+(C) Das Copyright auf eingepflegte Bilder, Texte und Dokumente liegt bei dem jeweiligen Rechte-/Lizenzinhaber.
+<br>
+<br>
+Content System CoMedius Presenter - (C) Copyright 2013 by <a style="text-decoration:underline;background-color:#ffffff;color:#000000;font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000" href="http://www.comedius.de" target="_neu"><b>CoMedius - Business Solutions</b></a>
+<br>
+<br>
+<br>
+</span>
+</div>
+</td>
+</tr>
+</table>
+
+<!-- Fußzeile Werbung laden -->
+
+<!-- Alle Variablen speichern -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+[
+    {
+        "name": "All cats",
+        "url":    "http://www.samtpfoten-neukoelln.com/katzenvermittlung/portfolio",
+        "type":   "detail",
+        "animal": "cat",
+        "priority": 0
+    }
+]
+
