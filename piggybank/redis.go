@@ -223,6 +223,17 @@ func RedisPersistAnimal(k string, a *Animal) error {
 		return err
 	}
 
+	switch a.Type {
+	case "cat":
+		if err := RedisAddIndexKey(c, fmt.Sprintf(REDIS_ANIMALS_CATS, a.ShelterId, a.UpdateId), k); err != nil {
+			return err
+		}
+	case "dog":
+		if err := RedisAddIndexKey(c, fmt.Sprintf(REDIS_ANIMALS_DOGS, a.ShelterId, a.UpdateId), k); err != nil {
+			return err
+		}
+	}
+
 	return c.Send("EXEC")
 }
 

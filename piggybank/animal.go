@@ -63,6 +63,33 @@ func GetAnimals(shelterId, updateId string) ([]Animal, error) {
 	return RedisGetAnimals(keys)
 }
 
+func GetCats(shelterId, updateId string) ([]Animal, error) {
+	return getAnimalType(shelterId, updateId, "cat")
+}
+
+func GetDogs(shelterId, updateId string) ([]Animal, error) {
+	return getAnimalType(shelterId, updateId, "dog")
+}
+
+func getAnimalType(shelterId, updateId, animalType string) ([]Animal, error) {
+	var template string
+	switch animalType {
+	case "cat":
+		template = REDIS_ANIMALS_CATS
+	case "dog":
+		template = REDIS_ANIMALS_DOGS
+	default:
+		return nil, fmt.Errorf("Unknown animal type '%s'!", animalType)
+	}
+
+	keys, err := RedisGetIndexKeys(fmt.Sprintf(template, shelterId, updateId))
+	if err != nil {
+		return nil, err
+	}
+
+	return RedisGetAnimals(keys)
+}
+
 func GetAnimal(shelterId, updateId, id string) (Animal, error) {
 	if len(shelterId) == 0 || len(updateId) == 0 || len(id) == 0 {
 		return Animal{}, fmt.Errorf("Getting Animal failed! ShelterId, UpdateId, or AnimalId is not set!")
