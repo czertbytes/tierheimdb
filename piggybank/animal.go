@@ -108,10 +108,21 @@ func GetAnimal(shelterId, updateId, id string) (Animal, error) {
 	return animals[0], nil
 }
 
-func UpdateAnimal() {
+func DeleteAnimals(shelterId, updateId string) error {
+	animals, err := GetAnimals(shelterId, updateId)
+	if err != nil {
+		return err
+	}
 
+	for _, a := range animals {
+		if err := DeleteAnimal(shelterId, updateId, a.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-func DeleteAnimal() {
-
+func DeleteAnimal(shelterId, updateId, animalId string) error {
+	return RedisDeleteAnimal(shelterId, updateId, animalId)
 }

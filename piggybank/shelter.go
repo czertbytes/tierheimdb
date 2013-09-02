@@ -78,10 +78,6 @@ func GetShelter(id string) (Shelter, error) {
 	return shelters[0], nil
 }
 
-func UpdateShelter(shelter *Shelter) error {
-	return nil
-}
-
 func DeleteEnabledShelters() error {
 	shelters, err := GetEnabledShelters()
 	if err != nil {

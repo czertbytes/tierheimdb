@@ -77,18 +77,21 @@ func getUpdate(k string) (Update, error) {
 	return updates[0], nil
 }
 
-func UpdateUpdate(update *Update) error {
+func DeleteUpdates(shelterId string) error {
+	updates, err := GetUpdates(shelterId)
+	if err != nil {
+		return err
+	}
+
+	for _, u := range updates {
+		if err := DeleteUpdate(shelterId, u.Id); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
-func DeleteUpdates() error {
-	return nil
-}
-
-func DeleteUpdate(id string) error {
-	return nil
-}
-
-func DeleteUpdateIndexes(k, id string) error {
-	return nil
+func DeleteUpdate(shelterId, updateId string) error {
+	return RedisDeleteUpdate(shelterId, updateId)
 }
