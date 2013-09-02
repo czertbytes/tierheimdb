@@ -3,39 +3,38 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	_ "fmt"
+	"fmt"
 	"net/http"
-	_ "strconv"
+	"strconv"
 	"strings"
+	"time"
 
-	//pb "github.com/czertbytes/tierheimdb/piggybank"
+	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
 const (
-	RATE_LIMIT_QUOTA = 500
+	RATE_LIMIT_QUOTA = 300 // requests per REDIS_RATE_LIMIT_RESET
 )
 
 type FilterRouter struct{}
 
 func (h *FilterRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	now := time.Now()
+	currentQuota := pb.RedisUpdateQuota(now.Minute(), remoteIpAddress(r))
+	if currentQuota >= RATE_LIMIT_QUOTA {
+		retryAfter := 59 - now.Second()
 
-	v1Router.ServeHTTP(w, r)
-	//ipAddress := getRemoteIpAddress(r)
-	//timeNow := time.Now()
-	//currentQuota := pb.RedisUpdateQuota(timeNow.Hour(), ipAddress)
-	//if currentQuota >= RATE_LIMIT_QUOTA {
-	//retryAfter := ((59 - timeNow.Minute()) * 60) + (59 - timeNow.Second())
-
-	//w.Header().Add("Content-Type", "application/json")
-	//w.Header().Add("Retry-After", strconv.Itoa(retryAfter))
-	//w.WriteHeader(429)
-	//w.Write([]byte(fmt.Sprintf("{\"limit\":\"%d\",\"retryAfter\":\"%d\"}", RATE_LIMIT_QUOTA, retryAfter)))
-	//} else {
-	//v1Router.ServeHTTP(w, r)
-	//}
+		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Retry-After", strconv.Itoa(retryAfter))
+		w.WriteHeader(429)
+		w.Write([]byte(fmt.Sprintf("{\"limit\":\"%d\",\"retryAfter\":\"%d\"}", RATE_LIMIT_QUOTA, retryAfter)))
+	} else {
+		v1Router.ServeHTTP(w, r)
+	}
 }
 
-func getRemoteIpAddress(r *http.Request) string {
+func remoteIpAddress(r *http.Request) string {
 	ipAddress := r.Header.Get("X-Real-Ip")
 	if len(ipAddress) == 0 {
 		ipAddress = strings.Split(r.RemoteAddr, ":")[0]
@@ -62,6 +61,7 @@ func responseNoContent(w http.ResponseWriter) {
 
 func responseStatus(w http.ResponseWriter, status int, i interface{}) {
 	w.Header().Add("Content-Type", "application/json; charset=utf-8")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(status)
 
 	encoder := json.NewEncoder(w)

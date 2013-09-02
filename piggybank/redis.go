@@ -21,6 +21,8 @@ const (
 	REDIS_ANIMALS_DOGS     = "tdb:s:%s:u:%s:animals:dogs"
 	REDIS_IMAGE            = "tdb:s:%s:u:%s:a:%s:i:%d"
 	REDIS_IMAGES           = "tdb:s:%s:u:%s:a:%s:images"
+	REDIS_RATE_LIMIT_QUOTA = "tdb:ratelimit:%02d"
+	REDIS_RATE_LIMIT_RESET = 60
 )
 
 var (
@@ -402,6 +404,23 @@ func RedisDeleteIndexKey(c redis.Conn, k, indexKey string) error {
 	return nil
 }
 
+func RedisUpdateQuota(minute int, ipAddress string) int {
+	redisConn := RedisPool.Get()
+	defer redisConn.Close()
+
+	key := fmt.Sprintf(REDIS_RATE_LIMIT_QUOTA, minute)
+	currentQuota, err := redis.Int(redisConn.Do("HINCRBY", key, ipAddress, "1"))
+	if err != nil {
+		return -1
+	}
+
+	if _, err := redisConn.Do("EXPIRE", key, REDIS_RATE_LIMIT_RESET); err != nil {
+		return -1
+	}
+
+	return currentQuota
+}
+
 /*
 func RedisDeleteKey(key string) error {
 	redisConn := RedisPool.Get()
@@ -437,22 +456,5 @@ func RedisSetField(key, field, value string) error {
 	}
 
 	return nil
-}
-
-func RedisUpdateQuota(hour int, ipAddress string) int {
-	redisConn := RedisPool.Get()
-	defer redisConn.Close()
-
-	key := fmt.Sprintf(RATE_LIMIT_QUOTA_KEY, hour)
-	currentQuota, err := redis.Int(redisConn.Do("HINCRBY", key, ipAddress, "1"))
-	if err != nil {
-		return -1
-	}
-
-	if _, err := redisConn.Do("EXPIRE", key, 3600); err != nil {
-		return -1
-	}
-
-	return currentQuota
 }
 */
