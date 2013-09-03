@@ -173,9 +173,31 @@ func APIv1DeleteShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Reques
 }
 
 func APIv1SyncShelterSourcesHandler(w http.ResponseWriter, r *http.Request) {
-	//shelterId := mux.Vars(r)["shelterId"]
+	shelterId := mux.Vars(r)["shelterId"]
 
-	responseNoContent(w)
+	animals, err := fetchAnimals(shelterId)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
+
+	u := pb.NewUpdate(shelterId)
+	for _, a := range animals {
+		a.UpdateId = u.Id
+		a.ShelterId = shelterId
+	}
+
+	if _, err := pb.PutAnimals(animals); err != nil {
+		internalServerError(w, err)
+		return
+	}
+
+	if err := pb.PutUpdate(u); err != nil {
+		internalServerError(w, err)
+		return
+	}
+
+	responseCreated(w, animals)
 }
 
 func APIv1GetShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
