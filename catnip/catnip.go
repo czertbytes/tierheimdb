@@ -92,6 +92,9 @@ func (c *Catnip) Fetch(s *Source) ([]*pb.Animal, error) {
 		}
 	}
 
+	animalChan := make(chan *pb.Animal)
+	errorChan := make(chan error)
+	counter := 0
 	animals := []*pb.Animal{}
 	for _, ps := range sources {
 		la, err := ParseList(c.p, ps.URL)
@@ -99,27 +102,43 @@ func (c *Catnip) Fetch(s *Source) ([]*pb.Animal, error) {
 			return nil, err
 		}
 
-		for _, a := range la {
-			a.Type = s.Animal
-			a.Priority = s.Priority
+		counter = counter + len(la)
+		for _, animal := range la {
+			go func(a *pb.Animal) {
+				a.Type = s.Animal
+				a.Priority = s.Priority
 
-			switch s.Type {
-			case "none":
-				a.URL = s.URL
-			case "detail":
-				da, err := ParseDetail(c.p, a.URL)
-				if err != nil {
-					return nil, err
+				switch s.Type {
+				case "none":
+					a.URL = s.URL
+				case "detail":
+					da, err := ParseDetail(c.p, a.URL)
+					if err != nil {
+						errorChan <- err
+					}
+
+					MergeAnimals(a, da)
+				default:
+					errorChan <- errors.New(fmt.Sprintf("Unknown Detail type: %s!", s.Type))
+					return
 				}
 
-				MergeAnimals(a, da)
-			default:
-				return nil, errors.New(fmt.Sprintf("Unknown Detail type: %s!", s.Type))
-			}
-
-			animals = append(animals, a)
+				animalChan <- a
+			}(animal)
 		}
 	}
 
-	return animals, nil
+	for {
+		select {
+		case animal := <-animalChan:
+			animals = append(animals, animal)
+
+			counter = counter - 1
+			if counter <= 0 {
+				return animals, nil
+			}
+		case err := <-errorChan:
+			return nil, err
+		}
+	}
 }
