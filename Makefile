@@ -1,8 +1,7 @@
 
-all: check-env clean download
+all: check-env clean get-apps
 
-dowload: check-env
-	cd $(GOPATH)
+get-apps:
 	go get github.com/czertbytes/tierheimdb/catnip
 	go get github.com/czertbytes/tierheimdb/catnip/franziskushamburg
 	go get github.com/czertbytes/tierheimdb/catnip/samtpfotenneukoelln

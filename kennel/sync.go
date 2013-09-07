@@ -18,7 +18,7 @@ func fetchAnimals(shelterId string) ([]*pb.Animal, error) {
 
 	return runCatnip(
 		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(shelterId, "-", "", -1)), // TODO: hmmm
-		fmt.Sprintf("%s/src/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, shelterId),
+		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, shelterId),
 	)
 }
 
