@@ -1,4 +1,3 @@
-
 all: check-env clean get-apps
 
 get-apps:
@@ -17,7 +16,6 @@ get-apps:
 clean: check-env
 	rm -rf $(GOPATH)/bin
 	rm -rf $(GOPATH)/pkg
-	rm -rf $(GOPATH)/src
 
 check-env:
 	if test "$(GOPATH)" = "" ; then \
