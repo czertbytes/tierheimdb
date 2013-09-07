@@ -11,14 +11,14 @@ import (
 )
 
 func fetchAnimals(shelterId string) ([]*pb.Animal, error) {
-	tdbRoot := os.Getenv("TIERHEIMDB_ROOT")
+	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
-		return nil, fmt.Errorf("Environment variable TIERHEIMDB_ROOT not set!")
+		return nil, fmt.Errorf("Environment variable GOPATH not set!")
 	}
 
 	return runCatnip(
 		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(shelterId, "-", "", -1)), // TODO: hmmm
-		fmt.Sprintf("%s/sources/%s.json", tdbRoot, shelterId),
+		fmt.Sprintf("%s/src/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, shelterId),
 	)
 }
 

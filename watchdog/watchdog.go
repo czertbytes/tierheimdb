@@ -73,14 +73,14 @@ func parseArgs(args []string) (string, error) {
 }
 
 func fetchAnimals(catnipName string) ([]*pb.Animal, error) {
-	tdbRoot := os.Getenv("TIERHEIMDB_ROOT")
+	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
-		log.Fatalf("Environment variable TIERHEIMDB_ROOT not set!")
+		log.Fatalf("Environment variable GOPATH not set!")
 	}
 
 	return runCatnip(
 		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(catnipName, "-", "", -1)), // TODO: hmmm
-		fmt.Sprintf("%s/sources/%s.json", tdbRoot, catnipName),
+		fmt.Sprintf("%s/src/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, catnipName),
 	)
 }
 
@@ -100,9 +100,9 @@ func persist(shelterId string, animals []*pb.Animal) error {
 }
 
 func backup(catnipName string, animals []*pb.Animal) error {
-	tdbRoot := os.Getenv("TIERHEIMDB_ROOT")
+	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
-		log.Fatalf("Environment variable TIERHEIMDB_ROOT not set!")
+		log.Fatalf("Environment variable GOPATH not set!")
 	}
 
 	b, err := json.Marshal(animals)
