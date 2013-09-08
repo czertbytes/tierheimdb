@@ -46,11 +46,12 @@ func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
 }
 
 func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
-	s := ""
-	if b, err := ioutil.ReadAll(content); err == nil {
-		s = string(b)
+	b, err := ioutil.ReadAll(content)
+	if err != nil {
+		return nil, err
 	}
 
+	s := string(b)
 	doc, err := html.Parse(strings.NewReader(s))
 	if err != nil {
 		return nil, err

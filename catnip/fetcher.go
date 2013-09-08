@@ -35,6 +35,7 @@ func ParsePagination(p Parser, url string) (int, int, int, error) {
 	if err != nil {
 		return 0, 0, 0, err
 	}
+	defer response.Body.Close()
 
 	return p.ParsePagination(response.Body)
 }
@@ -44,6 +45,7 @@ func ParseList(p Parser, url string) ([]*pb.Animal, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer response.Body.Close()
 
 	return p.ParseList(response.Body)
 }
@@ -53,6 +55,7 @@ func ParseDetail(p Parser, url string) (*pb.Animal, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer response.Body.Close()
 
 	return p.ParseDetail(response.Body)
 }

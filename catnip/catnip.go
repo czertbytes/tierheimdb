@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
@@ -104,6 +105,7 @@ func (c *Catnip) Fetch(s *Source) ([]*pb.Animal, error) {
 
 		counter = counter + len(la)
 		for _, animal := range la {
+			time.Sleep(100 * time.Millisecond)
 			go func(a *pb.Animal) {
 				a.Type = s.Animal
 				a.Priority = s.Priority
@@ -115,6 +117,7 @@ func (c *Catnip) Fetch(s *Source) ([]*pb.Animal, error) {
 					da, err := ParseDetail(c.p, a.URL)
 					if err != nil {
 						errorChan <- err
+						return
 					}
 
 					MergeAnimals(a, da)
