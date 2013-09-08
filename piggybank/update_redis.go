@@ -2,6 +2,7 @@ package piggybank
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/garyburd/redigo/redis"
 )
@@ -34,11 +35,11 @@ func RedisPersistUpdate(k string, u *Update) error {
 	return c.Send("EXEC")
 }
 
-func RedisGetUpdates(keys []string) ([]Update, error) {
+func RedisGetUpdates(keys Keys) (Updates, error) {
 	c := RedisPool.Get()
 	defer c.Close()
 
-	updates := []Update{}
+	updates := Updates{}
 	for _, k := range keys {
 		kExists, err := RedisKeyExists(c, k)
 		if err != nil {
@@ -61,6 +62,7 @@ func RedisGetUpdates(keys []string) ([]Update, error) {
 
 		updates = append(updates, u)
 	}
+	sort.Sort(ByDate{updates})
 
 	return updates, nil
 }

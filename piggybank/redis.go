@@ -107,7 +107,7 @@ func RedisAddIndexKey(c redis.Conn, indexKey, key string) error {
 	return nil
 }
 
-func RedisGetIndexKeys(k string) ([]string, error) {
+func RedisGetIndexKeys(k string) (Keys, error) {
 	c := RedisPool.Get()
 	defer c.Close()
 
@@ -116,7 +116,7 @@ func RedisGetIndexKeys(k string) ([]string, error) {
 		return nil, fmt.Errorf("Getting keys from indexKey %s failed!\n", k)
 	}
 
-	keys := []string{}
+	keys := Keys{}
 	for len(keysReply) > 0 {
 		var key string
 		keysReply, err = redis.Scan(keysReply, &key)

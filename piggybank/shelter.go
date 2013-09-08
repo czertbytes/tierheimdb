@@ -23,6 +23,24 @@ type Shelter struct {
 	Note         string `json:"note" redis:"note"`
 }
 
+type Shelters []Shelter
+
+func (ss Shelters) Len() int {
+	return len(ss)
+}
+
+func (ss Shelters) Swap(i, j int) {
+	ss[i], ss[j] = ss[j], ss[i]
+}
+
+type ByName struct {
+	Shelters
+}
+
+func (s ByName) Less(i, j int) bool {
+	return s.Shelters[i].Name < s.Shelters[j].Name
+}
+
 func PutShelters(shelters []*Shelter) ([]string, error) {
 	ids := []string{}
 	for _, s := range shelters {
@@ -42,7 +60,7 @@ func PutShelter(s *Shelter) error {
 	return RedisPersistShelter(fmt.Sprintf(REDIS_SHELTER, s.Id), s)
 }
 
-func GetAllShelters() ([]Shelter, error) {
+func GetAllShelters() (Shelters, error) {
 	keys, err := RedisGetIndexKeys(REDIS_SHELTERS)
 	if err != nil {
 		return nil, err
@@ -51,7 +69,7 @@ func GetAllShelters() ([]Shelter, error) {
 	return RedisGetShelters(keys)
 }
 
-func GetEnabledShelters() ([]Shelter, error) {
+func GetEnabledShelters() (Shelters, error) {
 	keys, err := RedisGetIndexKeys(fmt.Sprintf(REDIS_SHELTERS_ENABLED))
 	if err != nil {
 		return nil, err
@@ -66,7 +84,7 @@ func GetShelter(id string) (Shelter, error) {
 	}
 
 	k := fmt.Sprintf(REDIS_SHELTER, id)
-	shelters, err := RedisGetShelters([]string{k})
+	shelters, err := RedisGetShelters(Keys{k})
 	if err != nil {
 		return Shelter{}, err
 	}

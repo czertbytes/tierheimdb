@@ -13,6 +13,24 @@ type Update struct {
 	ShelterId string `json:"shelterId" redis:"shelterId"`
 }
 
+type Updates []Update
+
+func (us Updates) Len() int {
+	return len(us)
+}
+
+func (us Updates) Swap(i, j int) {
+	us[i], us[j] = us[j], us[i]
+}
+
+type ByDate struct {
+	Updates
+}
+
+func (s ByDate) Less(i, j int) bool {
+	return s.Updates[i].Created > s.Updates[j].Created
+}
+
 func NewUpdate(shelterId string) *Update {
 	return &Update{
 		Id:        makeUpdateId(),
@@ -34,7 +52,7 @@ func PutUpdate(u *Update) error {
 	return RedisPersistUpdate(fmt.Sprintf(REDIS_UPDATE, u.ShelterId, u.Id), u)
 }
 
-func GetUpdates(shelterId string) ([]Update, error) {
+func GetUpdates(shelterId string) (Updates, error) {
 	keys, err := RedisGetIndexKeys(fmt.Sprintf(REDIS_UPDATES, shelterId))
 	if err != nil {
 		return nil, err
@@ -65,7 +83,7 @@ func GetLastUpdate(shelterId string) (Update, error) {
 }
 
 func getUpdate(k string) (Update, error) {
-	updates, err := RedisGetUpdates([]string{k})
+	updates, err := RedisGetUpdates(Keys{k})
 	if err != nil {
 		return Update{}, err
 	}

@@ -2,6 +2,7 @@ package piggybank
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/garyburd/redigo/redis"
 )
@@ -35,11 +36,11 @@ func RedisPersistShelter(k string, s *Shelter) error {
 	return c.Send("EXEC")
 }
 
-func RedisGetShelters(keys []string) ([]Shelter, error) {
+func RedisGetShelters(keys []string) (Shelters, error) {
 	c := RedisPool.Get()
 	defer c.Close()
 
-	shelters := []Shelter{}
+	shelters := Shelters{}
 	for _, k := range keys {
 		kExists, err := RedisKeyExists(c, k)
 		if err != nil {
@@ -62,6 +63,7 @@ func RedisGetShelters(keys []string) ([]Shelter, error) {
 
 		shelters = append(shelters, s)
 	}
+	sort.Sort(ByName{shelters})
 
 	return shelters, nil
 }
