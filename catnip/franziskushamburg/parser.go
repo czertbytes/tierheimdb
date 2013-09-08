@@ -78,7 +78,7 @@ func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
 
 	name := p.parseName(doc)
 	return &pb.Animal{
-		Id:       cp.NormalizeName(name),
+		Id:       cp.NormalizeId(name),
 		Name:     name,
 		LongDesc: p.parseLongDesc(doc),
 		Images:   p.parseImages(doc),
