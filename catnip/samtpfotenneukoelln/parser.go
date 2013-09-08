@@ -51,8 +51,8 @@ func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 	return animals, nil
 }
 
-func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
-	doc, err := html.Parse(content)
+func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
+	doc, err := html.Parse(r)
 	if err != nil {
 		return &pb.Animal{}, err
 	}
@@ -61,7 +61,7 @@ func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
 	shortDesc, longDesc := p.parseDescriptions(doc)
 
 	return &pb.Animal{
-		Id:        cp.NormalizeName(name),
+		Id:        cp.NormalizeId(name),
 		Name:      name,
 		ShortDesc: shortDesc,
 		LongDesc:  longDesc,

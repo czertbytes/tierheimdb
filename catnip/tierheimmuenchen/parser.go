@@ -25,8 +25,8 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 	panic("Not supported!")
 }
 
-func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
-	doc, err := html.Parse(content)
+func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
+	doc, err := html.Parse(r)
 	if err != nil {
 		return nil, err
 	}
@@ -45,19 +45,12 @@ func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
 	return animals, nil
 }
 
-func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
-	b, err := ioutil.ReadAll(content)
+func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
+	s, doc, err := p.parseContent(r)
 	if err != nil {
 		return nil, err
 	}
 
-	s := string(b)
-	doc, err := html.Parse(strings.NewReader(s))
-	if err != nil {
-		return nil, err
-	}
-
-	//  parse animals from list page
 	animalNodes := p.detailNodes(doc)
 	if len(animalNodes) != 1 {
 		return nil, errors.New("Animal detail not found!")
@@ -66,10 +59,10 @@ func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
 	animalNode := animalNodes[0]
 	name := p.parseName(animalNode)
 	return &pb.Animal{
-		Id:       cp.NormalizeName(name),
+		Id:       cp.NormalizeId(name),
 		Name:     name,
-		Sex:      p.parseSex(animalNode),
-		Breed:    p.parseBreed(animalNode),
+		Sex:      cp.NormalizeSex(p.parseSex(animalNode)),
+		Breed:    cp.NormalizeBreed(p.parseBreed(animalNode)),
 		LongDesc: p.parseLongDesc(animalNode),
 		Images:   p.parseImages(s),
 	}, nil
@@ -79,10 +72,19 @@ func (p *Parser) ParseDetailExtra(r io.Reader) (*pb.Animal, error) {
 	panic("Not supported!")
 }
 
-func (p *Parser) detailNodes(node *html.Node) []*html.Node {
-	return cp.NodeSelect(node, p.selector([]string{
-		"div.details",
-	}))
+func (p *Parser) parseContent(r io.Reader) (string, *html.Node, error) {
+	b, err := ioutil.ReadAll(r)
+	if err != nil {
+		return "", nil, err
+	}
+
+	s := string(b)
+	doc, err := html.Parse(strings.NewReader(s))
+	if err != nil {
+		return "", nil, err
+	}
+
+	return s, doc, nil
 }
 
 func (p *Parser) parseName(node *html.Node) string {
@@ -97,15 +99,6 @@ func (p *Parser) parseName(node *html.Node) string {
 	name = strings.ToUpper(name[0:1]) + name[1:]
 
 	return name
-}
-
-func (p *Parser) nameNodes(node *html.Node) []*html.Node {
-	return cp.NodeSelect(node, []string{
-		"div.box1b",
-		"ul",
-		"li.name",
-		"h1",
-	})
 }
 
 func (p *Parser) parseSex(node *html.Node) string {
@@ -124,14 +117,6 @@ func (p *Parser) parseSex(node *html.Node) string {
 	return sex
 }
 
-func (p *Parser) sexNodes(node *html.Node) []*html.Node {
-	return cp.NodeSelect(node, []string{
-		"div.box1b",
-		"ul",
-		"li.geschlecht",
-	})
-}
-
 func (p *Parser) parseBreed(node *html.Node) string {
 	breedNodes := p.breedNodes(node)
 	if len(breedNodes) != 1 {
@@ -148,14 +133,6 @@ func (p *Parser) parseBreed(node *html.Node) string {
 	return breed
 }
 
-func (p *Parser) breedNodes(node *html.Node) []*html.Node {
-	return cp.NodeSelect(node, []string{
-		"div.box1b",
-		"ul",
-		"li.art",
-	})
-}
-
 func (p *Parser) parseLongDesc(node *html.Node) string {
 	longDescNodes := p.longDescNodes(node)
 	if len(longDescNodes) != 1 {
@@ -166,6 +143,57 @@ func (p *Parser) parseLongDesc(node *html.Node) string {
 	longDesc = strings.Trim(longDesc, " \n")
 
 	return longDesc
+}
+
+func (p *Parser) parseListAnimalLink(node *html.Node) string {
+	for _, linkNode := range p.detailLinkNodes(node) {
+		return cp.NodeAttribute(linkNode, "href")
+	}
+
+	return ""
+}
+
+func (p *Parser) parseImages(s string) []pb.Image {
+	images := []pb.Image{}
+
+	for _, img := range regexp.MustCompile(`/thm/daten/tierdb/bilder/([^ ;]+);`).FindAllStringSubmatch(s, -1) {
+		images = append(images, pb.Image{
+			URL: fmt.Sprintf("http://tierschutzverein-muenchen.de/thm/daten/tierdb/bilder/%s", img[1]),
+		})
+	}
+
+	return images
+}
+
+func (p *Parser) detailNodes(node *html.Node) []*html.Node {
+	return cp.NodeSelect(node, p.selector([]string{
+		"div.details",
+	}))
+}
+
+func (p *Parser) nameNodes(node *html.Node) []*html.Node {
+	return cp.NodeSelect(node, []string{
+		"div.box1b",
+		"ul",
+		"li.name",
+		"h1",
+	})
+}
+
+func (p *Parser) sexNodes(node *html.Node) []*html.Node {
+	return cp.NodeSelect(node, []string{
+		"div.box1b",
+		"ul",
+		"li.geschlecht",
+	})
+}
+
+func (p *Parser) breedNodes(node *html.Node) []*html.Node {
+	return cp.NodeSelect(node, []string{
+		"div.box1b",
+		"ul",
+		"li.art",
+	})
 }
 
 func (p *Parser) longDescNodes(node *html.Node) []*html.Node {
@@ -179,14 +207,6 @@ func (p *Parser) listAnimalNodes(doc *html.Node) []*html.Node {
 		"div.liste",
 		"div.galeriezelle",
 	}))
-}
-
-func (p *Parser) parseListAnimalLink(node *html.Node) string {
-	for _, linkNode := range p.detailLinkNodes(node) {
-		return cp.NodeAttribute(linkNode, "href")
-	}
-
-	return ""
 }
 
 func (p *Parser) detailLinkNodes(node *html.Node) []*html.Node {
@@ -211,15 +231,4 @@ func (p *Parser) selector(s []string) []string {
 	}
 
 	return append(baseSelector, s...)
-}
-func (p *Parser) parseImages(s string) []pb.Image {
-	images := []pb.Image{}
-
-	for _, img := range regexp.MustCompile(`/thm/daten/tierdb/bilder/([^ ;]+);`).FindAllStringSubmatch(s, -1) {
-		images = append(images, pb.Image{
-			URL: fmt.Sprintf("http://tierschutzverein-muenchen.de/thm/daten/tierdb/bilder/%s", img[1]),
-		})
-	}
-
-	return images
 }

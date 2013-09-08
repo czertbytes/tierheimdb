@@ -60,7 +60,7 @@ func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 		if strings.HasPrefix(link, "?f_mandant=bmt_hamburg_1fb0bd784c03ad8c500a2c224deb22b5&") {
 			animal := &pb.Animal{
 				URL:       fmt.Sprintf("http://presenter.comedius.de/design/bmt_hamburg_standard_10001.php%s", link),
-				Sex:       sex,
+				Sex:       cp.NormalizeSex(sex),
 				ShortDesc: shortDesc,
 			}
 			animals = append(animals, animal)

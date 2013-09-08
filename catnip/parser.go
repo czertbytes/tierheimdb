@@ -13,7 +13,7 @@ type Parser interface {
 	ParseDetail(r io.Reader) (*pb.Animal, error)
 }
 
-func NormalizeName(name string) string {
+func NormalizeId(name string) string {
 	return strings.ToLower(name)
 }
 

@@ -23,10 +23,10 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 	panic("Not supported!")
 }
 
-func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
+func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 	var animals []*pb.Animal
 
-	doc, err := html.Parse(content)
+	doc, err := html.Parse(r)
 	if err != nil {
 		return animals, err
 	}
@@ -36,10 +36,10 @@ func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
 		name := p.parseName(animalNode)
 		if len(name) > 0 {
 			animals = append(animals, &pb.Animal{
-				Id:       cp.NormalizeName(name),
+				Id:       cp.NormalizeId(name),
 				Name:     name,
-				Breed:    p.parseBreed(animalNode),
-				Sex:      p.parseSex(animalNode),
+				Sex:      cp.NormalizeSex(p.parseSex(animalNode)),
+				Breed:    cp.NormalizeBreed(p.parseBreed(animalNode)),
 				LongDesc: p.parseDesc(animalNode),
 				Images:   p.parseImages(animalNode),
 			})
@@ -49,25 +49,12 @@ func (p *Parser) ParseList(content io.Reader) ([]*pb.Animal, error) {
 	return animals, nil
 }
 
-func (p *Parser) ParseDetail(content io.Reader) (*pb.Animal, error) {
+func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
 	panic("Not supported!")
 }
 
 func (p *Parser) ParseDetailExtra(r io.Reader) (*pb.Animal, error) {
 	panic("Not supported!")
-}
-
-func (p *Parser) listAnimalNodes(doc *html.Node) []*html.Node {
-	return cp.NodeSelect(doc, []string{
-		"html",
-		"body#inhalt",
-		"div.contentcontainerborder",
-		"div.contentcontainerbg",
-		"div#contentcontainer",
-		"div#content",
-		"div.contentelements",
-		"div.block",
-	})
 }
 
 func (p *Parser) parseName(doc *html.Node) string {
@@ -100,17 +87,6 @@ func (p *Parser) parseName(doc *html.Node) string {
 	return name
 }
 
-func (p *Parser) nameNodes(doc *html.Node) []*html.Node {
-	return cp.NodeSelect(doc, []string{
-		"div.rightcol",
-		"h3",
-	})
-}
-
-func (p *Parser) normalizeName(name string) string {
-	return strings.ToLower(name)
-}
-
 func (p *Parser) parseBreed(doc *html.Node) string {
 	var breed string
 
@@ -132,13 +108,6 @@ func (p *Parser) parseBreed(doc *html.Node) string {
 	breed = strings.Trim(breed, " :\n")
 
 	return breed
-}
-
-func (p *Parser) detailNodes(doc *html.Node) []*html.Node {
-	return cp.NodeSelect(doc, []string{
-		"div.rightcol",
-		"p",
-	})
 }
 
 func (p *Parser) parseSex(doc *html.Node) string {
@@ -211,4 +180,31 @@ func (p *Parser) parseImages(doc *html.Node) []pb.Image {
 	}
 
 	return images
+}
+
+func (p *Parser) listAnimalNodes(doc *html.Node) []*html.Node {
+	return cp.NodeSelect(doc, []string{
+		"html",
+		"body#inhalt",
+		"div.contentcontainerborder",
+		"div.contentcontainerbg",
+		"div#contentcontainer",
+		"div#content",
+		"div.contentelements",
+		"div.block",
+	})
+}
+
+func (p *Parser) nameNodes(doc *html.Node) []*html.Node {
+	return cp.NodeSelect(doc, []string{
+		"div.rightcol",
+		"h3",
+	})
+}
+
+func (p *Parser) detailNodes(doc *html.Node) []*html.Node {
+	return cp.NodeSelect(doc, []string{
+		"div.rightcol",
+		"p",
+	})
 }

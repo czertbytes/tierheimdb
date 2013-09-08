@@ -80,10 +80,10 @@ func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
 	}
 
 	return &pb.Animal{
-		Id:        cp.NormalizeName(name),
+		Id:        cp.NormalizeId(name),
 		Name:      name,
-		Breed:     p.parseBreed(doc),
-		Sex:       p.parseSex(doc),
+		Breed:     cp.NormalizeBreed(p.parseBreed(doc)),
+		Sex:       cp.NormalizeSex(p.parseSex(doc)),
 		ShortDesc: shortDesc,
 		LongDesc:  longDesc,
 		Images:    images,
