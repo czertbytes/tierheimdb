@@ -6,14 +6,17 @@
         "id": "samtpfoten-neukoelln",
         "latLon": "52.4737029,13.4504878",
         "longDesc": "",
+        "logoUrl": "http://www.tierheimdb.de/s/samtpfoten-neukoelln-logo.png",
         "name": "Samtpfoten Neuk\u00f6lln e.V.",
+        "fullName": "Samtpfoten  Neuk\u00f6lln",
         "note": "",
         "phone": "030-68408270",
         "postalCode": "12055",
         "shortDesc": "",
         "street": "Schudomastra\u00dfe",
         "streetNumber": "9/10",
-        "url": "http://www.samtpfoten-neukoelln.com"
+        "url": "http://www.samtpfoten-neukoelln.com",
+        "animalTypes": ["cat"]
     },
     {
         "city": "Hamburg",
@@ -22,14 +25,17 @@
         "id": "franziskus-hamburg",
         "latLon": "53.597049,9.942275",
         "longDesc": "",
+        "logoUrl": "http://www.tierheimdb.de/s/btm-logo.png",
         "name": "Franziskus-Tierheim, Bund gegen Missbrauch der Tiere e. V.",
+        "fullName": "Franziskus-Tierheim",
         "note": "",
         "phone": "040-55492837",
         "postalCode": "22527",
         "shortDesc": "",
         "street": "Lokstedter Grenzstra\u00dfe",
         "streetNumber": "7",
-        "url": "http://www.franziskustierheim.de/"
+        "url": "http://www.franziskustierheim.de/",
+        "animalTypes": ["cat", "dog"]
     },
     {
         "city": "Dresden",
@@ -38,14 +44,17 @@
         "id": "tierheim-dresden",
         "latLon": "51.077840,13.658580",
         "longDesc": "",
+        "logoUrl": "http://www.tierheimdb.de/s/dresden-logo.gif",
         "name": "Tierschutzverein Dresden e.V.",
+        "fullName": "Tierheim Dresden",
         "note": "",
         "phone": "0351-4520352",
         "postalCode": "01157",
         "shortDesc": "",
         "street": "Zum Tierheim",
         "streetNumber": "10",
-        "url": "http://www.dresden.de/tierheim"
+        "url": "http://www.dresden.de/tierheim",
+        "animalTypes": ["cat", "dog"]
     },
     {
         "city": "M\u00fcnchen",
@@ -54,14 +63,17 @@
         "id": "tierheim-muenchen",
         "latLon": "48.139892,11.668165",
         "longDesc": "",
+        "logoUrl": "http://www.tierheimdb.de/s/tierheim-muenchen-logo.png",
         "name": "Tierschutzverein M\u00fcnchen e.V.",
+        "fullName": "Tierheim M\u00fcnchen",
         "note": "",
         "phone": "089-921000-0",
         "postalCode": "81829",
         "shortDesc": "",
         "street": "Riemer Strasse",
         "streetNumber": "270",
-        "url": "http://www.tierschutzverein-muenchen.de"
+        "url": "http://www.tierschutzverein-muenchen.de",
+        "animalTypes": ["cat", "dog"]
     },
     {
         "city": "Berlin",
@@ -70,13 +82,16 @@
         "id": "tierheim-berlin",
         "latLon": "52.573429,13.546615",
         "longDesc": "",
+        "logoUrl": "http://www.tierheimdb.de/s/tierheim-berlin-logo.png",
         "name": "Tierschutzverein f\u00fcr Berlin und Umgebung Corporation e.V.",
+        "fullName": "Tierheim Berlin",
         "note": "",
         "phone": "030-768880",
         "postalCode": "13057",
         "shortDesc": "",
         "street": "Hausvaterweg",
         "streetNumber": "39",
-        "url": "http://www.tierschutz-berlin.de"
+        "url": "http://www.tierschutz-berlin.de",
+        "animalTypes": ["cat", "dog"]
     }
 ]

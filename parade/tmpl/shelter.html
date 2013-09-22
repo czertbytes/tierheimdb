@@ -1,68 +1,114 @@
 {{ define "shelter" }}
 <!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>TierheimDB</title>
-    <link href="/s/css/bootstrap.css" rel="stylesheet">
-    <link href="/s/css/tierheimdb.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">TierheimDB</a>
-        <div class="nav-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav pull-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Shelter<b class="caret"></b></a>
-              <ul class="dropdown-menu" role="menu">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {{with .Shelter}}
+            {{with .PBShelter}}
+                <title>TierheimDB &mdash; {{.Name}}</title>
+            {{end}}
+        {{end}}
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/s/pure-min.css">
+        <link rel="stylesheet" href="/s/tierheimdb.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="pure-g-r" id="layout-with-shelters">
+            <div class="pure-u" id="main-nav">
+                <a href="#" class="nav-menu-button">Menu</a>
+                <div>
+                    <h1>TDB</h1>
+                    <nav class="pure-menu pure-menu-open">
+                        <ul>
+                            <li><a class="selected" href="#">Shelters</a></li>
+                            <li><a href="#">Mission</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="pure-u-1" id="shelters">
                 {{with .Shelters}}
                     {{range .}}
-                    <li><a href="/{{.Id}}">{{.Name}}</a></li>
+                        {{$selected := .Selected}}
+                        {{$cats := .Cats}}
+                        {{$dogs := .Dogs}}
+                        {{with .PBShelter}}
+                            <a href="/{{.Id}}" class="pure-g">
+                                <section {{if $selected}} class="selected"{{end}}>
+                                    <div class="pure-u">
+                                        <img src="{{.LogoURL}}" alt="{{.Name}}">
+                                    </div>
+                                    <div class="pure-u-3-4">
+                                        <h4>{{.FullName}}</h4>
+                                        <div class="city">{{.City}}</div>
+                                        <div class="offers">Offers <span>{{$cats}} cats</span> and <span>{{$dogs}} dogs</span>.</div>
+                                    </div>
+                                </section>
+                            </a>
+                        {{end}}
                     {{end}}
                 {{end}}
-              </ul>
-            </li>
-            <li><a href="/about">Help</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <ul class="list-inline">
-            {{with .Animals}}
-                {{range .}}
-                <li>
-                {{$name := .Name}}
-                {{$shelterId := .ShelterId}}
-                {{$updateId := .UpdateId}}
-                {{$animalId := .Id}}
-                {{range $index, $img := .Images}}
-                    {{if not $index }}
-                    <a href="/{{$shelterId}}/{{$updateId}}/{{$animalId}}" class="thumbnail" style="background-image: url({{$img.URL}})"><span>{{$name}}</span></a>
+            </div>
+            <article class="pure-u-1" id="content">
+                <header>
+                    <div class="pure-g">
+                        {{with .Shelter}}
+                        <div class="pure-u-1-2">
+                            {{with .PBShelter}}
+                                <h1><a href="{{.URL}}" target="_blank">{{.Name}}</a></h1>
+                            {{end}}
+                            {{with .PBUpdate}}
+                                <p>Updated at {{.Created}}</p>
+                            {{end}}
+                        </div>
+                        <div class="pure-u-1-2">
+                            {{with .PBShelter}}
+                                <a class="pure-button" href="/{{.Id}}?type=cat">Cats</a>
+                                <a class="pure-button" href="/{{.Id}}?type=dog">Dogs</a>
+                                <a class="pure-button" href="/{{.Id}}">All</a>
+                            {{end}}
+                        </div>
+                        {{end}}
+                    </div>
+                </header>
+                <ul>
+                    {{with .Shelter}}
+                        {{with .PBAnimals}}
+                            {{range .}}
+                            <li>
+                            {{$name := .Name}}
+                            {{$shelterId := .ShelterId}}
+                            {{$updateId := .UpdateId}}
+                            {{$animalId := .Id}}
+                            {{range $index, $img := .Images}}
+                                {{if not $index }}
+                                <a href="/{{$shelterId}}/{{$updateId}}/{{$animalId}}" style="background-image: url({{$img.URL}})"><span>{{$name}}</span></a>
+                                {{end}}
+                            {{end}}
+                            </li>
+                            {{end}}
+                        {{end}}
                     {{end}}
-                {{end}}
-                {{end}}
-                </li>
-            {{end}}
-          </ul>
+                </ul>
+                <footer>
+                    {{with .Shelter}}
+                        {{with .PBShelter}}
+                            <p>Animal images are subjects of copyright {{.FullName}}.</p>
+                        {{end}}
+                    {{end}}
+                </footer>
+            </article>
         </div>
-      </div>
-    </div>
-
-    <script src="/s/js/jquery-2.0.3.min.js"></script>
-    <script src="/s/js/bootstrap.min.js"></script>
-  </body>
+    </body>
 </html>
 {{end}}

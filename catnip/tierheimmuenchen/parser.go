@@ -14,6 +14,10 @@ import (
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
+var (
+	imageRE = regexp.MustCompile(`/thm/daten/tierdb/bilder/([^ ;]+);`)
+)
+
 type Parser struct {
 }
 
@@ -156,7 +160,7 @@ func (p *Parser) parseListAnimalLink(node *html.Node) string {
 func (p *Parser) parseImages(s string) []pb.Image {
 	images := []pb.Image{}
 
-	for _, img := range regexp.MustCompile(`/thm/daten/tierdb/bilder/([^ ;]+);`).FindAllStringSubmatch(s, -1) {
+	for _, img := range imageRE.FindAllStringSubmatch(s, -1) {
 		images = append(images, pb.Image{
 			URL: fmt.Sprintf("http://tierschutzverein-muenchen.de/thm/daten/tierdb/bilder/%s", img[1]),
 		})

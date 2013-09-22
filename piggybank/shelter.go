@@ -10,7 +10,9 @@ type Shelter struct {
 	Created      string `json:"created" redis:"created"`
 	Enabled      bool   `json:"enabled" redis:"enabled"`
 	Name         string `json:"name" redis:"name"`
+	FullName     string `json:"fullName" redis:"fullName"`
 	URL          string `json:"url" redis:"url"`
+	LogoURL      string `json:"logoUrl" redis:"logoUrl"`
 	Phone        string `json:"phone" redis:"phone"`
 	Email        string `json:"email" redis:"email"`
 	ShortDesc    string `json:"shortDesc" redis:"shortDesc"`
