@@ -11,6 +11,8 @@ type Update struct {
 	Id        string `json:"id" redis:"id"`
 	Created   string `json:"created" redis:"created"`
 	ShelterId string `json:"shelterId" redis:"shelterId"`
+	Cats      int    `json:"cats" redis:"cats"`
+	Dogs      int    `json:"dogs" redis:"dogs"`
 }
 
 type Updates []Update

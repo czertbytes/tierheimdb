@@ -6,23 +6,25 @@ import (
 )
 
 type Shelter struct {
-	Id           string `json:"id" redis:"id"`
-	Created      string `json:"created" redis:"created"`
-	Enabled      bool   `json:"enabled" redis:"enabled"`
-	Name         string `json:"name" redis:"name"`
-	FullName     string `json:"fullName" redis:"fullName"`
-	URL          string `json:"url" redis:"url"`
-	LogoURL      string `json:"logoUrl" redis:"logoUrl"`
-	Phone        string `json:"phone" redis:"phone"`
-	Email        string `json:"email" redis:"email"`
-	ShortDesc    string `json:"shortDesc" redis:"shortDesc"`
-	LongDesc     string `json:"longDesc" redis:"longDesc"`
-	Street       string `json:"street" redis:"street"`
-	StreetNumber string `json:"streetNumber" redis:"streetNumber"`
-	PostalCode   string `json:"postalCode" redis:"postalCode"`
-	City         string `json:"city" redis:"city"`
-	LatLon       string `json:"latLon" redis:"latLon"`
-	Note         string `json:"note" redis:"note"`
+	Id             string   `json:"id" redis:"id"`
+	Created        string   `json:"created" redis:"created"`
+	Enabled        bool     `json:"enabled" redis:"enabled"`
+	Name           string   `json:"name" redis:"name"`
+	FullName       string   `json:"fullName" redis:"fullName"`
+	URL            string   `json:"url" redis:"url"`
+	LogoURL        string   `json:"logoUrl" redis:"logoUrl"`
+	Phone          string   `json:"phone" redis:"phone"`
+	Email          string   `json:"email" redis:"email"`
+	ShortDesc      string   `json:"shortDesc" redis:"shortDesc"`
+	LongDesc       string   `json:"longDesc" redis:"longDesc"`
+	Street         string   `json:"street" redis:"street"`
+	StreetNumber   string   `json:"streetNumber" redis:"streetNumber"`
+	PostalCode     string   `json:"postalCode" redis:"postalCode"`
+	City           string   `json:"city" redis:"city"`
+	LatLon         string   `json:"latLon" redis:"latLon"`
+	Note           string   `json:"note" redis:"note"`
+	AnimalTypes    []string `json:"animalTypes" redis:"-"`
+	IntAnimalTypes int      `json:"-" redis:"animalTypes"`
 }
 
 type Shelters []Shelter
@@ -58,6 +60,7 @@ func PutShelters(shelters []*Shelter) ([]string, error) {
 
 func PutShelter(s *Shelter) error {
 	s.Created = time.Now().Format(time.RFC3339)
+	s.IntAnimalTypes = intAnimalTypes(s.AnimalTypes)
 
 	return RedisPersistShelter(fmt.Sprintf(REDIS_SHELTER, s.Id), s)
 }
@@ -94,6 +97,8 @@ func GetShelter(id string) (Shelter, error) {
 	if len(shelters) == 0 {
 		return Shelter{}, fmt.Errorf("Getting Shelter failed! ShelterId '%s' not found!", k)
 	}
+
+	shelters[0].AnimalTypes = animalTypes(shelters[0].IntAnimalTypes)
 
 	return shelters[0], nil
 }
