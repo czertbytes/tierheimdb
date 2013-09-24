@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 
@@ -19,8 +21,6 @@ type Shelter struct {
 	Selected  bool
 	PBAnimals []pb.Animal
 	PBUpdate  pb.Update
-	Cats      int
-	Dogs      int
 }
 
 type ShelterPage struct {
@@ -37,10 +37,14 @@ type AnimalPage struct {
 }
 
 func init() {
-	files := []string{
-		"tmpl/index.html",
-		"tmpl/shelter.html",
-		"tmpl/animal.html",
+	tdbRoot := os.Getenv("GOPATH")
+	if len(tdbRoot) == 0 {
+		log.Fatalf("Environment variable GOPATH not set!")
+	}
+
+	files := []string{}
+	for _, f := range []string{"shelter.html", "animal.html"} {
+		files = append(files, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/%s", tdbRoot, f))
 	}
 
 	var err error
@@ -66,23 +70,27 @@ func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 	var shelter Shelter
 	for _, s := range shelters {
 		if s.PBShelter.Id == shelterId {
+			allAnimals, err := pb.GetAnimals(s.PBShelter.Id, s.PBUpdate.Id)
+			if err != nil {
+				log.Println(err)
+				return
+			}
+
+			if len(animalType) > 0 {
+				animals := []pb.Animal{}
+				for _, a := range allAnimals {
+					if a.Type == animalType {
+						animals = append(animals, a)
+					}
+				}
+				s.PBAnimals = animals
+			} else {
+				s.PBAnimals = allAnimals
+			}
 			s.Selected = true
+
 			shelter = *s
 		}
-	}
-
-	if len(animalType) > 0 {
-		animals := []pb.Animal{}
-		for _, a := range shelter.PBAnimals {
-			if a.Type == animalType {
-				animals = append(animals, a)
-			}
-		}
-		shelter.PBAnimals = animals
-	}
-
-	for _, s := range shelters {
-		log.Println(s.Selected)
 	}
 
 	tmpl.ExecuteTemplate(w, "shelter", &ShelterPage{
@@ -117,28 +125,11 @@ func makeShelter(shelter pb.Shelter) (Shelter, error) {
 		return Shelter{}, err
 	}
 
-	animals, err := pb.GetAnimals(shelter.Id, update.Id)
-	if err != nil {
-		return Shelter{}, err
-	}
-
-	cats, dogs := 0, 0
-	for _, animal := range animals {
-		if animal.Type == "cat" {
-			cats = cats + 1
-		}
-		if animal.Type == "dog" {
-			dogs = dogs + 1
-		}
-	}
-
 	return Shelter{
 		shelter,
 		false,
-		animals,
+		[]pb.Animal{},
 		update,
-		cats,
-		dogs,
 	}, nil
 }
 

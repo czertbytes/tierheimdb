@@ -40,26 +40,22 @@
                 {{with .Shelters}}
                     {{range .}}
                         {{$selected := .Selected}}
-                        {{$cats := .Cats}}
-                        {{$dogs := .Dogs}}
                         {{with .PBShelter}}
-                        <a href="/{{.Id}}" class="pure-g">
-                                {{if $selected}}
-                                <section class="selected">
-                                {{else}}
-                                <section>
-                                {{end}}
+                            <a href="/{{.Id}}" class="pure-g">
+                                <section {{if $selected}}class="selected" {{end}}>
                                     <div class="pure-u">
                                         <img src="{{.LogoURL}}" alt="{{.Name}}">
                                     </div>
                                     <div class="pure-u-3-4">
                                         <h4>{{.FullName}}</h4>
                                         <div class="city">{{.City}}</div>
-                                        <div class="offers">Offers <span>{{$cats}} cats</span>.</div>
+                        {{end}}
+                        {{with .PBUpdate}}
+                                        <div class="offers">Offers <span>{{.Cats}} cats</span> and <span>{{.Dogs}} dogs</span>.</div>
+                        {{end}}
                                     </div>
                                 </section>
                             </a>
-                        {{end}}
                     {{end}}
                 {{end}}
             </div>

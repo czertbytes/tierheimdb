@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 
@@ -36,7 +38,11 @@ func main() {
 	serveFile("/tierheim-muenchen-logo.png", "./tierheim-muenchen-logo.png")
 	serveFile("/tierheim-berlin-logo.jpg", "./tierheim-berlin-logo.jpg")
 
-	http.Handle("/s/", http.StripPrefix("/s/", http.FileServer(http.Dir("./s/"))))
+	tdbRoot := os.Getenv("GOPATH")
+	if len(tdbRoot) == 0 {
+		log.Fatalf("Environment variable GOPATH not set!")
+	}
+	http.Handle("/s/", http.StripPrefix("/s/", http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/s", tdbRoot)))))
 
 	log.Println("Running Parade")
 	log.Fatalf("Failed to run webserver: %s", http.ListenAndServe(":8081", nil))
