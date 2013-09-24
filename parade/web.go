@@ -76,17 +76,22 @@ func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			if len(animalType) > 0 {
-				animals := []pb.Animal{}
-				for _, a := range allAnimals {
+			animals := []pb.Animal{}
+			for _, a := range allAnimals {
+				if len(a.Images) == 0 {
+					a.Images = []pb.Image{pb.Image{URL: fmt.Sprintf("http://placehold.it/200x200&text=%s", a.Name)}}
+				}
+
+				if len(animalType) > 0 {
 					if a.Type == animalType {
 						animals = append(animals, a)
 					}
+				} else {
+					animals = append(animals, a)
 				}
-				s.PBAnimals = animals
-			} else {
-				s.PBAnimals = allAnimals
 			}
+			s.PBAnimals = animals
+
 			s.Selected = true
 
 			shelter = *s
