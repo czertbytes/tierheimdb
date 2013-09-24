@@ -85,8 +85,20 @@ func fetchAnimals(catnipName string) ([]*pb.Animal, error) {
 }
 
 func persist(shelterId string, animals []*pb.Animal) error {
+	var catsCounter int
+	var dogsCounter int
+
 	u := pb.NewUpdate(shelterId)
 	for _, a := range animals {
+		if len(a.Type) > 0 {
+			switch a.Type {
+			case "cat":
+				catsCounter = catsCounter + 1
+			case "dog":
+				dogsCounter = dogsCounter + 1
+			}
+		}
+
 		a.UpdateId = u.Id
 		a.ShelterId = shelterId
 	}
@@ -95,6 +107,9 @@ func persist(shelterId string, animals []*pb.Animal) error {
 	if err != nil {
 		return err
 	}
+
+	u.Cats = catsCounter
+	u.Dogs = dogsCounter
 
 	return pb.PutUpdate(u)
 }
