@@ -27,6 +27,14 @@ type Shelter struct {
 	IntAnimalTypes int      `json:"-" redis:"animalTypes"`
 }
 
+func (s *Shelter) SetIntAnimalTypes() {
+	s.IntAnimalTypes = intAnimalTypes(s.AnimalTypes)
+}
+
+func (s *Shelter) SetAnimalTypes() {
+	s.AnimalTypes = animalTypes(s.IntAnimalTypes)
+}
+
 type Shelters []Shelter
 
 func (ss Shelters) Len() int {
@@ -60,7 +68,6 @@ func PutShelters(shelters []*Shelter) ([]string, error) {
 
 func PutShelter(s *Shelter) error {
 	s.Created = time.Now().Format(time.RFC3339)
-	s.IntAnimalTypes = intAnimalTypes(s.AnimalTypes)
 
 	return RedisPersistShelter(fmt.Sprintf(REDIS_SHELTER, s.Id), s)
 }
@@ -97,8 +104,6 @@ func GetShelter(id string) (Shelter, error) {
 	if len(shelters) == 0 {
 		return Shelter{}, fmt.Errorf("Getting Shelter failed! ShelterId '%s' not found!", k)
 	}
-
-	shelters[0].AnimalTypes = animalTypes(shelters[0].IntAnimalTypes)
 
 	return shelters[0], nil
 }

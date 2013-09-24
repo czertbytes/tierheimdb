@@ -19,6 +19,8 @@ func RedisPersistShelter(k string, s *Shelter) error {
 		return fmt.Errorf("Creating Shelter with sKey: %s failed! Shelter with that key already exists!", k)
 	}
 
+	s.SetIntAnimalTypes()
+
 	c.Send("MULTI")
 	if err := RedisPersistStruct(c, k, s); err != nil {
 		return err
@@ -60,6 +62,7 @@ func RedisGetShelters(keys []string) (Shelters, error) {
 		if err := redis.ScanStruct(v, &s); err != nil {
 			return nil, err
 		}
+		s.SetAnimalTypes()
 
 		shelters = append(shelters, s)
 	}
