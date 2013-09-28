@@ -15,7 +15,7 @@ func RedisPersistAnimal(k string, a *Animal) error {
 		return err
 	}
 	if kExists != false {
-		return fmt.Errorf("Creating Update with key: %s failed! Update with that key already exists!", k)
+		return fmt.Errorf("Creating Animal with key: %s failed! Animal with that key already exists!", k)
 	}
 
 	c.Send("MULTI")

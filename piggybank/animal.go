@@ -30,17 +30,10 @@ type Image struct {
 
 func PutAnimals(animals []*Animal) ([]string, error) {
 	ids := []string{}
-
-	names := make(map[string]bool)
-	for _, a := range animals {
-		if _, found := names[a.Id]; found == true {
-			a.Id = fmt.Sprintf("%s-%d", a.Id, time.Now().UnixNano())
-		}
-
+	for _, a := range uniqueAnimals(animals) {
 		if err := PutAnimal(a); err != nil {
 			return nil, err
 		}
-		names[a.Id] = true
 
 		ids = append(ids, a.Id)
 	}

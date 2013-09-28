@@ -105,7 +105,7 @@ func (c *Catnip) Fetch(s *Source) ([]*pb.Animal, error) {
 
 		counter = counter + len(la)
 		for _, animal := range la {
-			time.Sleep(500 * time.Millisecond)
+			time.Sleep(1000 * time.Millisecond)
 			go func(a *pb.Animal) {
 				a.Type = s.Animal
 				a.Priority = s.Priority
