@@ -6,8 +6,27 @@ import (
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
+func makeShelters() (Shelters, error) {
+	pbShelters, err := pb.GetEnabledShelters()
+	if err != nil {
+		return nil, err
+	}
+
+	shelters := Shelters{}
+	for _, pbShelter := range pbShelters {
+		shelter, err := makeShelter(pbShelter)
+		if err != nil {
+			return nil, err
+		}
+
+		shelters = append(shelters, &shelter)
+	}
+
+	return shelters, nil
+}
+
 func makeSheltersShelter(shelterId, animalType string) (Shelters, Shelter, error) {
-	shelters, err := enabledShelters()
+	shelters, err := makeShelters()
 	if err != nil {
 		return nil, Shelter{}, err
 	}
@@ -21,7 +40,7 @@ func makeSheltersShelter(shelterId, animalType string) (Shelters, Shelter, error
 }
 
 func makeSheltersShelterAnimal(shelterId, updateId, animalId string) (Shelters, Shelter, pb.Animal, error) {
-	shelters, err := enabledShelters()
+	shelters, err := makeShelters()
 	if err != nil {
 		return nil, Shelter{}, pb.Animal{}, err
 	}
@@ -51,25 +70,6 @@ func makeShelter(shelter pb.Shelter) (Shelter, error) {
 		[]pb.Animal{},
 		update,
 	}, nil
-}
-
-func enabledShelters() (Shelters, error) {
-	pbShelters, err := pb.GetEnabledShelters()
-	if err != nil {
-		return nil, err
-	}
-
-	shelters := Shelters{}
-	for _, pbShelter := range pbShelters {
-		shelter, err := makeShelter(pbShelter)
-		if err != nil {
-			return nil, err
-		}
-
-		shelters = append(shelters, &shelter)
-	}
-
-	return shelters, nil
 }
 
 func selectedShelter(shelters Shelters, shelterId, animalType string) (Shelter, error) {

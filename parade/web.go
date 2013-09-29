@@ -25,6 +25,10 @@ type Shelter struct {
 
 type Shelters []*Shelter
 
+type IndexPage struct {
+	Shelters Shelters
+}
+
 type ShelterPage struct {
 	Shelters      Shelters
 	Shelter       Shelter
@@ -38,6 +42,9 @@ type AnimalPage struct {
 	Animal        pb.Animal
 }
 
+type ContactPage struct {
+}
+
 func init() {
 	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
@@ -45,7 +52,7 @@ func init() {
 	}
 
 	files := []string{}
-	for _, f := range []string{"shelter.html", "animal.html"} {
+	for _, f := range []string{"index.html", "shelter.html", "animal.html", "contact.html"} {
 		files = append(files, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/%s", tdbRoot, f))
 	}
 
@@ -57,6 +64,15 @@ func init() {
 }
 
 func GetIndexHandler(w http.ResponseWriter, r *http.Request) {
+	shelters, err := makeShelters()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	tmpl.ExecuteTemplate(w, "index", &IndexPage{
+		shelters,
+	})
 }
 
 func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
@@ -96,8 +112,6 @@ func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func GetHelpHandler(w http.ResponseWriter, r *http.Request) {
-}
-
-func GetAboutHandler(w http.ResponseWriter, r *http.Request) {
+func GetContactHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "contact", &ContactPage{})
 }

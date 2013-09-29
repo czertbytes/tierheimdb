@@ -19,10 +19,9 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", GetIndexHandler).Methods("GET")
+	router.HandleFunc("/contact", GetContactHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}", GetShelterHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}/{updateId}/{animalId}", GetAnimalHandler).Methods("GET")
-	router.HandleFunc("/help", GetHelpHandler).Methods("GET")
-	router.HandleFunc("/about", GetAboutHandler).Methods("GET")
 
 	http.Handle("/", router)
 
