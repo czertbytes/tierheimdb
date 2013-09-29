@@ -28,15 +28,5 @@
         "URL":    "http://www.dresden.de/de/02/070/111/01/hunde/ab-10-jahre.php",
         "Type":   "none",
         "Animal": "dog"
-    },
-    {
-        "URL":    "http://www.dresden.de/de/02/070/111/01/hunde/hunde-sorgenkinder.php",
-        "Type":   "none",
-        "Animal": "dog"
-    },
-    {
-        "URL":    "http://www.dresden.de/de/02/070/111/01/hunde/05_listenhunde.php",
-        "Type":   "none",
-        "Animal": "dog"
     }
 ]
