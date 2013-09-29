@@ -294,7 +294,7 @@ func APIv1GetShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Request)
 	shelterId := params["shelterId"]
 	updateId := params["updateId"]
 
-	animals, err := pb.GetAnimals(shelterId, updateId)
+	animals, err := pb.GetAnimals(shelterId, updateId, r.URL.Query().Get("type"))
 	if err != nil {
 		badRequest(w, err)
 		return
