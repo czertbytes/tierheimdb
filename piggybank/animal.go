@@ -47,8 +47,8 @@ func PutAnimal(a *Animal) error {
 	return RedisPersistAnimal(fmt.Sprintf(REDIS_ANIMAL, a.ShelterId, a.UpdateId, a.Id), a)
 }
 
-func GetAnimals(shelterId, updateId string) ([]Animal, error) {
-	keys, err := RedisGetIndexKeys(fmt.Sprintf(REDIS_ANIMALS, shelterId, updateId))
+func GetAnimals(shelterId, updateId, animalType string) ([]Animal, error) {
+	keys, err := RedisGetIndexKeys(fmt.Sprintf(animalsRedisKey(animalType), shelterId, updateId))
 	if err != nil {
 		return nil, err
 	}
@@ -56,15 +56,19 @@ func GetAnimals(shelterId, updateId string) ([]Animal, error) {
 	return RedisGetAnimals(keys)
 }
 
+func GetAllAnimals(shelterId, updateId string) ([]Animal, error) {
+	return GetAnimals(shelterId, updateId, "")
+}
+
 func GetCats(shelterId, updateId string) ([]Animal, error) {
-	return getAnimalType(shelterId, updateId, "cat")
+	return GetAnimals(shelterId, updateId, "cat")
 }
 
 func GetDogs(shelterId, updateId string) ([]Animal, error) {
-	return getAnimalType(shelterId, updateId, "dog")
+	return GetAnimals(shelterId, updateId, "dog")
 }
 
-func getAnimalType(shelterId, updateId, animalType string) ([]Animal, error) {
+func animalsRedisKey(animalType string) string {
 	var template string
 	switch animalType {
 	case "cat":
@@ -72,15 +76,10 @@ func getAnimalType(shelterId, updateId, animalType string) ([]Animal, error) {
 	case "dog":
 		template = REDIS_ANIMALS_DOGS
 	default:
-		return nil, fmt.Errorf("Unknown animal type '%s'!", animalType)
+		template = REDIS_ANIMALS
 	}
 
-	keys, err := RedisGetIndexKeys(fmt.Sprintf(template, shelterId, updateId))
-	if err != nil {
-		return nil, err
-	}
-
-	return RedisGetAnimals(keys)
+	return template
 }
 
 func GetAnimal(shelterId, updateId, id string) (Animal, error) {
@@ -102,7 +101,7 @@ func GetAnimal(shelterId, updateId, id string) (Animal, error) {
 }
 
 func DeleteAnimals(shelterId, updateId string) error {
-	animals, err := GetAnimals(shelterId, updateId)
+	animals, err := GetAllAnimals(shelterId, updateId)
 	if err != nil {
 		return err
 	}

@@ -76,26 +76,10 @@ func APIv1GetShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var animals []pb.Animal
-	switch r.URL.Query().Get("type") {
-	case "cats":
-		animals, err = pb.GetCats(shelterId, update.Id)
-		if err != nil {
-			internalServerError(w, err)
-			return
-		}
-	case "dogs":
-		animals, err = pb.GetDogs(shelterId, update.Id)
-		if err != nil {
-			internalServerError(w, err)
-			return
-		}
-	default:
-		animals, err = pb.GetAnimals(shelterId, update.Id)
-		if err != nil {
-			internalServerError(w, err)
-			return
-		}
+	animals, err := pb.GetAnimals(shelterId, update.Id, r.URL.Query().Get("type"))
+	if err != nil {
+		internalServerError(w, err)
+		return
 	}
 
 	response(w, animals)

@@ -23,14 +23,16 @@ type Shelter struct {
 	PBUpdate  pb.Update
 }
 
+type Shelters []*Shelter
+
 type ShelterPage struct {
-	Shelters      []*Shelter
+	Shelters      Shelters
 	Shelter       Shelter
 	SheltersTotal int
 }
 
 type AnimalPage struct {
-	Shelters      []*Shelter
+	Shelters      Shelters
 	Shelter       Shelter
 	SheltersTotal int
 	Animal        pb.Animal
@@ -61,41 +63,10 @@ func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 	shelterId := mux.Vars(r)["shelterId"]
 	animalType := r.URL.Query().Get("type")
 
-	shelters, err := enabledShelters(shelterId)
+	shelters, shelter, err := makeSheltersShelter(shelterId, animalType)
 	if err != nil {
 		log.Println(err)
 		return
-	}
-
-	var shelter Shelter
-	for _, s := range shelters {
-		if s.PBShelter.Id == shelterId {
-			allAnimals, err := pb.GetAnimals(s.PBShelter.Id, s.PBUpdate.Id)
-			if err != nil {
-				log.Println(err)
-				return
-			}
-
-			animals := []pb.Animal{}
-			for _, a := range allAnimals {
-				if len(a.Images) == 0 {
-					a.Images = []pb.Image{pb.Image{URL: fmt.Sprintf("http://placehold.it/200x200&text=%s", a.Name)}}
-				}
-
-				if len(animalType) > 0 {
-					if a.Type == animalType {
-						animals = append(animals, a)
-					}
-				} else {
-					animals = append(animals, a)
-				}
-			}
-			s.PBAnimals = animals
-
-			s.Selected = true
-
-			shelter = *s
-		}
 	}
 
 	tmpl.ExecuteTemplate(w, "shelter", &ShelterPage{
@@ -105,60 +76,13 @@ func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func enabledShelters(shelterId string) ([]*Shelter, error) {
-	pbShelters, err := pb.GetEnabledShelters()
-	if err != nil {
-		return nil, err
-	}
-
-	shelters := []*Shelter{}
-	for _, pbShelter := range pbShelters {
-		shelter, err := makeShelter(pbShelter)
-		if err != nil {
-			return nil, err
-		}
-
-		shelters = append(shelters, &shelter)
-	}
-
-	return shelters, nil
-}
-
-func makeShelter(shelter pb.Shelter) (Shelter, error) {
-	update, err := pb.GetLastUpdate(shelter.Id)
-	if err != nil {
-		return Shelter{}, err
-	}
-
-	return Shelter{
-		shelter,
-		false,
-		[]pb.Animal{},
-		update,
-	}, nil
-}
-
 func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	shelterId := params["shelterId"]
 	updateId := params["updateId"]
 	animalId := params["animalId"]
 
-	shelters, err := enabledShelters(shelterId)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
-	var shelter Shelter
-	for _, s := range shelters {
-		if s.PBShelter.Id == shelterId {
-			s.Selected = true
-			shelter = *s
-		}
-	}
-
-	animal, err := pb.GetAnimal(shelterId, updateId, animalId)
+	shelters, shelter, animal, err := makeSheltersShelterAnimal(shelterId, updateId, animalId)
 	if err != nil {
 		log.Println(err)
 		return
