@@ -1,0 +1,9 @@
+{{define "animal-content-footer"}}
+    <footer>
+        {{with .Shelter}}
+            {{with .PBShelter}}
+                <p>Animal images are subjects of copyright {{.FullName}}.</p>
+            {{end}}
+        {{end}}
+    </footer>
+{{end}}

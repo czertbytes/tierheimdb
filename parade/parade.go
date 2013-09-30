@@ -18,7 +18,7 @@ func main() {
 	}
 
 	router := mux.NewRouter()
-	router.HandleFunc("/", GetIndexHandler).Methods("GET")
+	router.HandleFunc("/", GetHomeHandler).Methods("GET")
 	router.HandleFunc("/contact", GetContactHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}", GetShelterHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}/{updateId}/{animalId}", GetAnimalHandler).Methods("GET")

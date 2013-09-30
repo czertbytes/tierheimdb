@@ -25,24 +25,26 @@ type Shelter struct {
 
 type Shelters []*Shelter
 
-type IndexPage struct {
+type HomePage struct {
+	Title    string
 	Shelters Shelters
 }
 
 type ShelterPage struct {
-	Shelters      Shelters
-	Shelter       Shelter
-	SheltersTotal int
+	Title    string
+	Shelters Shelters
+	Shelter  Shelter
 }
 
 type AnimalPage struct {
-	Shelters      Shelters
-	Shelter       Shelter
-	SheltersTotal int
-	Animal        pb.Animal
+	Title    string
+	Shelters Shelters
+	Shelter  Shelter
+	Animal   pb.Animal
 }
 
 type ContactPage struct {
+	Title string
 }
 
 func init() {
@@ -51,26 +53,21 @@ func init() {
 		log.Fatalf("Environment variable GOPATH not set!")
 	}
 
-	files := []string{}
-	for _, f := range []string{"index.html", "shelter.html", "animal.html", "contact.html"} {
-		files = append(files, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/%s", tdbRoot, f))
-	}
-
-	var err error
-	tmpl, err = tmpl.ParseFiles(files...)
-	if err != nil {
-		panic(err)
-	}
+	tmpl = template.Must(
+		template.New("all").
+			Funcs(template.FuncMap{"dateFormat": DateFormatter}).
+			ParseGlob(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/*.html.tmpl", tdbRoot)))
 }
 
-func GetIndexHandler(w http.ResponseWriter, r *http.Request) {
+func GetHomeHandler(w http.ResponseWriter, r *http.Request) {
 	shelters, err := makeShelters()
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	tmpl.ExecuteTemplate(w, "index", &IndexPage{
+	tmpl.ExecuteTemplate(w, "home", &HomePage{
+		"Home",
 		shelters,
 	})
 }
@@ -86,9 +83,9 @@ func GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.ExecuteTemplate(w, "shelter", &ShelterPage{
+		shelter.PBShelter.Name,
 		shelters,
 		shelter,
-		len(shelters),
 	})
 }
 
@@ -105,13 +102,15 @@ func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.ExecuteTemplate(w, "animal", &AnimalPage{
+		animal.Name,
 		shelters,
 		shelter,
-		len(shelters),
 		animal,
 	})
 }
 
 func GetContactHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl.ExecuteTemplate(w, "contact", &ContactPage{})
+	tmpl.ExecuteTemplate(w, "contact", &ContactPage{
+		"Contact",
+	})
 }

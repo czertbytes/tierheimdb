@@ -1,0 +1,11 @@
+{{define "animal-content-body"}}
+    {{with .Animal}}
+        <p>{{.LongDesc}}</p>
+        <ul>
+            {{$name := .Name}}
+            {{range $index, $img := .Images}}
+                <li><a href="{{$img.URL}}" style="background-image: url({{$img.URL}})" target="_blank"><span>{{$name}}</span></a></li>
+            {{end}}
+        </ul>
+    {{end}}
+{{end}}

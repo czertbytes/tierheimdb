@@ -1,0 +1,21 @@
+{{define "shelter-content-body"}}
+    <ul>
+        {{with .Shelter}}
+            {{with .PBAnimals}}
+                {{range .}}
+                <li>
+                    {{$name := .Name}}
+                    {{$shelterId := .ShelterId}}
+                    {{$updateId := .UpdateId}}
+                    {{$animalId := .Id}}
+                    {{range $index, $img := .Images}}
+                        {{if not $index }}
+                            <a href="/{{$shelterId}}/{{$updateId}}/{{$animalId}}" style="background-image: url({{$img.URL}})"><span>{{$name}}</span></a>
+                        {{end}}
+                    {{end}}
+                    </li>
+                {{end}}
+            {{end}}
+        {{end}}
+    </ul>
+{{end}}

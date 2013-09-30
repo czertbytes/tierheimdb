@@ -1,0 +1,9 @@
+{{define "shelter-main"}}
+    <body>
+        <div class="pure-g-r" id="layout-with-shelters">
+           {{template "page-navigation-shelters"}}
+           {{template "navigation-shelters" .}}
+           {{template "shelter-content" .}}
+        </div>
+    </body>
+{{end}}
