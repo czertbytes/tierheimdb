@@ -10,7 +10,6 @@ get-apps:
 	go get github.com/czertbytes/tierheimdb/kennel
 	go get github.com/czertbytes/tierheimdb/parade
 	go get github.com/czertbytes/tierheimdb/piggybank
-	go get github.com/czertbytes/tierheimdb/prism
 	go get github.com/czertbytes/tierheimdb/watchdog
 
 clean: check-env

@@ -22,12 +22,22 @@ var (
 	}
 )
 
+var (
+	tdbRoot = ""
+)
+
+func init() {
+	tdbRoot = os.Getenv("GOPATH")
+	if len(tdbRoot) == 0 {
+		log.Fatalf("Environment variable GOPATH not set!")
+	}
+}
+
 //  run me as
 //  ./watchdog <shelterId>
 //
 //  example
 //  ./watchdog samtpfoten-neukoelln
-
 func main() {
 	args := os.Args
 	if len(args) != 2 {
@@ -73,13 +83,8 @@ func parseArgs(args []string) (string, error) {
 }
 
 func fetchAnimals(catnipName string) ([]*pb.Animal, error) {
-	tdbRoot := os.Getenv("GOPATH")
-	if len(tdbRoot) == 0 {
-		log.Fatalf("Environment variable GOPATH not set!")
-	}
-
 	return runCatnip(
-		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(catnipName, "-", "", -1)), // TODO: hmmm
+		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(catnipName, "-", "", -1)),
 		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, catnipName),
 	)
 }
@@ -115,11 +120,6 @@ func persist(shelterId string, animals []*pb.Animal) error {
 }
 
 func backup(catnipName string, animals []*pb.Animal) error {
-	tdbRoot := os.Getenv("GOPATH")
-	if len(tdbRoot) == 0 {
-		log.Fatalf("Environment variable GOPATH not set!")
-	}
-
 	b, err := json.Marshal(animals)
 	if err != nil {
 		return err
