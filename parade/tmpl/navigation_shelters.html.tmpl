@@ -14,7 +14,18 @@
                                 <div class="city">{{.City}}</div>
                 {{end}}
                 {{with .PBUpdate}}
-                                <div class="offers">Offers <span>{{.Cats}} cats</span> and <span>{{.Dogs}} dogs</span>.</div>
+                                <div class="offers">Offers
+                                {{if .Cats}}
+                                    <span>{{.Cats}} cats</span>
+                                {{end}}
+                                {{if .Cats}}
+                                    {{if .Dogs}}
+                                        and
+                                    {{end}}
+                                {{end}}
+                                {{if .Dogs}}
+                                    <span>{{.Dogs}} dogs</span>
+                                {{end}}</div>
                 {{end}}
                             </div>
                         </section>
