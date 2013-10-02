@@ -18,6 +18,16 @@ func NormalizeId(name string) string {
 }
 
 func NormalizeBreed(breed string) string {
+	breed = strings.Replace(breed, "Katze", "", -1)
+	breed = strings.Replace(breed, "Hund", "", -1)
+	breed = strings.Replace(breed, " -Mix", "-Mix", -1)
+	breed = strings.Replace(breed, "EKH", "Europäisch Kurzhaar", -1)
+	breed = strings.Trim(breed, " /")
+
+	if len(breed) > 1 {
+		breed = strings.ToUpper(breed[0:1]) + breed[1:]
+	}
+
 	return breed
 }
 
