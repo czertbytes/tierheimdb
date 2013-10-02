@@ -8,6 +8,28 @@ import (
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
+func APIv1GetCitiesHandler(w http.ResponseWriter, r *http.Request) {
+	cities, err := pb.GetCities()
+	if err != nil {
+		internalServerError(w, err)
+		return
+	}
+
+	response(w, cities)
+}
+
+func APIv1GetCityHandler(w http.ResponseWriter, r *http.Request) {
+	city := mux.Vars(r)["city"]
+
+	c, err := pb.GetCity(city)
+	if err != nil {
+		internalServerError(w, err)
+		return
+	}
+
+	response(w, c)
+}
+
 func APIv1GetSheltersHandler(w http.ResponseWriter, r *http.Request) {
 	shelters, err := pb.GetEnabledShelters()
 	if err != nil {
