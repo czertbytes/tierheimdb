@@ -18,7 +18,7 @@ func APIv1GetCitiesHandler(w http.ResponseWriter, r *http.Request) {
 	response(w, cities)
 }
 
-func APIv1GetCityHandler(w http.ResponseWriter, r *http.Request) {
+func APIv1GetCityAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 	city := mux.Vars(r)["city"]
 
 	c, err := pb.GetCity(city)
@@ -27,7 +27,24 @@ func APIv1GetCityHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response(w, c)
+	animals := []Animal{}
+	for _, s := range c.Shelters {
+		update, err := pb.GetLastUpdate(s.Id)
+		if err != nil {
+			internalServerError(w, err)
+			return
+		}
+
+		as, err := pb.GetAnimals(s.Id, update.Id, r.URL.Query().Get("type"))
+		if err != nil {
+			internalServerError(w, err)
+			return
+		}
+
+		animals = append(animals, as...)
+	}
+
+	response(w, animals)
 }
 
 func APIv1GetSheltersHandler(w http.ResponseWriter, r *http.Request) {

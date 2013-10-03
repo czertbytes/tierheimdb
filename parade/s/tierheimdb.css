@@ -48,11 +48,14 @@ a {
     font-weight: bold;
     color: #fff;
 }
-#main-nav .pure-menu a.selected,
+#main-nav .pure-menu a.selected {
+    color: #C17325;
+    background: #4D4D4D;
+}
 #main-nav .pure-menu a:hover,
 #main-nav .pure-menu a:focus {
-    color: #2B2B2B;
-    background: #BDB8AD;
+    color: #DA8C3F;
+    background: #4D4D4D;
 }
 #main-nav .pure-menu-heading {
     border-bottom: none;
@@ -105,6 +108,37 @@ a {
     margin: 0.4em 0;
 }
 
+
+#hero {
+    text-align: center;
+    margin: 5em auto 4em;
+    font-family: 'Bowlby One SC', cursive;
+}
+
+#hero h1 {
+    font-size: 700%;
+    font-weight: 100;
+    color: #C17325;
+}
+
+#hero h2 {
+    letter-spacing: 0em;
+    font-size: 200%;
+    font-weight: 100;
+    color: #2B2B2B;
+}
+
+#marketing {
+    margin: 0em 8em;
+}
+
+#marketing section {
+    margin: 3em 0;
+}
+
+#marketing section h3 {
+    color: #C17325;
+}
 
 #content header {
     padding: 1em 2em;

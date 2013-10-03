@@ -23,7 +23,7 @@ func main() {
 	v1Router = apiRouter.PathPrefix("/v1").Subrouter()
 
 	v1Router.HandleFunc("/cities", APIv1GetCitiesHandler).Methods("GET")
-	v1Router.HandleFunc("/city/{city}", APIv1GetCityHandler).Methods("GET")
+	v1Router.HandleFunc("/city/{city}/animals", APIv1GetCityAnimalsHandler).Methods("GET")
 	v1Router.HandleFunc("/shelters", APIv1GetSheltersHandler).Methods("GET")
 	v1Router.HandleFunc("/shelters", APIv1PostSheltersHandler).Methods("POST")
 	v1Router.HandleFunc("/shelters", APIv1DeleteSheltersHandler).Methods("DELETE")
