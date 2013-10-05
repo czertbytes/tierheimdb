@@ -1,0 +1,17 @@
+{{define "sitemap"}}
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+            <loc>http://www.tierheimdb.de/</loc>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+        {{with .Animals}}
+            {{range .}}
+                <url>
+                    <loc>http://www.tierheimdb.de/{{.ShelterId}}/{{.UpdateId}}/{{.Id | html}}</loc>
+                    <changefreq>weekly</changefreq>
+                </url>
+            {{end}}
+        {{end}}
+    </urlset>
+{{end}}

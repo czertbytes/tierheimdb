@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	t_template "text/template"
 
 	"github.com/gorilla/mux"
 
@@ -13,7 +14,8 @@ import (
 )
 
 var (
-	tmpl *template.Template
+	tmpl   *template.Template
+	t_tmpl *t_template.Template
 )
 
 type Shelter struct {
@@ -47,11 +49,19 @@ type ContactPage struct {
 	Title string
 }
 
+type Sitemap struct {
+	Animals []pb.Animal
+}
+
 func init() {
 	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
 		log.Fatalf("Environment variable GOPATH not set!")
 	}
+
+	t_tmpl = t_template.Must(
+		t_template.New("sitemap").
+			ParseGlob(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/*.xml.tmpl", tdbRoot)))
 
 	tmpl = template.Must(
 		template.New("all").
@@ -112,5 +122,36 @@ func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 func GetContactHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "contact", &ContactPage{
 		"Contact",
+	})
+}
+
+func GetSitemapHandler(w http.ResponseWriter, r *http.Request) {
+	shelters, err := pb.GetEnabledShelters()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	animals := []pb.Animal{}
+	for _, s := range shelters {
+		update, err := pb.GetLastUpdate(s.Id)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		as, err := pb.GetAllAnimals(s.Id, update.Id)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		animals = append(animals, as...)
+	}
+
+	w.Header().Add("Content-Type", "application/xml; charset=utf-8")
+	w.Write([]byte("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"))
+	t_tmpl.ExecuteTemplate(w, "sitemap", &Sitemap{
+		animals,
 	})
 }

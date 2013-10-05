@@ -19,13 +19,13 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", GetHomeHandler).Methods("GET")
+	router.HandleFunc("/sitemap.xml", GetSitemapHandler).Methods("GET")
 	router.HandleFunc("/contact", GetContactHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}", GetShelterHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}/{updateId}/{animalId}", GetAnimalHandler).Methods("GET")
 
 	http.Handle("/", router)
 
-	serveFile("/sitemap.xml", "./sitemap.xml")
 	serveFile("/favicon.ico", "./favicon.ico")
 	serveFile("/robots.txt", "./robots.txt")
 	serveFile("/humans.txt", "./humans.txt")
