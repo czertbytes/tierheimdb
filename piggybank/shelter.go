@@ -36,13 +36,13 @@ func (s *Shelter) SetAnimalTypes() {
 }
 
 func (s *Shelter) HasAnimalType(animalType string) bool {
-    for _, aType := range s.AnimalTypes {
-        if aType == animalType {
-            return true
-        }
-    }
+	for _, aType := range s.AnimalTypes {
+		if aType == animalType {
+			return true
+		}
+	}
 
-    return false
+	return false
 }
 
 type Shelters []Shelter
@@ -101,30 +101,30 @@ func GetEnabledShelters() (Shelters, error) {
 }
 
 func GetSheltersNear(latLon string, maxDistance float64) (Shelters, error) {
-    lat, lon, err := parseLatLon(latLon)
-    if err != nil {
-        return nil, err
-    }
+	lat, lon, err := parseLatLon(latLon)
+	if err != nil {
+		return nil, err
+	}
 
-    ss, err := GetEnabledShelters()
-    if err != nil {
-        return nil, err
-    }
+	ss, err := GetEnabledShelters()
+	if err != nil {
+		return nil, err
+	}
 
-    shelters := Shelters{}
-    for _, s := range ss {
-        sLat, sLon, err := parseLatLon(s.LatLon)
-        if err != nil {
-            return nil, err
-        }
+	shelters := Shelters{}
+	for _, s := range ss {
+		sLat, sLon, err := parseLatLon(s.LatLon)
+		if err != nil {
+			return nil, err
+		}
 
-        distance := haversineFormula(lat, lon, sLat, sLon)
-        if distance < maxDistance {
-            shelters = append(shelters, s)
-        }
-    }
+		distance := haversineFormula(lat, lon, sLat, sLon)
+		if distance < maxDistance {
+			shelters = append(shelters, s)
+		}
+	}
 
-    return shelters, nil
+	return shelters, nil
 }
 
 func GetShelter(id string) (Shelter, error) {
