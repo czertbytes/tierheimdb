@@ -35,6 +35,16 @@ func (s *Shelter) SetAnimalTypes() {
 	s.AnimalTypes = animalTypes(s.IntAnimalTypes)
 }
 
+func (s *Shelter) HasAnimalType(animalType string) bool {
+    for _, aType := range s.AnimalTypes {
+        if aType == animalType {
+            return true
+        }
+    }
+
+    return false
+}
+
 type Shelters []Shelter
 
 func (ss Shelters) Len() int {
@@ -88,6 +98,33 @@ func GetEnabledShelters() (Shelters, error) {
 	}
 
 	return RedisGetShelters(keys)
+}
+
+func GetSheltersNear(latLon string, maxDistance float64) (Shelters, error) {
+    lat, lon, err := parseLatLon(latLon)
+    if err != nil {
+        return nil, err
+    }
+
+    ss, err := GetEnabledShelters()
+    if err != nil {
+        return nil, err
+    }
+
+    shelters := Shelters{}
+    for _, s := range ss {
+        sLat, sLon, err := parseLatLon(s.LatLon)
+        if err != nil {
+            return nil, err
+        }
+
+        distance := haversineFormula(lat, lon, sLat, sLon)
+        if distance < maxDistance {
+            shelters = append(shelters, s)
+        }
+    }
+
+    return shelters, nil
 }
 
 func GetShelter(id string) (Shelter, error) {

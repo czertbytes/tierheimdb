@@ -47,6 +47,49 @@ func PutAnimal(a *Animal) error {
 	return RedisPersistAnimal(fmt.Sprintf(REDIS_ANIMAL, a.ShelterId, a.UpdateId, a.Id), a)
 }
 
+func SearchAnimals(latLon, animalType string, limit, offset int) ([]Animal, error) {
+    shelters, err := GetSheltersNear(latLon, 100)
+    if err != nil {
+        return nil, err
+    }
+
+    if len(animalType) > 0 {
+        sheltersWithType := Shelters{}
+        for _, s := range shelters {
+            if s.HasAnimalType(animalType) {
+                sheltersWithType = append(sheltersWithType, s)
+            }
+        }
+
+        shelters = sheltersWithType
+    }
+
+    animals := []Animal{}
+    for _, s := range shelters {
+        u, err := GetLastUpdate(s.Id)
+        if err != nil {
+            return nil, err
+        }
+
+        as, err := GetAnimals(s.Id, u.Id, animalType)
+        if err != nil {
+            return nil, err
+        }
+
+        animals = append(animals, as...)
+    }
+
+    if offset > len(animals) {
+        offset = len(animals)
+    }
+
+    if limit > len(animals) {
+        limit = len(animals)
+    }
+
+    return animals[offset:limit], nil
+}
+
 func GetAnimals(shelterId, updateId, animalType string) ([]Animal, error) {
 	keys, err := RedisGetIndexKeys(fmt.Sprintf(animalsRedisKey(animalType), shelterId, updateId))
 	if err != nil {
