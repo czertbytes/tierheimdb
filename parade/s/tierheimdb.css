@@ -111,20 +111,19 @@ a {
 
 #hero {
     text-align: center;
-    margin: 5em auto 4em;
+    margin: 1em auto 1em;
     font-family: 'Bowlby One SC', cursive;
 }
 
 #hero h1 {
     font-size: 700%;
-    font-weight: 100;
+    font-weight: 50;
     color: #C17325;
 }
 
 #hero h2 {
     letter-spacing: 0em;
     font-size: 200%;
-    font-weight: 100;
     color: #2B2B2B;
 }
 
@@ -137,6 +136,7 @@ a {
 }
 
 #marketing section h3 {
+    text-align: center;
     color: #C17325;
 }
 
