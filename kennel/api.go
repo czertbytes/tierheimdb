@@ -2,59 +2,14 @@ package main
 
 import (
 	"net/http"
-    "strconv"
 
 	"github.com/gorilla/mux"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
-func APIv1GetCityAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	city := mux.Vars(r)["city"]
-
-	c, err := pb.GetCity(city)
-	if err != nil {
-		internalServerError(w, err)
-		return
-	}
-
-	animals := []pb.Animal{}
-	for _, s := range c.Shelters {
-		update, err := pb.GetLastUpdate(s.Id)
-		if err != nil {
-			internalServerError(w, err)
-			return
-		}
-
-		as, err := pb.GetAnimals(s.Id, update.Id, r.URL.Query().Get("type"))
-		if err != nil {
-			internalServerError(w, err)
-			return
-		}
-
-		animals = append(animals, as...)
-	}
-
-	response(w, animals)
-}
-
 func APIv1GetAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	location := r.URL.Query().Get("location")
-	animalType := r.URL.Query().Get("type")
-	limit := r.URL.Query().Get("limit")
-	offset := r.URL.Query().Get("offset")
-
-    l, err := strconv.Atoi(limit)
-    if err != nil {
-        l = 100
-    }
-
-    o, err := strconv.Atoi(offset)
-    if err != nil {
-        o = 0
-    }
-
-	animals, err := pb.SearchAnimals(location, animalType, int(l), int(o))
+	animals, err := pb.SearchAnimals(parseAnimalsHandlerQuery(r))
 	if err != nil {
 		internalServerError(w, err)
 		return
