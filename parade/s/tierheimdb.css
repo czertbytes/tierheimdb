@@ -1,3 +1,42 @@
+* { font-family: 'FiraSans'; }
+
+@font-face {
+  font-family: 'FiraSans';
+  src: url('fonts/FiraSans/FiraSans/FiraSans-Regular.eot');
+  src: url('fonts/FiraSans/FiraSans-Regular.eot?#iefix') format('embedded-opentype'),
+  url('fonts/FiraSans/FiraSans-Regular.woff') format('woff'),
+  url('fonts/FiraSans/FiraSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'FiraSans';
+  src: url('fonts/FiraSans/FiraSans-Light.eot');
+  src: url('fonts/FiraSans/FiraSans-Light.eot?#iefix') format('embedded-opentype'),
+  url('fonts/FiraSans/FiraSans-Light.woff') format('woff'),
+  url('fonts/FiraSans/FiraSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'FiraSans';
+  src: url('fonts/FiraSans/FiraSans-Medium.eot');
+  src: url('fonts/FiraSans/FiraSans-Medium.eot?#iefix') format('embedded-opentype'),
+  url('fonts/FiraSans/FiraSans-Medium.woff') format('woff'),
+  url('fonts/FiraSans/FiraSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'FiraSans';
+  src: url('fonts/FiraSans/FiraSans-Bold.eot');
+  src: url('fonts/FiraSans/FiraSans-Bold.eot?#iefix') format('embedded-opentype'),
+  url('fonts/FiraSans/FiraSans-Bold.woff') format('woff'),
+  url('fonts/FiraSans/FiraSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 body {
     color: #2B2B2B;
 }
@@ -63,7 +102,6 @@ a {
     color: rgb(75, 113, 151);
 }
 #main-nav h1 {
-    font-family: 'Bowlby One SC', cursive;
     color: #C17325;
 }
 #main-nav .nav-menu-button {
@@ -117,7 +155,6 @@ a {
 #hero {
     text-align: center;
     margin: 1em auto 1em;
-    font-family: 'Bowlby One SC', cursive;
 }
 
 #hero h1 {
@@ -169,6 +206,13 @@ a {
 }
 #content p {
   margin: 2em;
+  line-height: 1.7em;
+  text-align: justify;
+
+  /*
+  -moz-column-count: 2;
+  -moz-column-gap: 34px;
+  */
 }
 #content ul {
     float: left;
@@ -202,6 +246,8 @@ a {
 }
 #content footer {
     clear: both;
-    text-align: center;
     font-size: 60%;
+}
+#content footer p {
+    text-align: center;
 }
