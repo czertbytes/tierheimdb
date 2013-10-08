@@ -46,7 +46,8 @@ type AnimalPage struct {
 }
 
 type ContactPage struct {
-	Title string
+	Title    string
+	Shelters Shelters
 }
 
 type Sitemap struct {
@@ -120,8 +121,15 @@ func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetContactHandler(w http.ResponseWriter, r *http.Request) {
+	shelters, err := makeShelters()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
 	tmpl.ExecuteTemplate(w, "contact", &ContactPage{
 		"Contact",
+		shelters,
 	})
 }
 
