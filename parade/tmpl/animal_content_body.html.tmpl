@@ -1,6 +1,7 @@
 {{define "animal-content-body"}}
     {{with .Animal}}
         <p>{{.LongDesc}}</p>
+        <p><a href={{.URL}} class="pure-button" target="_blank">Show {{.Name}} in shelter page</a></p>
         <ul>
             {{$name := .Name}}
             {{range $index, $img := .Images}}
