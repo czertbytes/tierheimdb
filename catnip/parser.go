@@ -14,7 +14,7 @@ type Parser interface {
 }
 
 func NormalizeId(name string) string {
-	name = strins.ToLower(name)
+	name = strings.ToLower(name)
 	name = strings.Replace(name, "/ reserviert", "", -1)
 	name = strings.Trim(name, " ")
 
