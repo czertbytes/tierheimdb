@@ -20,7 +20,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", GetHomeHandler).Methods("GET")
 	router.HandleFunc("/sitemap.xml", GetSitemapHandler).Methods("GET")
-	router.HandleFunc("/contact", GetContactHandler).Methods("GET")
+	router.HandleFunc("/about", GetAboutHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}", GetShelterHandler).Methods("GET")
 	router.HandleFunc("/{shelterId}/{updateId}/{animalId}", GetAnimalHandler).Methods("GET")
 

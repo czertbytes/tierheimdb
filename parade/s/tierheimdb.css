@@ -140,6 +140,10 @@ a {
     color: #C17325;
 }
 
+#about {
+    margin: 2em 3em;
+}
+
 #content header {
     padding: 1em 2em;
 }

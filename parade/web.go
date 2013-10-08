@@ -45,7 +45,7 @@ type AnimalPage struct {
 	Animal   pb.Animal
 }
 
-type ContactPage struct {
+type AboutPage struct {
 	Title    string
 	Shelters Shelters
 }
@@ -120,15 +120,15 @@ func GetAnimalHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func GetContactHandler(w http.ResponseWriter, r *http.Request) {
+func GetAboutHandler(w http.ResponseWriter, r *http.Request) {
 	shelters, err := makeShelters()
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	tmpl.ExecuteTemplate(w, "contact", &ContactPage{
-		"Contact",
+	tmpl.ExecuteTemplate(w, "about", &AboutPage{
+		"About",
 		shelters,
 	})
 }
