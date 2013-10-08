@@ -14,7 +14,11 @@ type Parser interface {
 }
 
 func NormalizeId(name string) string {
-	return strings.ToLower(name)
+	name = strins.ToLower(name)
+	name = strings.Replace(name, "/ reserviert", "", -1)
+	name = strings.Trim(name, " ")
+
+	return name
 }
 
 func NormalizeBreed(breed string) string {
