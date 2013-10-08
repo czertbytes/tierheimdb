@@ -75,6 +75,11 @@ a {
     width: 350px;
     border-right: 1px solid #ddd;
 }
+
+#shelters > a {
+    display: block;
+}
+
 #shelters section {
     padding: 0.9em 1em;
     border-bottom: 1px solid #ddd;
