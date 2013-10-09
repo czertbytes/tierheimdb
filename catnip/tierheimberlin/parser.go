@@ -183,7 +183,7 @@ func (p *Parser) parseSex(doc *html.Node) string {
 
 func (p *Parser) parseDescriptions(doc *html.Node) (string, string) {
 	descriptionNodes := p.descriptionNodes(doc)
-	if len(descriptionNodes) < 2 {
+	if len(descriptionNodes) < 1 {
 		return "", ""
 	}
 
@@ -195,11 +195,22 @@ func (p *Parser) parseDescriptions(doc *html.Node) (string, string) {
 	shortDesc = strings.Trim(shortDesc, " \n")
 
 	var longDescBuffer bytes.Buffer
-	for c := descriptionNodes[0].NextSibling; c != nil; c = c.NextSibling {
-		for c2 := c.FirstChild; c2 != nil; c2 = c2.NextSibling {
-			if c2.Type == html.TextNode {
-				longDescBuffer.WriteString(c2.Data)
+	if len(descriptionNodes) == 1 {
+		//  cats have only one p, paragraphs are separated by <br>
+		for c := descriptionNodes[0].FirstChild; c != nil; c = c.NextSibling {
+			if c.Type == html.TextNode {
+				longDescBuffer.WriteString(c.Data)
 				longDescBuffer.WriteString(" ")
+			}
+		}
+	} else {
+		//  dogs have description in p's
+		for c := descriptionNodes[0].NextSibling; c != nil; c = c.NextSibling {
+			for c2 := c.FirstChild; c2 != nil; c2 = c2.NextSibling {
+				if c2.Type == html.TextNode {
+					longDescBuffer.WriteString(c2.Data)
+					longDescBuffer.WriteString(" ")
+				}
 			}
 		}
 	}

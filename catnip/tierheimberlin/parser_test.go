@@ -116,10 +116,21 @@ func TestParseDetail(t *testing.T) {
 			pb.Animal{
 				Id:        "darryl",
 				Name:      "Darryl",
-				Sex:       "männlich",
+				Sex:       "M",
 				Breed:     "Cocker Spaniel",
 				ShortDesc: "Darryl wurde am 22.04.09 geboren und ist etwa 46 cm groß.",
 				LongDesc:  "Er ist ein eigensinniger Kerl, der eine Weile braucht um Vertrauen zu fassen. Wenn er sich bedrängt fühlt, hat er in der Vergangenheit leider gelernt, dass er sich mit den Zähnen verteidigen kann. Unsere Hundetrainerin arbeitet mit ihm und er macht sehr gute Fortschritte. Darryl liebt die Gesellschaft von Hündinnen und orientiert sich auch an diesen, so dass eine Vermittlung zu einer Hündin für ihn wünschenswert wäre. Ideal ist für ihn eine ruhige Umgebung und ein Garten bei geduldigen und hundeerfahrenen Menschen ohne Kinder. Vor der Vermittlung sollten Sie mehrere Besuche bei uns einplanen, damit er Vertrauen fassen kann. Unsere Hundetrainerin steht Ihnen dabei gerne zur Seite. Wenn Sie diesem anspruchsvollen Hund eine Chance geben möchten, dann melden Sie sich bitte bei den Tierpflegern unter 030 / 76 888 204.",
+			},
+		},
+		{
+			"test_data/detail_cat.html",
+			pb.Animal{
+				Id:        "pipusch",
+				Name:      "Pipusch",
+				Sex:       "M",
+				Breed:     "Europäisch Kurzhaar",
+				ShortDesc: "Pipusch musste leider ins Tierheim Berlin, weil sein Besitzer in ein Seniorenheim kam und den hübschen Kater nicht mitnehmen konnte. Der einstige Einzelkater ist hier angekommen noch etwas erschrocken von der neuen Situation.",
+				LongDesc:  "Pipusch musste leider ins Tierheim Berlin, weil sein Besitzer in ein Seniorenheim kam und den hübschen Kater nicht mitnehmen konnte. Der einstige Einzelkater ist hier angekommen noch etwas erschrocken von der neuen Situation. Der Kater ist sehr gutmütig und möchte wieder in einen ruhigen Haushalt. Der Weg in den Garten sollte Pipusch offen stehen. Besuchen Sie den Kater Pipusch im Samtpfotenhaus 1. Bei Interesse können Sie auch anrufen und sich weitere Informationen über den schwarzweißen Kater einholen: 030 / 76 888 121.",
 			},
 		},
 	}
@@ -141,7 +152,7 @@ func TestParseDetail(t *testing.T) {
 		}
 
 		exp := test.Animal
-		if a.Id != exp.Id || a.Name != exp.Name || a.LongDesc != exp.LongDesc {
+		if a.Id != exp.Id || a.Name != exp.Name || a.ShortDesc != exp.ShortDesc || a.LongDesc != exp.LongDesc {
 			t.Errorf("Parsing animal failed! Got: %s Exp: %s", a, exp)
 			return
 		}
