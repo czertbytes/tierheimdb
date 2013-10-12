@@ -1,0 +1,26 @@
+[
+    {
+        "URL":        "http://presenter.comedius.de/design/bmt_standard_10001.php?f_mandant=bmt_hunsrueck_sd98f7isdfi98s7df68sdfhsd789wk&f_bereich=Hunde&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/bmt_standard_10001.php?f_mandant=bmt_hunsrueck_sd98f7isdfi98s7df68sdfhsd789wk&f_bereich=Hunde&f_aktuelle_seite={{pageId}}&f_funktion=Uebersicht",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung++mittelgro%DFe+Hunde+&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung++mittelgro%DFe+Hunde+&f_aktuelle_seite={{pageId}}&f_funktion=Uebersicht",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+gro%DFe+Hunde+&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+gro%DFe+Hunde+&f_aktuelle_seite={{pageId}}&f_funktion=Uebersicht",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+Katzen&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/bmt_koeln_standard_10001.php?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+Katzen&f_aktuelle_seite={{pageId}}&f_funktion=Uebersicht",
+        "Type":       "detail",
+        "Animal":     "cat"
+    }
+]

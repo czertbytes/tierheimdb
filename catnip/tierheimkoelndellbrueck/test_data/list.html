@@ -1,0 +1,1556 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<title>Übersicht</title>
+
+<!-- Metainformation laden -->
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="CoMedius Presenter  -  Author: CoMedius - Business Solutions">
+<meta name="description" content="Der CoMedius Presenter ist eine reine Internetanwendung, mit der Sie mit einfachen Klicks Produkte und Dienstleitungen im Internet präsentieren können. Variable Inhalte, eigenes Design und schnelle Änderungsmöglichkeiten ohne Programmierkenntnisse sind mit dem CoMedius Presenter möglich und für jedermann umsetzbar.">
+<meta name="keywords" content="Internetauftritt,Internetlösung,Weblösung,Tools,Tool,Auswertungen,variable Inhalte,Content Management System,CMS,Webverwaltung,einfache Bedienung,Webhosting,Internetauftritt,individuelles Design,einfache Erstellung,Seitenerstellung,Verein,Vereine,Selbständige,Unternehmen,Mittelstand,Tierschutzverein,Tierheim,Tierpension,Verband,Verbände">
+<meta name="robots" content="index">
+<meta name="robots" content="follow">
+
+<!-- CSS laden -->
+<!-- CSS liegt in der Datei: formate.css -->
+<link rel="stylesheet" type="text/css" href="sys_formate.css">
+
+
+
+<!-- Java-Script Funktionen -->
+
+
+
+
+<script type="text/javascript">
+<!--
+var f_link = "";
+var f_form_variablen = "form_variablen";
+
+var f_variablen_anzahl = 0;
+var f_variablen_name = new Array();
+var f_variablen_inhalt = new Array();
+
+
+
+
+function form_mail_abschicken(string_href)
+{
+         //Felder überprüfen
+         document.form_mail.method = "post";
+         document.form_mail.action = string_href;
+         document.form_mail.submit();
+}
+
+
+
+
+function suche_starten(string_href)
+{
+         document.form_suche.method = "post";
+         document.form_suche.action = string_href;
+         document.form_suche.submit();
+}
+
+
+
+
+function fenster_schliessen()
+{
+
+        window.open('','_parent','');
+        window.close();
+        //self.close();
+}
+
+
+
+
+function einblenden_bild(bild_object_id,bild_speicher_autowert_id,bild_speicher_name_id,bild_autowert,bild_name)
+{
+        //Objekt einblenden
+        document.getElementById(bild_object_id).src = bild_name;
+        document.getElementById(bild_speicher_autowert_id).value = bild_autowert;
+        document.getElementById(bild_speicher_name_id).value = bild_name;
+}
+
+
+
+
+function einblenden_bereich()
+{
+        //Objekt einblenden
+        formular_bereich.style.display = 'block';
+}
+
+
+
+
+function einblenden_objekt(objekt_name,objekt_eigenschaft)
+{
+        //Objekt einblenden
+        document.getElementById(objekt_name).removeAttribute(objekt_eigenschaft);
+}
+
+
+
+
+function vorschau_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	vorschau_seite = window.open(f_link,"CoMedius","width=990,height=580,left=0,top=0,locationbar=yes,menubar=yes,scrollbars=yes");
+	vorschau_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function upload_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	upload_seite = window.open(f_link,"CoMedius","width=500,height=500,left=262,top=134,scrollbars=yes");
+	upload_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function link_jmp(f_link)
+{
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+}
+
+
+
+
+function link_par_jmp(f_link,f_variablen_anzahl)
+{
+
+	//testen: alert(f_variablen_name[0]);
+	//testen: alert(f_variablen_inhalt[0]);
+	//testen: alert(f_variablen_anzahl);
+
+	//Alle übergegebenen Variablen durchlaufen
+	for (var i=0; i<f_variablen_anzahl; i++)
+	{
+		//testen: alert("Variablencounter: "+i);
+		//testen: alert(window.document.forms[0].elements[0].value);
+
+		//Alle Elemente im Formular überprüfen
+		for (var i2=0;window.document.forms[0].elements[i2].value != "Variablen Ende";i2++)
+		{
+			//testen: alert("Elementecounter: "+i2);
+
+			//Vergleichen, ob Formularelement die übergegeben Variable ist
+			//testen: alert("Elements Name: "+window.document.forms[0].elements[i2].name);
+			//testen: alert("Variablenname: "+f_variablen_name[i]);
+			if(window.document.forms[0].elements[i2].name == f_variablen_name[i])
+			{
+				//Ja, gefunden - Wert speichern
+				window.document.forms[0].elements[i2].value = f_variablen_inhalt[i];
+				//testen: alert(window.document.forms[0].elements[i2].value);
+			}
+		}
+	}
+
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	//testen: alert(f_link);
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+
+}
+
+//-->
+</script>
+<noscript>Diese Internetseite benötigt Java-Script. Bitte aktivieren Sie im Browser die Java-Script Unterstützung.</noscript>
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------- -->
+<!--- Body Start: design_kundenweb_00_body_start.inc.php -- -->
+<!--------------------------------------------------------- -->
+
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- Variablen laden -->
+
+
+
+
+
+
+
+<!-- Verbindungsdaten / Presenter Werberpartner -->
+
+
+
+
+
+<!-- Verbindung mit MySQL-Server aufbauen / Presenter Werberpartner -->
+
+
+
+
+
+<!------- -->
+<!-- Code -->
+<!------- -->
+
+
+
+
+
+<!-- URL-Variablen auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Formularsuche starten lassen: design_kundenweb_01_suchform_starten.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Standard-Variablen -->
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern --- -->
+<!---------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- Anzeigendaten auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern: design_kundenweb_02_suchfunktion.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------- -->
+<!--- Übersicht: design_kundenweb_04_funktion_uebersicht.inc.php -- -->
+<!----------------------------------------------------------------- -->
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+
+<img style="border-style:none;background-color:#ece9e2;vertical-align:top" galleryimg="no" src="./.././design/bmt_koeln_standard_10001.jpg" width="960">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<!-- Leerzeile -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+<td width="994" valign="top">
+<!-- Überschrift -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:994px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:18px;font-style:normal;font-weight:bold;color:#756d58">
+Kleine Hunde</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+
+<div style="clear:left">
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="994" valign="top">
+
+<!-- Einleitung -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:994px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+<br />
+<br />
+<br>
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:1024px;height:10px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#756d58">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Start ---------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+<!--------------------------------------------------------------------- -->
+<!--- Such- und Filterfunktion                                      --- -->
+<!--------------------------------------------------------------------- -->
+<!-- Feldbeschreibung: f_suche -->
+<form name="form_suche" action="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht" method="post">
+<div style="position:static;width:1024px;border-width:1px;border-style:solid;border-color:#3A5470;background-color:#BBD6F6;padding:10px">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1" valign="top">
+</td>
+
+<td width="80" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+Suche:
+</span>
+</td>
+
+<!-- Eingabe: f_suche 300 -->
+<td width="300" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<input id="f_suche" name="f_e_suche" type="text" size="40" maxlength="255" value="">
+</span>
+</td>
+
+<!-- Link: Suche starten 120 -->
+<td width="120" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" target="_self">
+     <b>Suche starten</b>
+</a>
+</span>
+</td>
+
+<!-- Link: Alle DS anzeigen 100 -->
+<td width="100" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" onclick="javascript: document.form_suche.f_e_suche.value = '';" target="_self">
+     <b>Alle anzeigen</b>
+</a>
+</span>
+</td>
+
+</tr>
+</table>
+</div>
+</form>
+
+
+
+<!----------------------------------------- -->
+<!--- Seitenanzeige der Vorgänge (oben) --- -->
+<!----------------------------------------- -->
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seitenanzeigen_oben" style="position:static;width:1024px">
+<br>
+<p id="TextSeitenanzeige">
+<br>Anzahl: 11<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+     <br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+<br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_0" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1381489898_46ed0ade15120f281de0" width="150">
+<p align="center">
+Erstellt am: 11.10.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Nicki</b><br><br>Rasse: Yorkshire Terrier<br />
+Alter: geb. Sept. 2007<br />
+Geschlecht: Rüde<br />
+Abgabegrund: Halter erkrankt<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=55273&f_aktueller_ds_select=0&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_1" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1379760651_8eba749779f069de3148" width="150">
+<p align="center">
+Erstellt am: 21.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Salomè</b><br><br>Rasse: Mischling<br />
+Alter: geb. ca. 2011<br />
+Geschlecht: Hündin, kastriert<br />
+Abgabegrund: Übernahme bmt Partner-<br />
+                       tierheim<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54883&f_aktueller_ds_select=1&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_2" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1377589102_87caa9c36b0d33f956c9" width="150">
+<p align="center">
+Erstellt am: 27.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Jona</b><br><br>Rasse: Spitz<br />
+Alter: geb. ca. 2000 / 2001<br />
+Geschlecht: Hündin<br />
+Abgabegrund: Halterin erkrankt<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54284&f_aktueller_ds_select=2&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_3" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1376660411_f4e0208019ccb200dbca" width="150">
+<p align="center">
+Erstellt am: 16.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Chici + Chicitin</b><br><br>Rasse: Pekinesen Mix und Pinscher-Mix<br />
+Alter: geb. 2007 und 2008<br />
+Geschlecht: Hündin und Rüde, kastriert<br />
+Abgabegrund: Umzug<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54062&f_aktueller_ds_select=3&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_4" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1376125042_b0a3c9aefa88bf25b3eb" width="150">
+<p align="center">
+Erstellt am: 10.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Gini</b><br><br>Rasse: Pinschermischling<br />
+Alter: unbekannt, älter<br />
+Geschlecht: weiblich kastriert<br />
+Abgabegrund: ausgesetzt<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=53824&f_aktueller_ds_select=4&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana;color:#3A5470" href="https://ssl.kundenserver.de/comedius-ssl5.de/webs/comedius_create2/webs/9/web_vorschau/lupos_logbuch_2013_08.php" target="_neu">
+    <img style="border-style:none;background-color:#ece9e2;vertical-align:top" galleryimg="no" src="./.././system/pic/icon_einstellungen_menue_neutral.gif" width="15">
+    &nbsp;&nbsp;Link mit weiteren Informationen - https://ssl.kundenserver.de/comedius-ssl5.de/webs/comedius_create2/webs/9/web_vorschau/lupos_logbuch_2013_08.php    </a>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_5" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1376122762_6f53050d73440cc011c6" width="150">
+<p align="center">
+Erstellt am: 10.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Rudi</b><br><br>Rasse: Dackel Mischling<br />
+Alter: geb. 09.2002<br />
+Geschlecht: Rüde, kastriert<br />
+Abgabegrund: Halterin verstorben<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=53822&f_aktueller_ds_select=5&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_6" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1375784438_5034f1e2055e95c11ee2" width="150">
+<p align="center">
+Erstellt am: 06.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Cappi</b><br><br>Rasse: Terrier - Mix<br />
+Alter: geb. ca. 2010<br />
+Geschlecht: Rüde, kastriert<br />
+Abgabegrund: Übernahme bmt-<br />
+                     Partnertierheim<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=53702&f_aktueller_ds_select=6&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_7" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1368260742_7ac6af5a9a7716fcdad7" width="150">
+<p align="center">
+Erstellt am: 11.05.2013</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Timmy</b><br><br>Rasse: J.R. Terrier-Mix<br />
+Alter: geb. 2005<br />
+Geschlecht: Rüde, kastriert<br />
+Abgabegrund: Halterin erkrankt<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=51802&f_aktueller_ds_select=7&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_8" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1346244815_18ee017cbd30354d3046.jpg" width="150">
+<p align="center">
+Erstellt am: 29.08.2012</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Luna</b><br><br>Rasse: Pinscher-Mix<br />
+Alter: geb. Juli  2006<br />
+Geschlecht: Hündin, kastriert<br />
+Abgabegrund: Halter erkrankt<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=45582&f_aktueller_ds_select=8&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1024">
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+<br>
+<img id="bild_9" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_koeln_d620d9faeeb43f717c893b5c818f1287/file_1308310974_cd9fe351e4c852fb4c6e.jpg" width="150">
+<p align="center">
+Erstellt am: 17.06.2011</p>
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="450">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="450" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Albi</b><br><br>Rasse: Terrier-Mix<br />
+Alter: geb. ca. 12.2009<br />
+Geschlecht: Rüde, kastriert<br />
+Bei uns seit: Juni 2011<br />
+Abgabegrund: Überforderung<br><br>    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana; color:#756d58" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=34410&f_aktueller_ds_select=9&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+<td style="background-color:#ffffff" width="220">
+
+    <table>
+
+    <tr>
+    <td style="color:#756d58" width="220" valign="top">
+
+    
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+
+
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1024" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+</p>
+</div>
+
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+<!------------------------------------------ -->
+<!--- Seitenanzeige der Vorgänge (unten) --- -->
+<!------------------------------------------ -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+
+<div id="seitenanzeigen_unten" style="position:static;width:1024px">
+<p id="TextSeitenanzeige">
+<br>Anzahl: 11<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=bmt_koeln_d620d9faeeb43f717c893b5c818f1287&f_bereich=Vermittlung+kleine+Hunde+&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+     </p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+    <!-- Werbeanzeigen am unteren Ende der Übersicht -->
+    
+    <!-- bmt-Anzeigen am unteren Ende der Übersicht -->
+    <div style="clear:left">
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+    <div style="clear:left">
+    <br>
+    <br>
+    <br>
+    </div>
+
+    <div style="margin-left:30px">
+    <span style="color:#756d58" width="1024" valign="top">
+
+    
+    </span>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!------------------------------------------------------------------------- -->
+<!--- Detailansicht: design_kundenweb_05_funktion_detailansicht.inc.php --- -->
+<!------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------------------------------- -->
+<!--- Detailansicht drucken: design_kundenweb_06_funktion_detailansicht_drucken.inc.php --- -->
+<!----------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------------- -->
+<!--- Ende: design_kundenweb_07_ende.inc.php --- -->
+<!---------------------------------------------- -->
+
+<!--------------------------------- -->
+<!--- Rahmen für Vorgänge (Ende)--- -->
+<!--------------------------------- -->
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Ende ----------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Fußzeile laden -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+<!-- Fusszeile -->
+<!-- Copyright -->
+<div style="width:1024px">
+<span style="font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000;text-align:center">
+<br>
+<br>
+<br>
+(C) Das Copyright auf eingepflegte Bilder, Texte und Dokumente liegt bei dem jeweiligen Rechte-/Lizenzinhaber.
+<br>
+<br>
+Content System CoMedius Presenter - (C) Copyright 2013 by <a style="text-decoration:underline;background-color:#ffffff;color:#000000;font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000" href="http://www.comedius.de" target="_neu"><b>CoMedius - Business Solutions</b></a>
+<br>
+<br>
+<br>
+</span>
+</div>
+</td>
+</tr>
+</table>
+
+<!-- Fußzeile Werbung laden -->
+
+<!-- Alle Variablen speichern -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

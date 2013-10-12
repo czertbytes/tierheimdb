@@ -1,8 +1,9 @@
 package catnip
 
 import (
-	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
@@ -20,8 +21,9 @@ func PaginatedSources(p Parser, s *Source) ([]*Source, error) {
 	sources := []*Source{}
 	pages := (total / perPage) + start
 	for pageId := start; pageId <= pages; pageId++ {
+		url := strings.Replace(s.Pagination, "{{pageId}}", strconv.Itoa(pageId), 1)
 		sources = append(sources, &Source{
-			URL:    fmt.Sprintf(s.Pagination, pageId),
+			URL:    url,
 			Type:   s.Type,
 			Animal: s.Animal,
 		})

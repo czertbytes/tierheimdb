@@ -38,10 +38,10 @@ func NormalizeBreed(breed string) string {
 func NormalizeSex(sex string) string {
 	parsedSex := []string{}
 	for _, token := range strings.Split(sex, " ,/") {
-		if token == "männlich" {
+		if token == "männlich" || token == "Rüde" {
 			parsedSex = append(parsedSex, "M")
 		}
-		if token == "weiblich" {
+		if token == "weiblich" || token == "Hündin" || token == "weibl." {
 			parsedSex = append(parsedSex, "F")
 		}
 	}
