@@ -7,6 +7,7 @@ get-apps:
 	go get github.com/czertbytes/tierheimdb/catnip/tierheimberlin
 	go get github.com/czertbytes/tierheimdb/catnip/tierheimdresden
 	go get github.com/czertbytes/tierheimdb/catnip/tierheimmuenchen
+	go get github.com/czertbytes/tierheimdb/catnip/tierheimdellbrueck
 	go get github.com/czertbytes/tierheimdb/kennel
 	go get github.com/czertbytes/tierheimdb/parade
 	go get github.com/czertbytes/tierheimdb/piggybank
