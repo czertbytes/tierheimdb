@@ -38,7 +38,7 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 				return 0, 0, 0, err
 			}
 
-			return 1, 10, int(counter), nil
+			return 1, 5, int(counter), nil
 		}
 	}
 
@@ -55,9 +55,9 @@ func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 
 	for _, animalNode := range p.listAnimalNodes(doc) {
 		link := cp.NodeAttribute(animalNode, "href")
-		if strings.HasPrefix(link, "?f_mandant=bmt") {
+		if strings.HasPrefix(link, "?f_mandant=tsv") {
 			animals = append(animals, &pb.Animal{
-				URL: fmt.Sprintf("http://presenter.comedius.de/design/bmt_koeln_standard_10001.php%s", link),
+				URL: fmt.Sprintf("http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php%s", link),
 			})
 		}
 	}
@@ -104,14 +104,16 @@ func (p *Parser) parseSex(doc *html.Node) string {
 	}
 	detailNode := detailNodes[0]
 
+	counter := 0
 	for c := detailNode.FirstChild; c != nil; c = c.NextSibling {
 		if c.Type == html.TextNode {
-			sex := strings.Trim(cp.ToUTF8(c.Data), " ")
-			sex = strings.Replace(sex, "\u0009", "", -1)
-			sex = strings.Replace(sex, "\u000A", "", -1)
-			sex = strings.Trim(sex, " ")
-			if strings.HasPrefix(sex, "Geschlecht:") {
-				return sex[12:]
+			if len(c.Data) > 0 {
+				sex := cp.PrepareStringChunk(c.Data)
+				if counter == 2 {
+					return sex
+				}
+
+				counter += 1
 			}
 		}
 	}
@@ -128,12 +130,9 @@ func (p *Parser) parseBreed(doc *html.Node) string {
 
 	for c := detailNode.FirstChild; c != nil; c = c.NextSibling {
 		if c.Type == html.TextNode {
-			breed := strings.Trim(cp.ToUTF8(c.Data), " ")
-			breed = strings.Replace(breed, "\u0009", "", -1)
-			breed = strings.Replace(breed, "\u000A", "", -1)
-			breed = strings.Trim(breed, " ")
-			if strings.HasPrefix(breed, "Rasse: ") {
-				return breed[6:]
+			breed := cp.PrepareStringChunk(c.Data)
+			if len(breed) > 0 {
+				return breed
 			}
 		}
 	}
@@ -149,27 +148,21 @@ func (p *Parser) parseLongDesc(doc *html.Node) string {
 	detailNode := detailNodes[0]
 
 	var longDesc string
+	counter := 0
 	for c := detailNode.FirstChild; c != nil; c = c.NextSibling {
 		if c.Type == html.TextNode {
-			desc := strings.Trim(c.Data, " ")
-			desc = strings.Replace(desc, "\u0009", "", -1)
-			desc = strings.Replace(desc, "\u000A", "", -1)
-			desc = strings.Trim(desc, " ")
-			if !(strings.HasPrefix(desc, "Abgabegrund") ||
-				strings.HasPrefix(desc, "Rasse") ||
-				strings.HasPrefix(desc, "Geschlecht") ||
-				strings.HasPrefix(desc, "Alter") ||
-				strings.HasPrefix(desc, "Farbe") ||
-				strings.HasPrefix(desc, "im Tierheim seit")) {
-				longDesc += desc
+			if counter > 3 {
+				longDesc += cp.PrepareStringChunk(c.Data)
 				longDesc += " "
 			}
+			counter += 1
 		}
 	}
 	longDesc = strings.Replace(longDesc, "  ", " ", -1)
+	longDesc = strings.Replace(longDesc, " .", ".", -1)
 	longDesc = strings.Trim(longDesc, " ")
 
-	return cp.ToUTF8(longDesc)
+	return longDesc
 }
 
 func (p *Parser) parseImages(doc *html.Node) []pb.Image {

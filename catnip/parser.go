@@ -35,16 +35,39 @@ func NormalizeBreed(breed string) string {
 	return breed
 }
 
-func NormalizeSex(sex string) string {
+func NormalizeSex(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t := PrepareStringChunk(s)
+	t = strings.ToLower(t)
+	t = strings.Replace(t, "/", " ", -1)
+	t = strings.Replace(t, ",", " ", -1)
+
 	parsedSex := []string{}
-	for _, token := range strings.Split(sex, " ,/") {
-		if token == "männlich" || token == "Rüde" {
+	for _, token := range strings.Split(t, " ") {
+		if token == "männlich" || token == "rüde" {
 			parsedSex = append(parsedSex, "M")
 		}
-		if token == "weiblich" || token == "Hündin" || token == "weibl." {
+		if token == "weiblich" || token == "hündin" || token == "weibl." {
 			parsedSex = append(parsedSex, "F")
 		}
 	}
 
 	return strings.Join(parsedSex, "/")
+}
+
+func PrepareStringChunk(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t := strings.Trim(ToUTF8(s), " ")
+	t = strings.Replace(t, "\u0009", "", -1)
+	t = strings.Replace(t, "\u000A", "", -1)
+	t = strings.Replace(t, "\u00A0", "", -1)
+	t = strings.Trim(t, " ")
+
+	return t
 }
