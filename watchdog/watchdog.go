@@ -20,6 +20,7 @@ var (
 		"tierheim-berlin",
 		"tierheim-muenchen",
 		"tierheim-dellbrueck",
+		"tierheim-frankfurtmain",
 	}
 )
 

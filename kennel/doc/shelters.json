@@ -129,5 +129,27 @@
         "street": "Iddelsfelder Hardt",
         "streetNumber": "",
         "url": "http://www.tierheim-dellbrueck.de"
+    },
+    {
+        "animalTypes": [
+            "cat",
+            "dog"
+        ],
+        "city": "Frankfurt am Main",
+        "email": "service@tsv-frankfurt.de",
+        "enabled": true,
+        "fullName": "Tierschutzverein Frankfurt am Main und Umgebung von 1841 e. V.",
+        "id": "tierheim-frankfurtmain",
+        "latLon": "50.1190,8.7590",
+        "logoUrl": "http://www.tierheimdb.de/s/tierheim-frankfurtmain-logo.png",
+        "longDesc": "",
+        "name": "Tierheim Frankfurt am Main",
+        "note": "",
+        "phone": "069-414579",
+        "postalCode": "60386",
+        "shortDesc": "",
+        "street": "Ferdinand-Porsche-Str.",
+        "streetNumber": "2-4",
+        "url": "http://www.tierheim-frankfurt.de"
     }
 ]

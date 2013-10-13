@@ -88,13 +88,17 @@ func (p *Parser) parseName(doc *html.Node) string {
 		return ""
 	}
 
-	name := nameNodes[0].FirstChild.Data
-	if i := strings.Index(name, ","); i > 0 {
-		name = name[0:i]
-	}
-	name = strings.Trim(name, " ")
+	if nameNodes[0].FirstChild != nil {
+		name := nameNodes[0].FirstChild.Data
+		if i := strings.Index(name, ","); i > 0 {
+			name = name[0:i]
+		}
+		name = strings.Trim(name, " ")
 
-	return cp.ToUTF8(name)
+		return cp.ToUTF8(name)
+	}
+
+	return ""
 }
 
 func (p *Parser) parseSex(doc *html.Node) string {
