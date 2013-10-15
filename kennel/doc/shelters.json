@@ -151,5 +151,49 @@
         "street": "Ferdinand-Porsche-Str.",
         "streetNumber": "2-4",
         "url": "http://www.tierheim-frankfurt.de"
+    },
+    {
+        "animalTypes": [
+            "cat",
+            "dog"
+        ],
+        "city": "Stuhr-Brinkum",
+        "email": "th-arche-noah@bmt-tierschutz.de",
+        "enabled": true,
+        "fullName": "Tierheim Arche Noah",
+        "id": "arche-noah",
+        "latLon": "53.01845,8.78242",
+        "logoUrl": "http://www.tierheimdb.de/s/bmt-logo.png",
+        "longDesc": "",
+        "name": "Tierheim Arche Noah",
+        "note": "",
+        "phone": "0421-890171",
+        "postalCode": "28816",
+        "shortDesc": "",
+        "street": "Rodendamm",
+        "streetNumber": "10",
+        "url": "http://www.tierheim-arche-noah.de"
+    },
+    {
+        "animalTypes": [
+            "cat",
+            "dog"
+        ],
+        "city": "Heppenheim",
+        "email": "info@tierheim-heppenheim.de",
+        "enabled": true,
+        "fullName": "Tierschutzverein Heppenheim und Umgebung e.V.",
+        "id": "tierheim-heppenheim",
+        "latLon": "49.62212,8.61176",
+        "logoUrl": "http://www.tierheimdb.de/s/tierheim-frankfurtmain-logo.png",
+        "longDesc": "",
+        "name": "Tierheim Heppenheim",
+        "note": "",
+        "phone": "06252-72637",
+        "postalCode": "64646",
+        "shortDesc": "",
+        "street": "Außerhalb",
+        "streetNumber": "65",
+        "url": "http://www.tierheim-heppenheim.de"
     }
 ]

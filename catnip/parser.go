@@ -13,26 +13,58 @@ type Parser interface {
 	ParseDetail(r io.Reader) (*pb.Animal, error)
 }
 
-func NormalizeId(name string) string {
-	name = strings.ToLower(name)
-	name = strings.Replace(name, "/ reserviert", "", -1)
-	name = strings.Trim(name, " ")
-
-	return name
-}
-
-func NormalizeBreed(breed string) string {
-	breed = strings.Replace(breed, "Katze", "", -1)
-	breed = strings.Replace(breed, "Hund", "", -1)
-	breed = strings.Replace(breed, " -Mix", "-Mix", -1)
-	breed = strings.Replace(breed, "EKH", "Europäisch Kurzhaar", -1)
-	breed = strings.Trim(breed, " /")
-
-	if len(breed) > 1 {
-		breed = strings.ToUpper(breed[0:1]) + breed[1:]
+var (
+	MaleSexKeywords = []string{
+		"männlich",
+		"männl",
+		"rüde",
 	}
 
-	return breed
+	FemaleSexKeywords = []string{
+		"weiblich",
+		"weibl",
+		"hündin",
+	}
+
+	SexKeywords = []string{}
+)
+
+func init() {
+	SexKeywords = append(SexKeywords, MaleSexKeywords...)
+	SexKeywords = append(SexKeywords, FemaleSexKeywords...)
+}
+
+func NormalizeId(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t := PrepareStringChunk(s)
+	t = strings.ToLower(t)
+	t = strings.Replace(t, "/ reserviert", "", -1)
+	t = strings.Trim(t, " ")
+
+	return t
+}
+
+func NormalizeBreed(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t := PrepareStringChunk(s)
+	for _, s := range []string{"Katze", "Hund"} {
+		t = strings.Replace(t, s, "", -1)
+	}
+	t = strings.Replace(t, " -Mix", "-Mix", -1)
+	t = strings.Replace(t, "EKH", "Europäisch Kurzhaar", -1)
+	t = strings.Trim(t, " /")
+
+	if len(t) > 1 {
+		t = strings.ToUpper(t[0:1]) + t[1:]
+	}
+
+	return t
 }
 
 func NormalizeSex(s string) string {
@@ -42,16 +74,22 @@ func NormalizeSex(s string) string {
 
 	t := PrepareStringChunk(s)
 	t = strings.ToLower(t)
-	t = strings.Replace(t, "/", " ", -1)
-	t = strings.Replace(t, ",", " ", -1)
+	for _, s := range []string{"/", ",", ":", "."} {
+		t = strings.Replace(t, s, " ", -1)
+	}
 
 	parsedSex := []string{}
 	for _, token := range strings.Split(t, " ") {
-		if token == "männlich" || token == "rüde" {
-			parsedSex = append(parsedSex, "M")
+		for _, s := range MaleSexKeywords {
+			if token == s {
+				parsedSex = append(parsedSex, "M")
+			}
 		}
-		if token == "weiblich" || token == "hündin" || token == "weibl." {
-			parsedSex = append(parsedSex, "F")
+
+		for _, s := range FemaleSexKeywords {
+			if token == s {
+				parsedSex = append(parsedSex, "F")
+			}
 		}
 	}
 
@@ -64,9 +102,9 @@ func PrepareStringChunk(s string) string {
 	}
 
 	t := strings.Trim(ToUTF8(s), " ")
-	t = strings.Replace(t, "\u0009", "", -1)
-	t = strings.Replace(t, "\u000A", "", -1)
-	t = strings.Replace(t, "\u00A0", "", -1)
+	for _, s := range []string{"\u0009", "\u000A", "\u00A0"} {
+		t = strings.Replace(t, s, "", -1)
+	}
 	t = strings.Trim(t, " ")
 
 	return t

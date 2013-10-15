@@ -1,0 +1,936 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<title>Übersicht</title>
+
+<!-- Metainformation laden -->
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="CoMedius Presenter  -  Author: CoMedius - Business Solutions">
+<meta name="description" content="Der CoMedius Presenter ist eine reine Internetanwendung, mit der Sie mit einfachen Klicks Produkte und Dienstleitungen im Internet präsentieren können. Variable Inhalte, eigenes Design und schnelle Änderungsmöglichkeiten ohne Programmierkenntnisse sind mit dem CoMedius Presenter möglich und für jedermann umsetzbar.">
+<meta name="keywords" content="Internetauftritt,Internetlösung,Weblösung,Tools,Tool,Auswertungen,variable Inhalte,Content Management System,CMS,Webverwaltung,einfache Bedienung,Webhosting,Internetauftritt,individuelles Design,einfache Erstellung,Seitenerstellung,Verein,Vereine,Selbständige,Unternehmen,Mittelstand,Tierschutzverein,Tierheim,Tierpension,Verband,Verbände">
+<meta name="robots" content="index">
+<meta name="robots" content="follow">
+
+<!-- CSS laden -->
+<!-- CSS liegt in der Datei: formate.css -->
+<link rel="stylesheet" type="text/css" href="sys_formate.css">
+
+
+
+<!-- Java-Script Funktionen -->
+
+
+
+
+<script type="text/javascript">
+<!--
+var f_link = "";
+var f_form_variablen = "form_variablen";
+
+var f_variablen_anzahl = 0;
+var f_variablen_name = new Array();
+var f_variablen_inhalt = new Array();
+
+
+
+
+function form_mail_abschicken(string_href)
+{
+         //Felder überprüfen
+         document.form_mail.method = "post";
+         document.form_mail.action = string_href;
+         document.form_mail.submit();
+}
+
+
+
+
+function suche_starten(string_href)
+{
+         document.form_suche.method = "post";
+         document.form_suche.action = string_href;
+         document.form_suche.submit();
+}
+
+
+
+
+function fenster_schliessen()
+{
+
+        window.open('','_parent','');
+        window.close();
+        //self.close();
+}
+
+
+
+
+function einblenden_bild(bild_object_id,bild_speicher_autowert_id,bild_speicher_name_id,bild_autowert,bild_name)
+{
+        //Objekt einblenden
+        document.getElementById(bild_object_id).src = bild_name;
+        document.getElementById(bild_speicher_autowert_id).value = bild_autowert;
+        document.getElementById(bild_speicher_name_id).value = bild_name;
+}
+
+
+
+
+function einblenden_bereich()
+{
+        //Objekt einblenden
+        formular_bereich.style.display = 'block';
+}
+
+
+
+
+function einblenden_objekt(objekt_name,objekt_eigenschaft)
+{
+        //Objekt einblenden
+        document.getElementById(objekt_name).removeAttribute(objekt_eigenschaft);
+}
+
+
+
+
+function vorschau_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	vorschau_seite = window.open(f_link,"CoMedius","width=990,height=580,left=0,top=0,locationbar=yes,menubar=yes,scrollbars=yes");
+	vorschau_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function upload_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	upload_seite = window.open(f_link,"CoMedius","width=500,height=500,left=262,top=134,scrollbars=yes");
+	upload_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function link_jmp(f_link)
+{
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+}
+
+
+
+
+function link_par_jmp(f_link,f_variablen_anzahl)
+{
+
+	//testen: alert(f_variablen_name[0]);
+	//testen: alert(f_variablen_inhalt[0]);
+	//testen: alert(f_variablen_anzahl);
+
+	//Alle übergegebenen Variablen durchlaufen
+	for (var i=0; i<f_variablen_anzahl; i++)
+	{
+		//testen: alert("Variablencounter: "+i);
+		//testen: alert(window.document.forms[0].elements[0].value);
+
+		//Alle Elemente im Formular überprüfen
+		for (var i2=0;window.document.forms[0].elements[i2].value != "Variablen Ende";i2++)
+		{
+			//testen: alert("Elementecounter: "+i2);
+
+			//Vergleichen, ob Formularelement die übergegeben Variable ist
+			//testen: alert("Elements Name: "+window.document.forms[0].elements[i2].name);
+			//testen: alert("Variablenname: "+f_variablen_name[i]);
+			if(window.document.forms[0].elements[i2].name == f_variablen_name[i])
+			{
+				//Ja, gefunden - Wert speichern
+				window.document.forms[0].elements[i2].value = f_variablen_inhalt[i];
+				//testen: alert(window.document.forms[0].elements[i2].value);
+			}
+		}
+	}
+
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	//testen: alert(f_link);
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+
+}
+
+//-->
+</script>
+<noscript>Diese Internetseite benötigt Java-Script. Bitte aktivieren Sie im Browser die Java-Script Unterstützung.</noscript>
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------- -->
+<!--- Body Start: design_kundenweb_00_body_start.inc.php -- -->
+<!--------------------------------------------------------- -->
+
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- Variablen laden -->
+
+
+
+
+
+
+
+<!-- Verbindungsdaten / Presenter Werberpartner -->
+
+
+
+
+
+<!-- Verbindung mit MySQL-Server aufbauen / Presenter Werberpartner -->
+
+
+
+
+
+<!------- -->
+<!-- Code -->
+<!------- -->
+
+
+
+
+
+<!-- URL-Variablen auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Formularsuche starten lassen: design_kundenweb_01_suchform_starten.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Standard-Variablen -->
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern --- -->
+<!---------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- Anzeigendaten auslesen -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------------------------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern: design_kundenweb_02_suchfunktion.inc.php -- -->
+<!--------------------------------------------------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------- -->
+<!--- Übersicht: design_kundenweb_04_funktion_uebersicht.inc.php -- -->
+<!----------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!------------------------------------------------------------------------- -->
+<!--- Detailansicht: design_kundenweb_05_funktion_detailansicht.inc.php --- -->
+<!------------------------------------------------------------------------- -->
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1250">
+
+<tr>
+
+<td style="background-color:#ece9e2" width="30">
+</td>
+
+<td style="background-color:#ece9e2" width="994">
+<span style="font-family:Verdana;font-size:18px;font-style:normal;font-weight:bold;color:#756d58">
+<br>
+Detailansicht
+<br>
+<br>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="1250">
+
+<tr>
+
+<td style="background-color:#ece9e2" width="30" valign="top">
+</td>
+
+<td style="background-color:#ece9e2" width="302" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+
+<p valign="top" align="center">
+<img id="bild_0" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce/file_1379079642_03968b8711f30d6c6bb2" width="300">
+</p>
+
+<p valign="top" align="center">
+<img id="bild_1" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce/file_1379079679_c9c826eb828528291819" width="300">
+</p>
+
+<p valign="top" align="center">
+<img id="bild_2" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce/file_1379079688_e41fe3e2449fec48cca9" width="300">
+</p>
+
+
+<p align="center">
+Erstellt am: 13.09.2013</p>
+
+
+
+
+
+    
+    <div style="text-align:left;font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#756d58">
+    <br>
+    <br>
+    <br>
+    <br>
+    Werbeanzeige:<br><br>
+    <a style="text-align:left;text-decoration:none;background-color:#ece9e2" target="_blank" title="Hier kann Ihre Online-Anzeige stehen - Klicken Sie hier für weitere Informationen!" href="http://www.comedius-server2.de/webs/ssl/webs/comedius_presenter_werbepartner/anzeigen/bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce/anzeigenkatalog.pdf">
+    <img style="text-align:left;border-style:none;" galleryimg="no" src="http://www.comedius-server2.de/webs/ssl/webs/comedius_presenter_werbepartner/anzeigen/bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce/werbeanzeige_anzeigenprojekt_v1_online.jpg" width="200" title="Hier kann Ihre Online-Anzeige stehen - Klicken Sie hier für weitere Informationen!">
+    </a>
+    <br>
+    <br>
+    </div>
+
+    
+
+
+
+
+
+</span>
+</td>
+
+<td style="background-color:#ece9e2" width="30" valign="top">
+</td>
+
+<td style="background-color:#ece9e2" width="800" valign="top">
+
+
+    <table>
+
+    <tr>
+    <td width="460" valign="top">
+    <p style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Struppi</b><br><br>Struppi ist ein netter, mit Artgenossen  meist verträglicher Rüde. Er ist Fremden gegenüber erst unsicher, baut aber recht schnell Vertrauen auf.<br />
+Bislang ist er noch recht Handscheu und schreckhaft. Wenn es zu stressig wird schnappt er auch mal, wenn man aber ruhig mit ihm umgeht lässt er alles zu.<br />
+<br><br>
+
+
+
+
+
+
+
+
+
+        <form name="form_mail" method="post" action="?f_mandant=bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce&f_bereich=Kleine+Hunde&f_seite_max_ds=6&f_aktuelle_seite=1&f_aktueller_ds=54694&f_aktueller_ds_select=0&f_e_suche=&f_mail=ja&f_funktion=Detailansicht">
+
+    <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+
+    <!-- Einleitung -->
+    <td width="570" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <br>
+    <br>
+    <b>Bei Fragen nutzen Sie bitte das folgende Formular. Die Daten werden uns direkt übermittelt und bearbeitet.
+    Bitte füllen Sie alle Pflichtfelder aus (*), bevor Sie auf die Schaltfläche "Anfrage senden" anklicken.</b>
+    <br>
+    <br>
+    <br>
+    </span>
+        </td>
+
+    </tr>
+
+    <!-- Meldung bei erfolgreichem Kontakt -->
+    
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+
+    <!-- Anrede/Titel aktiv testen -->
+        <!-- Anrede/Titel -->
+    <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Anrede:*</b>
+        </span>
+    </td>
+
+
+
+
+    <!-- Anrede/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <select style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_anrede" name="f_e_mail_anrede" size="1">
+        <option value="Frau">Frau</option>
+        <option value="Herr">Herr</option>
+        </select>
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+
+    <!-- Vorname/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Vorname:*</b>
+        </span>
+    </td>
+
+    <!-- Vorname/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_vorname" name="f_e_mail_vorname" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Name/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Name:*</b>
+        </span>
+    </td>
+
+    <!-- Name/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_name" name="f_e_mail_name" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Strasse/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Strasse:*</b>
+        </span>
+    </td>
+
+    <!-- Strasse/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_strasse" name="f_e_mail_strasse" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Plz/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Plz:*</b>
+        </span>
+    </td>
+
+    <!-- Plz/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_plz" name="f_e_mail_plz" type="text" size="10" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Ort/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Ort:*</b>
+        </span>
+    </td>
+
+    <!-- Ort/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_ort" name="f_e_mail_ort" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Land/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Land:</b>
+        </span>
+    </td>
+
+    <!-- Land/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_land" name="f_e_mail_land" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+
+
+    <!-- Mailadresse/Titel -->
+    <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Mailadresse:*</b>
+    </span>
+    </td>
+
+    <!-- Mailadrdesse/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_mailadresse" name="f_e_mail_mailadresse" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+
+
+
+
+    <!-- Telefon/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Telefon:</b>
+        </span>
+    </td>
+
+    <!-- Telefon/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_telefon" name="f_e_mail_telefon" type="text" size="50" maxlength="255" value="">
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Memo/Titel -->
+        <tr>
+    <td width="170" valign="top">
+        <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+        <b>Ihr Text:</b>
+        </span>
+    </td>
+
+    <!-- Memo/Feld -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <textarea style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#000000" id="f_mail_memo" name="f_e_mail_memo" rows="8" cols="48"></textarea>
+    </span>
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="5" valign="top">
+    </td>
+    </tr>
+    
+
+
+
+    <!-- Link -->
+    <tr>
+    <td width="170" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    </span>
+    </td>
+
+    <!-- Link -->
+    <td width="400" valign="top">
+    <span style="float:left;font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58">
+    <input name="Anfrage_Abschicken" value="Anfrage senden" type="submit">
+    </span>
+    
+    <br>
+    <br>
+
+    <span style="float:left;font-family:Verdana;font-size:9px;font-style:normal;font-weight:normal;color:#756d58">
+    (Hinterlegen Sie eine E-Mailadresse, um die Antwort auf eine gestellte Frage zu erhalten, so dürfen wir diese E-Mailadresse auch zukünftig nutzen,
+    um Sie regelmäßig über Informationen rund um das Thema Tierschutz zu informieren.)
+    </span>
+
+    </td>
+
+    </tr>
+
+    <tr>
+    <td height="30" valign="top">
+    </td>
+    </tr>
+
+    </form>
+    </table>
+
+
+
+
+        <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana;color:#3A5470" href="?f_mandant=bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce&f_bereich=Kleine+Hunde&f_seite_max_ds=6&f_aktuelle_seite=1&f_aktueller_ds=54694&f_e_suche=&f_aktueller_ds_select=0&f_funktion=Detailansicht_Drucken" target="_Neu">
+    <img style="border-style:none;background-color:#ece9e2;vertical-align:top" galleryimg="no" src="./.././system/pic/icon_einstellungen_menue_neutral.gif" width="15">
+    &nbsp;&nbsp;Druckansicht im neuen Fenster (Datei/Drucken klicken)
+    </a>
+    <br>
+        <br>
+    <br>
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#756d58;vertical-align:top">
+    <b>Kontaktdaten:</b>
+    <br>
+    bmt Tierheim Arche Noah<br />
+Rodendamm 10<br />
+28816 Stuhr/Brinkum    <br>
+    <br>
+    <b>Telefon:</b>
+    <br>
+    0421-890171    <br>
+    <br>
+    <b>Fax:</b>
+    <br>
+    0421-8090553    <br>
+    <br>
+    <b>Zusatzinformationen:</b>
+    <br>
+    Öffnungszeiten:<br />
+Di/Do/Fr/ 15-17 Uhr<br />
+Sa 14-17 Uhr<br />
+So/Mo/Mi und Feiertags geschlossen<br />
+<br />
+Telefonzeiten:<br />
+Mo-Fr  10-13 Uhr<br />
+    <br>
+    <br>
+    </span>
+        <br>
+    <br>
+    <a style="border-style:none;background-color:#ece9e2;vertical-align:top;font:normal 10pt Verdana;color:#756d58" href="?f_mandant=bmt_brinkum_131a3dc5d9a36a62409a455f08fa9dce&f_bereich=Kleine+Hunde&f_seite_max_ds=6&f_aktuelle_seite=1&f_e_suche=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+    <b>Zurück zur Übersicht...</b>
+    <br>
+    </a>
+    <br>
+    </p>
+    </td>
+    </tr>
+
+    </table>
+
+
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!----------------------------------------------------------------------------------------- -->
+<!--- Detailansicht drucken: design_kundenweb_06_funktion_detailansicht_drucken.inc.php --- -->
+<!----------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------------- -->
+<!--- Ende: design_kundenweb_07_ende.inc.php --- -->
+<!---------------------------------------------- -->
+
+<!--------------------------------- -->
+<!--- Rahmen für Vorgänge (Ende)--- -->
+<!--------------------------------- -->
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Ende ----------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Fußzeile laden -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="1024" valign="top">
+<!-- Fusszeile -->
+<!-- Copyright -->
+<div style="width:1024px">
+<span style="font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000;text-align:center">
+<br>
+<br>
+<br>
+(C) Das Copyright auf eingepflegte Bilder, Texte und Dokumente liegt bei dem jeweiligen Rechte-/Lizenzinhaber.
+<br>
+<br>
+Content System CoMedius Presenter - (C) Copyright 2013 by <a style="text-decoration:underline;background-color:#ffffff;color:#000000;font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000" href="http://www.comedius.de" target="_neu"><b>CoMedius - Business Solutions</b></a>
+<br>
+<br>
+<br>
+</span>
+</div>
+</td>
+</tr>
+</table>
+
+<!-- Fußzeile Werbung laden -->
+
+<!-- Alle Variablen speichern -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

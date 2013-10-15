@@ -21,6 +21,8 @@ var (
 		"tierheim-muenchen",
 		"tierheim-dellbrueck",
 		"tierheim-frankfurtmain",
+		"arche-noah",
+		"tierheim-heppenheim",
 	}
 )
 
