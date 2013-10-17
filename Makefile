@@ -9,6 +9,7 @@ install:
 	go install github.com/czertbytes/tierheimdb/catnip/dresden
 	go install github.com/czertbytes/tierheimdb/catnip/frankfurtmain
 	go install github.com/czertbytes/tierheimdb/catnip/franziskushamburg
+	go install github.com/czertbytes/tierheimdb/catnip/heppenheim
 	go install github.com/czertbytes/tierheimdb/catnip/muenchen
 	go install github.com/czertbytes/tierheimdb/catnip/samtpfotenneukoelln
 	go install github.com/czertbytes/tierheimdb/watchdog
