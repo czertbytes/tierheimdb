@@ -14,15 +14,15 @@ import (
 
 var (
 	validShelters = []string{
-		"samtpfoten-neukoelln",
-		"franziskus-hamburg",
-		"dresden",
-		"berlin",
-		"muenchen",
-		"dellbrueck",
-		"frankfurtmain",
 		"arche-noah",
+		"berlin",
+		"dellbrueck",
+		"dresden",
+		"frankfurtmain",
+		"franziskus-hamburg",
 		"heppenheim",
+		"muenchen",
+		"samtpfoten-neukoelln",
 	}
 
 	tdbRoot = ""
@@ -89,7 +89,7 @@ func parseArgs(args []string) (string, error) {
 func fetchAnimals(catnipName string) ([]*pb.Animal, error) {
 	return runCatnip(
 		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(catnipName, "-", "", -1)),
-		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/tierheim-%s.json", tdbRoot, catnipName),
+		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, catnipName),
 	)
 }
 
@@ -129,7 +129,7 @@ func backup(catnipName string, animals []*pb.Animal) error {
 		return err
 	}
 
-	return ioutil.WriteFile(fmt.Sprintf("%s/backup/tierheim-%s.json", tdbRoot, catnipName), b, 0644)
+	return ioutil.WriteFile(fmt.Sprintf("%s/backup/%s.json", tdbRoot, catnipName), b, 0644)
 }
 
 func runCatnip(catnipPath, sourcesPath string) ([]*pb.Animal, error) {
