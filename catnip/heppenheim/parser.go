@@ -46,7 +46,7 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 				return 0, 0, 0, err
 			}
 
-			return 1, 6, int(counter), nil
+			return 1, 10, int(counter), nil
 		}
 	}
 
@@ -63,18 +63,18 @@ func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 	}
 
 	for _, animalNode := range p.listAnimalNodes(doc) {
-		name := p.parseName(animalNode)
+		name := cp.NormalizeName(p.parseName(animalNode))
 		linkNodes := p.detailLinkNodes(animalNode)
 
-		if len(name) > 0 && len(linkNodes) == 1 {
+		if len(name) > 0 {
 			link := cp.NodeAttribute(linkNodes[0], "href")
-			if strings.HasPrefix(link, "?f_mandant=bmt_brinkum") {
+			if strings.HasPrefix(link, "?f_mandant=tierheim_heppenheim") {
 				animals = append(animals, &pb.Animal{
 					Id:    cp.NormalizeId(name),
 					Name:  name,
 					Sex:   cp.NormalizeSex(p.parseSex(animalNode)),
 					Breed: cp.NormalizeBreed(p.parseBreed(animalNode)),
-					URL:   fmt.Sprintf("http://presenter.comedius.de/design/bmt_brinkum2_standard_10001.php%s", link),
+					URL:   fmt.Sprintf("http://presenter.comedius.de/design/tierheim_heppenheim_standard_10001.php%s", link),
 				})
 			}
 		}
@@ -128,18 +128,11 @@ func (p *Parser) parseSex(doc *html.Node) string {
 	}
 
 	if len(parsedStrings) > 0 {
-		//  try dog parsing
 		for _, ps := range parsedStrings {
-			if strings.HasPrefix(ps, "Geschlecht") {
-				return ps[11:]
-			}
-		}
-
-		//  try cat parsing
-		for _, ps := range parsedStrings {
+			s := strings.ToLower(ps)
 			for _, sk := range cp.SexKeywords {
-				if strings.Index(ps, sk) >= 0 {
-					return ps
+				if strings.Index(s, sk) >= 0 {
+					return s
 				}
 			}
 		}
@@ -160,16 +153,22 @@ func (p *Parser) parseBreed(doc *html.Node) string {
 		}
 	}
 
+	notBreedPrefixes := []string{
+		"geboren",
+		"alt",
+		"gesprochen",
+	}
+
 	if len(parsedStrings) > 0 {
-		//  try dog parsing
-		for _, ps := range parsedStrings {
-			if strings.HasPrefix(ps, "Rasse") {
-				return ps[6:]
+		breed := strings.ToLower(parsedStrings[0])
+
+		for _, nbp := range notBreedPrefixes {
+			if strings.HasPrefix(breed, nbp) {
+				log.Println("Parse error! Breed not found!")
+				return ""
 			}
 		}
 
-		//  try cat parsing
-		//  zomg! we must believe it's the first parsed string
 		return parsedStrings[0]
 	}
 

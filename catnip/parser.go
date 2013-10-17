@@ -18,12 +18,17 @@ var (
 		"männlich",
 		"männl",
 		"rüde",
+		"rüden",
+		"freigänger",
+		"wohnungskater",
 	}
 
 	FemaleSexKeywords = []string{
 		"weiblich",
 		"weibl",
 		"hündin",
+		"freigängerin",
+		"wohnungskatze",
 	}
 
 	SexKeywords = []string{}
@@ -34,6 +39,20 @@ func init() {
 	SexKeywords = append(SexKeywords, FemaleSexKeywords...)
 }
 
+func NormalizeName(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t := PrepareStringChunk(s)
+	if i := strings.IndexAny(t, "-/"); i > 0 {
+		t = t[:i]
+	}
+	t = strings.Trim(t, " ")
+
+	return t
+}
+
 func NormalizeId(s string) string {
 	if len(s) == 0 {
 		return s
@@ -41,7 +60,6 @@ func NormalizeId(s string) string {
 
 	t := PrepareStringChunk(s)
 	t = strings.ToLower(t)
-	t = strings.Replace(t, "/ reserviert", "", -1)
 	t = strings.Trim(t, " ")
 
 	return t
@@ -80,14 +98,15 @@ func NormalizeSex(s string) string {
 
 	parsedSex := []string{}
 	for _, token := range strings.Split(t, " ") {
+		tokenLower := strings.ToLower(token)
 		for _, s := range MaleSexKeywords {
-			if token == s {
+			if tokenLower == s {
 				parsedSex = append(parsedSex, "M")
 			}
 		}
 
 		for _, s := range FemaleSexKeywords {
-			if token == s {
+			if tokenLower == s {
 				parsedSex = append(parsedSex, "F")
 			}
 		}
@@ -102,7 +121,7 @@ func PrepareStringChunk(s string) string {
 	}
 
 	t := strings.Trim(ToUTF8(s), " ")
-	for _, s := range []string{"\u0009", "\u000A", "\u00A0"} {
+	for _, s := range []string{"\u0009", "\u000A", "\u00A0", "\u0084", "\u0093"} {
 		t = strings.Replace(t, s, "", -1)
 	}
 	t = strings.Trim(t, " ")

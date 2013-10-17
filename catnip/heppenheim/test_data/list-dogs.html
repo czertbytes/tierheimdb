@@ -1,0 +1,1136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<title>Übersicht</title>
+
+<!-- Metainformation laden -->
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="CoMedius Presenter  -  Author: CoMedius - Business Solutions">
+<meta name="description" content="Der CoMedius Presenter ist eine reine Internetanwendung, mit der Sie mit einfachen Klicks Produkte und Dienstleitungen im Internet präsentieren können. Variable Inhalte, eigenes Design und schnelle Änderungsmöglichkeiten ohne Programmierkenntnisse sind mit dem CoMedius Presenter möglich und für jedermann umsetzbar.">
+<meta name="keywords" content="Internetauftritt,Internetlösung,Weblösung,Tools,Tool,Auswertungen,variable Inhalte,Content Management System,CMS,Webverwaltung,einfache Bedienung,Webhosting,Internetauftritt,individuelles Design,einfache Erstellung,Seitenerstellung,Verein,Vereine,Selbständige,Unternehmen,Mittelstand,Tierschutzverein,Tierheim,Tierpension,Verband,Verbände">
+<meta name="robots" content="index">
+<meta name="robots" content="follow">
+
+<!-- CSS laden -->
+<!-- CSS liegt in der Datei: formate.css -->
+<link rel="stylesheet" type="text/css" href="sys_formate.css">
+
+
+
+<!-- Java-Script Funktionen -->
+
+
+
+
+<script type="text/javascript">
+<!--
+var f_link = "";
+var f_form_variablen = "form_variablen";
+
+var f_variablen_anzahl = 0;
+var f_variablen_name = new Array();
+var f_variablen_inhalt = new Array();
+
+
+
+
+function form_mail_abschicken(string_href)
+{
+         //Felder überprüfen
+         document.form_mail.method = "post";
+         document.form_mail.action = string_href;
+         document.form_mail.submit();
+}
+
+
+
+
+function suche_starten(string_href)
+{
+         document.form_suche.method = "post";
+         document.form_suche.action = string_href;
+         document.form_suche.submit();
+}
+
+
+
+
+function fenster_schliessen()
+{
+
+        window.open('','_parent','');
+        window.close();
+        //self.close();
+}
+
+
+
+
+function einblenden_bild(bild_object_id,bild_speicher_autowert_id,bild_speicher_name_id,bild_autowert,bild_name)
+{
+        //Objekt einblenden
+        document.getElementById(bild_object_id).src = bild_name;
+        document.getElementById(bild_speicher_autowert_id).value = bild_autowert;
+        document.getElementById(bild_speicher_name_id).value = bild_name;
+}
+
+
+
+
+function einblenden_bereich()
+{
+        //Objekt einblenden
+        formular_bereich.style.display = 'block';
+}
+
+
+
+
+function einblenden_objekt(objekt_name,objekt_eigenschaft)
+{
+        //Objekt einblenden
+        document.getElementById(objekt_name).removeAttribute(objekt_eigenschaft);
+}
+
+
+
+
+function vorschau_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	vorschau_seite = window.open(f_link,"CoMedius","width=990,height=580,left=0,top=0,locationbar=yes,menubar=yes,scrollbars=yes");
+	vorschau_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function upload_open(f_link)
+{
+	//Öffnet das Upload-Formular für Dateien
+	upload_seite = window.open(f_link,"CoMedius","width=500,height=500,left=262,top=134,scrollbars=yes");
+	upload_seite.focus();
+	//upload_seite.moveTo(0,0);
+	//upload_seite.resizeTo(500,500);
+}
+
+
+
+
+function link_jmp(f_link)
+{
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+}
+
+
+
+
+function link_par_jmp(f_link,f_variablen_anzahl)
+{
+
+	//testen: alert(f_variablen_name[0]);
+	//testen: alert(f_variablen_inhalt[0]);
+	//testen: alert(f_variablen_anzahl);
+
+	//Alle übergegebenen Variablen durchlaufen
+	for (var i=0; i<f_variablen_anzahl; i++)
+	{
+		//testen: alert("Variablencounter: "+i);
+		//testen: alert(window.document.forms[0].elements[0].value);
+
+		//Alle Elemente im Formular überprüfen
+		for (var i2=0;window.document.forms[0].elements[i2].value != "Variablen Ende";i2++)
+		{
+			//testen: alert("Elementecounter: "+i2);
+
+			//Vergleichen, ob Formularelement die übergegeben Variable ist
+			//testen: alert("Elements Name: "+window.document.forms[0].elements[i2].name);
+			//testen: alert("Variablenname: "+f_variablen_name[i]);
+			if(window.document.forms[0].elements[i2].name == f_variablen_name[i])
+			{
+				//Ja, gefunden - Wert speichern
+				window.document.forms[0].elements[i2].value = f_variablen_inhalt[i];
+				//testen: alert(window.document.forms[0].elements[i2].value);
+			}
+		}
+	}
+
+	//Link dem Formular zuweisen und dann Formulardaten übertragen
+	//testen: alert(f_link);
+	window.document.form_variablen.action = f_link;
+	window.document.form_variablen.submit();
+
+}
+
+//-->
+</script>
+<noscript>Diese Internetseite benötigt Java-Script. Bitte aktivieren Sie im Browser die Java-Script Unterstützung.</noscript>
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+
+<!-- PHP-Funktion -->
+
+<!-------------- -->
+<!-- Funktionen: -->
+<!-------------- -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+
+<!-- PHP-Funktion -->
+<!-- Ende Funktion -->
+	
+
+<!-- PHP-Funktion -->
+
+<!-- PHP-Funktion -->
+
+<!-- Variablen laden -->
+
+
+
+
+<!------- -->
+<!-- Code -->
+<!------- -->
+
+
+
+
+
+
+<!-- PHP-Funktion -->
+
+<!------------------------------- -->
+<!-- Formularsuche starten lassen -->
+<!------------------------------- -->
+
+
+
+<!-- PHP-Funktion -->
+
+<!---------------------------------------- -->
+<!--- Suchfunktion: Suchwort speichern --- -->
+<!---------------------------------------- -->
+
+
+
+
+<!------------------------------- -->
+<!--- Anzahl der DS ermitteln --- -->
+<!------------------------------- -->
+
+
+<!-- PHP-Funktion -->
+
+<!------------------------------------------------- -->
+<!--- Funktionen                                --- -->
+<!------------------------------------------------- -->
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" valign="top">
+
+<img style="border-style:none;background-color:#EEF6F5;vertical-align:top" galleryimg="no" src="./.././design/tierheim_heppenheim_standard_10001.jpg" width="1200">
+</td>
+
+</tr>
+</table>
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" valign="top">
+<!-- Leerzeile -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:820px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#003531">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+<td width="790" valign="top">
+<!-- Überschrift -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:790px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:18px;font-style:normal;font-weight:bold;color:#003531">
+Vermittlungstiere - Hunde</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:820px;height:25px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#003531">
+</span>
+</div>
+</div>
+
+<div style="clear:left">
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="790" valign="top">
+
+<!-- Einleitung -->
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:790px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531">
+Unsere Hunde sind in der Regel gegen Tollwut, Parvovirose, Staupe, Hepatitis und Leptospirose geimpft und mit einem Microchip gekennzeichnet.<br />
+<br />
+Bei einer Vermittlung wird eine Schutzgebühr erhoben:<br />
+Hunde unter einem Jahr         200,- Euro<br />
+kastrierter Rüde                     180,- Euro<br />
+kastrierte Hündin                    220,- Euro<br />
+unkastrierter Hund                 150,- Euro<br />
+Unsere Hundeoldies (Hunde über 10 Jahre) vermitteln wir auf Spendenbasis.<br />
+<br />
+Für den Schutzvertrag benötigen wir Ihren Personalausweis und für den sicheren Transport des Hundes nach Hause brauchen Sie ein passendes Halsband und eine Leine.<br>
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" valign="top">
+<div style="float:left">
+<div style="position:static;background-color:#FFFFFF;float:left;width:820px;height:10px;vertical-align:top;text-align:left">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#003531">
+</span>
+</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Start ---------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+
+<!--------------------------------------------------------------------- -->
+<!--- Such- und Filterfunktion                                      --- -->
+<!--------------------------------------------------------------------- -->
+<!-- Feldbeschreibung: f_suche -->
+<form name="form_suche" action="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht" method="post">
+<div style="position:static;width:820px;border-width:1px;border-style:solid;border-color:#3A5470;background-color:#BBD6F6;padding:10px">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="1" valign="top">
+</td>
+
+<td width="80" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+Suche:
+</span>
+</td>
+
+<!-- Eingabe: f_suche 300 -->
+<td width="300" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<input id="f_suche" name="f_e_suche" type="text" size="40" maxlength="255" value="">
+</span>
+</td>
+
+<!-- Link: Suche starten 120 -->
+<td width="120" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" target="_self">
+     <b>Suche starten</b>
+</a>
+</span>
+</td>
+
+<!-- Link: Alle DS anzeigen 100 -->
+<td width="100" valign="middle">
+<span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000">
+<a style="text-decoration:underline;font-family:Verdana;font-size:12px;font-style:normal;font-weight:bold;color:#000000" href="javascript: suche_starten('?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=&f_aktuelle_seite=&f_aktueller_ds=&f_aktueller_ds_select=&f_funktion=Uebersicht')" onclick="javascript: document.form_suche.f_e_suche.value = '';" target="_self">
+     <b>Alle anzeigen</b>
+</a>
+</span>
+</td>
+
+</tr>
+</table>
+</div>
+</form>
+
+
+
+<!----------------------------------------- -->
+<!--- Seitenanzeige der Vorgänge (oben) --- -->
+<!----------------------------------------- -->
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="820" valign="top">
+
+<div id="seitenanzeigen_oben" style="position:static;width:820px">
+<br>
+<p id="TextSeitenanzeige">
+<br>Anzahl: 19<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+     <br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="820" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:820px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+<br>
+<br>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_0" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1379606585_fd3f9d2bef0d1720d1bf" width="150">
+<p align="center">
+Erstellt am: 19.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Ruscha</b><br><br>Labrador-Mischling<br />
+Hündin<br />
+geboren 2010<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54828&f_aktueller_ds_select=0&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_1" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1379606457_ebd851da4963bdcb4aff" width="150">
+<p align="center">
+Erstellt am: 19.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Donny und Kolga</b><br><br>Weimaraner<br />
+Rüde und Hündin<br />
+geboren 04.01.2008 und 02.04.2005<br />
+zusammen zu vermitteln<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54827&f_aktueller_ds_select=1&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_2" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1379606077_7a84f202cfdcc35f16c8" width="150">
+<p align="center">
+Erstellt am: 18.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Ates</b><br><br>gesprochen Atesch (türk. = Feuer)<br />
+Staffordshire-Bullterrier-Mix<br />
+Rüde<br />
+geboren 2011<br />
+- Listenhund-<br />
+<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54810&f_aktueller_ds_select=2&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_3" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1379514156_2a9b56d0561e07f706c3" width="150">
+<p align="center">
+Erstellt am: 18.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Spike</b><br><br>Husky-Schäferhund-Mischling<br />
+Rüde<br />
+geboren 21.11.2003<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54809&f_aktueller_ds_select=3&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_4" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1379513847_11fa4f498d526d462f96" width="150">
+<p align="center">
+Erstellt am: 18.09.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Gina</b><br><br>Schäferhund<br />
+Hündin<br />
+geboren 2009<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=54807&f_aktueller_ds_select=4&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_5" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1376415594_ad1238a68dd41b44c7a7" width="150">
+<p align="center">
+Erstellt am: 13.08.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Shirley</b><br><br>Dackel<br />
+kastrierte Hündin<br />
+geboren ca. 2007<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=53941&f_aktueller_ds_select=5&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_6" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1370443619_78af20a6bbbc31bdc88a" width="150">
+<p align="center">
+Erstellt am: 05.06.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Jackson</b><br><br>Bordercolliemischling<br />
+kastrierter Rüde<br />
+geboren 13.10.2006<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=52274&f_aktueller_ds_select=6&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana;color:#3A5470" href="http://www.youtube.com/watch?v=blln5Q7tipc&feature=youtu.be" target="_neu">
+    <img style="border-style:none;background-color:#EEF6F5;vertical-align:top" galleryimg="no" src="./.././system/pic/icon_einstellungen_menue_neutral.gif" width="15">
+    &nbsp;&nbsp;Link mit weiteren Informationen - http://www.youtube.com/watch?v=blln5Q7tipc&feature=youtu.be    </a>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_7" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1365755534_b72984ebdb8dc38a9797" width="150">
+<p align="center">
+Erstellt am: 12.04.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Brownie</b><br><br>Beagle<br />
+Rüde<br />
+geboren 24.07.2008<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=51134&f_aktueller_ds_select=7&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_8" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1361729844_97adbb8538af07c597dd.jpg" width="150">
+<p align="center">
+Erstellt am: 08.02.2013</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Jayjo</b><br><br>Staffordshire Terrier Mischling<br />
+Rüde<br />
+geboren im Dezember 2003<br />
+- Listenhund - <br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=49652&f_aktueller_ds_select=8&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="820">
+<tr>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="152" valign="top">
+<span style="font-family:Verdana;font-size:10px;font-style:normal;font-weight:normal;color:#003531">
+<br>
+<img id="bild_9" style="border-width:1px;border-style:solid;border-color:black" galleryimg="no" src="./.././pic/tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e/file_1364823729_5d1892b26668d79b5052" width="150">
+<p align="center">
+Erstellt am: 14.11.2012</p>
+</span>
+</td>
+
+<td style="background-color:#EEF6F5" width="30">
+</td>
+
+<td style="background-color:#EEF6F5" width="608">
+
+    <table>
+
+    <tr>
+    <td style="color:#003531" width="608" valign="top">
+    <span style="font-family:Verdana;font-size:12px;font-style:normal;font-weight:normal;color:#003531;vertical-align:top">
+    <b>Rocky</b><br><br>Rottweiler<br />
+kastrierter Rüde<br />
+geboren 02.05.2011<br />
+- Listenhund -, noch kein Wesenstest<br><br>    <a style="border-style:none;background-color:#EEF6F5;vertical-align:top;font:normal 10pt Verdana; color:#003531" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=47608&f_aktueller_ds_select=9&f_e_suche=&f_funktion=Detailansicht" target="_self">
+    <b>Weitere Details...</b>
+    </a>
+    <br>
+    <br>
+    <br>
+        </span>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="820" height="10" valign="top">
+</td>
+
+</tr>
+</table>
+
+
+
+
+<!------------------------------- -->
+<!--- Seite zurück/vor (Link) --- -->
+<!------------------------------- -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="820" valign="top">
+
+<div id="seiten_vor_zurueck" style="position:static;width:820px">
+<p id="TextSeitenanzeige">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">[ Seite vor ]</a>
+</p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+
+<!------------------------------------------ -->
+<!--- Seitenanzeige der Vorgänge (unten) --- -->
+<!------------------------------------------ -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="820" valign="top">
+
+<div id="seitenanzeigen_unten" style="position:static;width:820px">
+<p id="TextSeitenanzeige">
+<br>Anzahl: 19<br>Aktuelle Seite: 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seite:      <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=1&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          <b>
+          1          </b>
+          </a>
+          <a id="TextSeitenanzeige" style="text-decoration:underline" href="?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_seite_max_ds=10&f_aktuelle_seite=2&f_aktueller_ds=&f_e_suche=&f_aktueller_ds_select=&f_funktion=Uebersicht" target="_self">
+          2          </a>
+     </p>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+<!-- PHP-Funktion -->
+
+
+<!-- PHP-Funktion -->
+
+
+<!-- PHP-Funktion -->
+
+<!--------------------------------- -->
+<!--- Rahmen für Vorgänge (Ende)--- -->
+<!--------------------------------- -->
+
+
+
+
+<!-------------------------------------------------------------------------------- -->
+<!-- Seitenaufbau Ende ----------------------------------------------------------- -->
+<!-------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- Fußzeile laden -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+
+<td width="30">
+</td>
+
+<td width="820" valign="top">
+<!-- Fusszeile -->
+<!-- Copyright -->
+<div style="width:820px">
+<span style="font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000;text-align:center">
+<br>
+<br>
+<br>
+(C) Das Copyright auf eingepflegte Bilder, Texte und Dokumente liegt bei dem jeweiligen Rechte-/Lizenzinhaber.
+<br>
+<br>
+Content System CoMedius Presenter - (C) Copyright 2013 by <a style="text-decoration:underline;background-color:#ffffff;color:#000000;font-family:Verdana;font-size:11px;font-style:normal;font-weight:normal;color:#000000" href="http://www.comedius.de" target="_neu"><b>CoMedius - Business Solutions</b></a>
+<br>
+<br>
+<br>
+</span>
+</div>
+</td>
+</tr>
+</table>
+
+<!-- Fußzeile Werbung laden -->
+
+<!-- Alle Variablen speichern -->
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+

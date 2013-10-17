@@ -16,21 +16,21 @@ var (
 	validShelters = []string{
 		"samtpfoten-neukoelln",
 		"franziskus-hamburg",
-		"tierheim-dresden",
-		"tierheim-berlin",
-		"tierheim-muenchen",
-		"tierheim-dellbrueck",
-		"tierheim-frankfurtmain",
+		"dresden",
+		"berlin",
+		"muenchen",
+		"dellbrueck",
+		"frankfurtmain",
 		"arche-noah",
-		"tierheim-heppenheim",
+		"heppenheim",
 	}
-)
 
-var (
 	tdbRoot = ""
 )
 
 func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+
 	tdbRoot = os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
 		log.Fatalf("Environment variable GOPATH not set!")
@@ -89,7 +89,7 @@ func parseArgs(args []string) (string, error) {
 func fetchAnimals(catnipName string) ([]*pb.Animal, error) {
 	return runCatnip(
 		fmt.Sprintf("%s/bin/%s", tdbRoot, strings.Replace(catnipName, "-", "", -1)),
-		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/%s.json", tdbRoot, catnipName),
+		fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/catnip/sources/tierheim-%s.json", tdbRoot, catnipName),
 	)
 }
 
@@ -129,7 +129,7 @@ func backup(catnipName string, animals []*pb.Animal) error {
 		return err
 	}
 
-	return ioutil.WriteFile(fmt.Sprintf("%s/backup/%s.json", tdbRoot, catnipName), b, 0644)
+	return ioutil.WriteFile(fmt.Sprintf("%s/backup/tierheim-%s.json", tdbRoot, catnipName), b, 0644)
 }
 
 func runCatnip(catnipPath, sourcesPath string) ([]*pb.Animal, error) {

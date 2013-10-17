@@ -178,7 +178,7 @@ func TestParseList(t *testing.T) {
 
 		for i, a := range animals {
 			exp := test.Animals[i]
-			if a.URL != exp.URL {
+			if a.Id != exp.Id || a.Name != exp.Name || a.LongDesc != exp.LongDesc || a.Sex != exp.Sex || a.Breed != exp.Breed || a.URL != exp.URL {
 				t.Errorf("Parsing DetailSources failed! Got: %s Exp: %s", a, exp)
 				return
 			}

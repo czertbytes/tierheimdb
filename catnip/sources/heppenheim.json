@@ -1,0 +1,14 @@
+[
+    {
+        "URL":        "http://presenter.comedius.de/design/tierheim_heppenheim_standard_10001.php?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tierheim_heppenheim_standard_10001.php?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Hunde&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/tierheim_heppenheim_standard_10001.php?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Katzen&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tierheim_heppenheim_standard_10001.php?f_mandant=tierheim_heppenheim_dba261758ae4da4d90d508d1cbd11d1e&f_bereich=Katzen&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "Type":       "detail",
+        "Animal":     "cat"
+    }
+]

@@ -1,18 +1,19 @@
-all: check-env clean get-apps
+all: check-env clean install
 
-get-apps:
-	go get github.com/czertbytes/tierheimdb/catnip
-	go get github.com/czertbytes/tierheimdb/catnip/franziskushamburg
-	go get github.com/czertbytes/tierheimdb/catnip/samtpfotenneukoelln
-	go get github.com/czertbytes/tierheimdb/catnip/tierheimberlin
-	go get github.com/czertbytes/tierheimdb/catnip/tierheimdresden
-	go get github.com/czertbytes/tierheimdb/catnip/tierheimmuenchen
-	go get github.com/czertbytes/tierheimdb/catnip/tierheimdellbrueck
-	go get github.com/czertbytes/tierheimdb/catnip/tierheimfrankfurtmain
-	go get github.com/czertbytes/tierheimdb/kennel
-	go get github.com/czertbytes/tierheimdb/parade
-	go get github.com/czertbytes/tierheimdb/piggybank
-	go get github.com/czertbytes/tierheimdb/watchdog
+install:
+	go install github.com/czertbytes/tierheimdb/piggybank
+	go install github.com/czertbytes/tierheimdb/catnip
+	go install github.com/czertbytes/tierheimdb/catnip/archenoah
+	go install github.com/czertbytes/tierheimdb/catnip/berlin
+	go install github.com/czertbytes/tierheimdb/catnip/dellbrueck
+	go install github.com/czertbytes/tierheimdb/catnip/dresden
+	go install github.com/czertbytes/tierheimdb/catnip/frankfurtmain
+	go install github.com/czertbytes/tierheimdb/catnip/franziskushamburg
+	go install github.com/czertbytes/tierheimdb/catnip/muenchen
+	go install github.com/czertbytes/tierheimdb/catnip/samtpfotenneukoelln
+	go install github.com/czertbytes/tierheimdb/watchdog
+	go install github.com/czertbytes/tierheimdb/kennel
+	go install github.com/czertbytes/tierheimdb/parade
 
 clean: check-env
 	rm -rf $(GOPATH)/bin
