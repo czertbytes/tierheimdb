@@ -55,6 +55,8 @@ type Sitemap struct {
 }
 
 func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+
 	tdbRoot := os.Getenv("GOPATH")
 	if len(tdbRoot) == 0 {
 		log.Fatalf("Environment variable GOPATH not set!")

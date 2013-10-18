@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
+func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+}
+
 func makeShelters() (Shelters, error) {
 	pbShelters, err := pb.GetEnabledShelters()
 	if err != nil {
+		log.Println("Getting enabled shelters failed!")
 		return nil, err
 	}
 
@@ -16,6 +22,7 @@ func makeShelters() (Shelters, error) {
 	for _, pbShelter := range pbShelters {
 		shelter, err := makeShelter(pbShelter)
 		if err != nil {
+			log.Printf("Make shelter '%s' failed!", pbShelter.Id)
 			return nil, err
 		}
 
@@ -61,6 +68,7 @@ func makeSheltersShelterAnimal(shelterId, updateId, animalId string) (Shelters, 
 func makeShelter(shelter pb.Shelter) (Shelter, error) {
 	update, err := pb.GetLastUpdate(shelter.Id)
 	if err != nil {
+		log.Println("Getting last update for '%s' failed!", shelter.Id)
 		return Shelter{}, err
 	}
 
