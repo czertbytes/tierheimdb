@@ -1,13 +1,31 @@
 [
     {
-        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Hunde&f_funktion=Uebersicht",
-        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Hunde&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Kleine_Hunde&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Kleine_Hunde&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
         "Type":       "detail",
         "Animal":     "dog"
     },
     {
-        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Katzen&f_funktion=Uebersicht",
-        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Katzen&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Mittlere_Hunde&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Mittlere_Hunde&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Gro%25DFe_Hunde&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Gro%25DFe_Hunde&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "Type":       "detail",
+        "Animal":     "dog"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e2&f_bereich=Freigaengerkatzen&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e2&f_bereich=Freigaengerkatzen&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
+        "Type":       "detail",
+        "Animal":     "cat"
+    },
+    {
+        "URL":        "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Wohnungskatzen&f_funktion=Uebersicht",
+        "Pagination": "http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php?f_mandant=tsv_ffm_f8bc3055161419854ea9ddb99936b98e&f_bereich=Wohnungskatzen&f_funktion=Uebersicht&f_aktuelle_seite={{pageId}}",
         "Type":       "detail",
         "Animal":     "cat"
     }

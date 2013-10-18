@@ -71,7 +71,7 @@ func NormalizeBreed(s string) string {
 	}
 
 	t := PrepareStringChunk(s)
-	for _, s := range []string{"Katze", "Hund"} {
+	for _, s := range []string{"Katze", "Hund", "Rasse: "} {
 		t = strings.Replace(t, s, "", -1)
 	}
 	t = strings.Replace(t, " -Mix", "-Mix", -1)

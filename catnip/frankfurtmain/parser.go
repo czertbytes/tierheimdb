@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"strconv"
 	"strings"
 
@@ -38,7 +39,7 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 				return 0, 0, 0, err
 			}
 
-			return 1, 5, int(counter), nil
+			return 1, 10, int(counter), nil
 		}
 	}
 
@@ -54,11 +55,20 @@ func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
 	}
 
 	for _, animalNode := range p.listAnimalNodes(doc) {
-		link := cp.NodeAttribute(animalNode, "href")
-		if strings.HasPrefix(link, "?f_mandant=tsv") {
-			animals = append(animals, &pb.Animal{
-				URL: fmt.Sprintf("http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php%s", link),
-			})
+		name := cp.NormalizeName(p.parseName(animalNode))
+		linkNodes := p.detailLinkNodes(animalNode)
+
+		if len(name) > 0 {
+			link := cp.NodeAttribute(linkNodes[0], "href")
+			if strings.HasPrefix(link, "?f_mandant=tsv") {
+				animals = append(animals, &pb.Animal{
+					Id:    cp.NormalizeId(name),
+					Name:  name,
+					Sex:   cp.NormalizeSex(p.parseSex(animalNode)),
+					Breed: cp.NormalizeBreed(p.parseBreed(animalNode)),
+					URL:   fmt.Sprintf("http://presenter.comedius.de/design/tsv_frankfurt_standard_10001.php%s", link),
+				})
+			}
 		}
 	}
 
@@ -71,12 +81,7 @@ func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
 		return nil, err
 	}
 
-	name := p.parseName(doc)
 	return &pb.Animal{
-		Id:       cp.NormalizeId(name),
-		Name:     name,
-		Sex:      cp.NormalizeSex(p.parseSex(doc)),
-		Breed:    cp.NormalizeBreed(p.parseBreed(doc)),
 		LongDesc: p.parseLongDesc(doc),
 		Images:   p.parseImages(doc),
 	}, nil
@@ -102,45 +107,47 @@ func (p *Parser) parseName(doc *html.Node) string {
 }
 
 func (p *Parser) parseSex(doc *html.Node) string {
-	detailNodes := p.longDescNodes(doc)
-	if len(detailNodes) != 1 {
-		return ""
-	}
-	detailNode := detailNodes[0]
+	var parsedStrings []string
 
-	counter := 0
-	for c := detailNode.FirstChild; c != nil; c = c.NextSibling {
-		if c.Type == html.TextNode {
-			if len(c.Data) > 0 {
-				sex := cp.PrepareStringChunk(c.Data)
-				if counter == 2 {
-					return sex
-				}
-
-				counter += 1
+	for c := doc.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.TextNode && len(c.Data) > 0 {
+			if ps := cp.PrepareStringChunk(c.Data); len(ps) > 0 {
+				parsedStrings = append(parsedStrings, ps)
 			}
 		}
 	}
 
+	if len(parsedStrings) > 0 {
+		for _, ps := range parsedStrings {
+			s := strings.ToLower(ps)
+			for _, sk := range cp.SexKeywords {
+				if strings.Index(s, sk) >= 0 {
+					return s
+				}
+			}
+		}
+	}
+
+	log.Println("Parse error! Sex not found!")
 	return ""
 }
 
 func (p *Parser) parseBreed(doc *html.Node) string {
-	detailNodes := p.longDescNodes(doc)
-	if len(detailNodes) != 1 {
-		return ""
-	}
-	detailNode := detailNodes[0]
+	var parsedStrings []string
 
-	for c := detailNode.FirstChild; c != nil; c = c.NextSibling {
-		if c.Type == html.TextNode {
-			breed := cp.PrepareStringChunk(c.Data)
-			if len(breed) > 0 {
-				return breed
+	for c := doc.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.TextNode && len(c.Data) > 0 {
+			if ps := cp.PrepareStringChunk(c.Data); len(ps) > 0 {
+				parsedStrings = append(parsedStrings, ps)
 			}
 		}
 	}
 
+	if len(parsedStrings) > 0 {
+		return parsedStrings[0]
+	}
+
+	log.Println("Parse error! Breed not found!")
 	return ""
 }
 
@@ -212,8 +219,19 @@ func (p *Parser) listAnimalNodes(doc *html.Node) []*html.Node {
 		"tr",
 		"td",
 		"span",
-		"a",
 	}))
+}
+
+func (p *Parser) nameNodes(node *html.Node) []*html.Node {
+	return cp.NodeSelect(node, []string{
+		"b",
+	})
+}
+
+func (p *Parser) detailLinkNodes(doc *html.Node) []*html.Node {
+	return cp.NodeSelect(doc, []string{
+		"a",
+	})
 }
 
 func (p *Parser) paginationNodes(doc *html.Node) []*html.Node {
@@ -222,19 +240,6 @@ func (p *Parser) paginationNodes(doc *html.Node) []*html.Node {
 		"td",
 		"div#seitenanzeigen_oben",
 		"p#TextSeitenanzeige",
-	}))
-}
-
-func (p *Parser) nameNodes(node *html.Node) []*html.Node {
-	return cp.NodeSelect(node, p.selector([]string{
-		"tr",
-		"td",
-		"table",
-		"tbody",
-		"tr",
-		"td",
-		"p",
-		"b",
 	}))
 }
 
