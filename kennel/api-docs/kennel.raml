@@ -1,0 +1,287 @@
+#%RAML 0.8
+---
+title: TierheimDB API
+version: v1
+baseUri: http://api.tierheimdb.de/{version}
+protocols: [ HTTP ]
+mediaType: application/json
+schemas:
+  - animal: !include schemas/animal.schema.json
+  - update: !include schemas/update.schema.json
+  - shelter: !include schemas/shelter.schema.json
+resourceTypes:
+  - base:
+    get?:
+    put?:
+    patch?:
+    post?:
+    delete?:
+    sync?:
+  - collections:
+    type: base
+    get:
+      is: [ paged ]
+      responses:
+        200:
+          body:
+            application/json:
+              schema: <<schema>>
+    post:
+      body:
+        application/json:
+          schema: <<schema>>
+      responses:
+        body:
+          application/json:
+            schema: <<schema>>
+    delete:
+      responses:
+        204:
+          body:
+  - member:
+traits:
+  - typed:
+    queryParameters:
+      type:
+        displayName: Type
+        type: string
+        enum: [ "cat", "dog" ]
+        description: Animal type. Allowed values are: cat and dog
+        example: cat
+        required: false
+  - paged:
+    queryParameters:
+      offset:
+        displayName: Offset
+        type: integer
+        description: Sets a number or results to be skipped in response
+        example: 2
+        required: false
+      limit:
+        displayName: Limit
+        type: integer
+        description: Sets maximum results returned
+        example: 10
+        required: false
+  - locationed:
+    queryParameters:
+      latlon:
+        displayName: Location
+        type: string
+        description: Latitude, longitude location separated by comma
+        example: 53,12;14,24
+        required: false
+/animals:
+  type:
+    collection:
+      schema: animal
+  is: [ typed, paged, locationed ]
+  get:
+    displayName: Retrieve Animals collection
+    description: Retrieve Animals collection by latitude and longitude parameters
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/v1/animals.json
+/shelters:
+  type:
+    collection:
+      schema: shelter
+  is: [ typed, paged, locationed ]
+  get:
+    displayName: Retrieve Shelters collection
+    description: Retrieve Shelters collection
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/v1/shelters.json
+  post:
+    displayName: Create Shelters collection
+    description: Create Shelters collection
+    body:
+      application/json:
+        example: !include examples/v1/create-shelters.json
+    responses:
+      201:
+  delete:
+    displayName: Delete Shelters collection
+    description: Delete Shelters collection
+    responses:
+      204:
+/shelter:
+  /{shelterId}:
+    type:
+      member:
+        schema: shelter
+    get:
+      displayName: Retrieve a Shelter
+      description: Retrieve a Shelter
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/v1/shelter.json
+        404:
+          body:
+            application/json:
+              example: !include examples/v1/shelter-not-found.json
+    delete:
+      displayName: Delete a Shelter
+      description: Delete a Shelter
+      responses:
+        204:
+        404:
+          body:
+            application/json:
+              example: !include examples/v1/shelter-not-found.json
+    /animals:
+      typed:
+        collection:
+          schema: animal
+      is: [ typeable, pageable ]
+      get:
+        displayName: Retrieve Animals collection
+        description: Retrieve Animals collection in a Shelter from last Update
+        responses:
+          200:
+            body:
+              application/json:
+                example: !include examples/v1/animals.json
+          404:
+            body:
+              application/json:
+                example: !include examples/v1/shelter-not-found.json
+      post:
+        displayName: Create Animals collection
+        description: Create Animals collection with a new Update
+        body:
+          application/json:
+            example: !include examples/v1/create-animals.json
+        responses:
+          201:
+            body:
+              application/json:
+                example: !include examples/v1/animals.json
+          404:
+            body:
+              application/json:
+                example: !include examples/v1/shelter-not-found.json
+    /sources:
+      sync:
+        displayName: Synchronize Shelter
+        description: Synchronize Shelter remote sources with TierheimDB
+        responses:
+          201:
+            body:
+              application/json:
+                example: !include examples/v1/animals.json
+          404:
+            body:
+              application/json:
+                example: !include examples/v1/shelter-not-found.json
+    /updates:
+      type:
+        collection:
+          schema: update
+      is: [ pageable ]
+      get:
+        displayName: Retrieve Updates collection
+        description: Retrieve Updates collection in a Shelter sorted by create time
+        responses:
+          200:
+            body:
+              application/json:
+                example: !include examples/v1/updates.json
+          404:
+            body:
+              application/json:
+                example: !include examples/v1/shelter-not-found.json
+      delete:
+        displayName: Delete Updates collection
+        description: Delete all Updates in a Shelter
+        responses:
+          204:
+          404:
+            body:
+              application/json:
+                example: !include examples/v1/shelter-not-found.json
+    /update:
+      /{updateId}:
+        type:
+          member:
+            schema: update
+        get:
+          displayName: Retrieve an Update
+          description: Retrieve an Update in a Shelter
+          responses:
+            200:
+              body:
+                application/json:
+                  example: !include examples/v1/update.json
+            404:
+              body:
+                application/json:
+                  example: !include examples/v1/shelter-update-not-found.json
+        delete:
+          displayName: Delete an Update
+          description: Delete an Update in a Shelter
+          responses:
+            204:
+            404:
+              body:
+                application/json:
+                  example: !include examples/v1/shelter-update-not-found.json
+        /animals:
+          type:
+            collection:
+              schema: animal
+          is: [ typeable, pageable ]
+          get:
+            displayName: Retrieve Animals collection
+            description: Retrieve Animals collection in a Shelter from an Update
+            responses:
+              200:
+                body:
+                  application/json:
+                    example: !include examples/v1/animals.json
+              404:
+                body:
+                  application/json:
+                    example: !include examples/v1/shelter-update-not-found.json
+          delete:
+            displayName: Delete Animals
+            description: Delete all Animals in a Shelter from an Update
+            responses:
+              204:
+              404:
+                body:
+                  application/json:
+                    example: !include examples/v1/shelter-update-not-found.json
+        /animal:
+          /{animalId}:
+            type:
+              member:
+                schema: animal
+            get:
+              displayName: Retrieve an Animal
+              description: Retrieve an Animal in a Shelter from an Update
+              responses:
+                200:
+                  body:
+                    application/json:
+                      example: !include examples/v1/animal.json
+                404:
+                  body:
+                    application/json:
+                      example: !include examples/v1/shelter-update-animal-not-found.json
+            delete:
+              displayName: Delete an Animal
+              description: Delete an Animal in a Shelter from an Update
+              responses:
+                204:
+                404:
+                  body:
+                    application/json:
+                      example: !include examples/v1/shelter-update-animal-not-found.json
