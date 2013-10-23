@@ -9,29 +9,31 @@ import (
 )
 
 func parseAnimalsHandlerQuery(r *http.Request) (string, string, int, int) {
-	latlon := r.URL.Query().Get("latlon")
-	if len(latlon) == 0 {
-		latlon = ""
-	}
-
-	animalType := r.URL.Query().Get("type")
-	if len(animalType) == 0 {
-		animalType = ""
-	}
-
-	l := r.URL.Query().Get("limit")
-	limit, err := strconv.Atoi(l)
-	if err != nil {
-		limit = 100
-	}
-
-	o := r.URL.Query().Get("offset")
-	offset, err := strconv.Atoi(o)
-	if err != nil {
-		offset = 0
-	}
+	latlon := validateStringQueryParam("latlon", r)
+	animalType := validateStringQueryParam("type", r)
+	limit := validateIntQueryParam("limit", r)
+	offset := validateIntQueryParam("offset", r)
 
 	return latlon, animalType, limit, offset
+}
+
+func validateStringQueryParam(name string, r *http.Request) string {
+	param := r.URL.Query().Get(name)
+	if len(param) == 0 {
+		param = ""
+	}
+
+	return param
+}
+
+func validateIntQueryParam(name string, r *http.Request) int {
+	param := r.URL.Query().Get(name)
+	val, err := strconv.Atoi(param)
+	if err != nil {
+		val = 0
+	}
+
+	return val
 }
 
 func validateShelterId(shelterId string) error {
