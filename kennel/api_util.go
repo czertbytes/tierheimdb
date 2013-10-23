@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
+
+	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
 func parseAnimalsHandlerQuery(r *http.Request) (string, string, int, int) {
@@ -29,4 +32,35 @@ func parseAnimalsHandlerQuery(r *http.Request) (string, string, int, int) {
 	}
 
 	return latlon, animalType, limit, offset
+}
+
+func validateShelterId(shelterId string) error {
+	shelters, err := pb.GetEnabledShelters()
+	if err != nil {
+		return err
+	}
+
+	for _, s := range shelters {
+		if s.Id == shelterId {
+			return nil
+		}
+	}
+
+	return fmt.Errorf("ShelterId '%s' is not valid!", shelterId)
+}
+
+func validateUpdateId(shelterId, updateId string) error {
+	if err := pb.RedisExistsUpdate(shelterId, updateId); err != nil {
+		return fmt.Errorf("UpdateId '%s' is not valid!", updateId)
+	}
+
+	return nil
+}
+
+func validateAnimalId(shelterId, updateId, animalId string) error {
+	if err := pb.RedisExistsAnimal(shelterId, updateId, animalId); err != nil {
+		return fmt.Errorf("AnimalId '%s' is not valid!", animalId)
+	}
+
+	return nil
 }

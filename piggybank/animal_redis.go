@@ -130,3 +130,20 @@ func RedisDeleteAnimal(shelterId, updateId, animalId string) error {
 
 	return c.Send("EXEC")
 }
+
+func RedisExistsAnimal(shelterId, updateId, animalId string) error {
+	c := RedisPool.Get()
+	defer c.Close()
+
+	k := fmt.Sprintf(REDIS_ANIMAL, shelterId, updateId, animalId)
+	kExists, err := RedisKeyExists(c, k)
+	if err != nil {
+		return err
+	}
+
+	if kExists != true {
+		return fmt.Errorf("Getting Animal with key: %s failed! Animal with that key does not exists!", k)
+	}
+
+	return nil
+}

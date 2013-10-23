@@ -3,8 +3,6 @@ package main
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
-
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
@@ -54,7 +52,11 @@ func APIv1DeleteSheltersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetShelterHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	shelter, err := pb.GetShelter(shelterId)
 	if err != nil {
@@ -66,7 +68,11 @@ func APIv1GetShelterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteShelterHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	if err := pb.DeleteShelter(shelterId); err != nil {
 		internalServerError(w, err)
@@ -77,8 +83,11 @@ func APIv1DeleteShelterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	routeParams := mux.Vars(r)
-	shelterId := routeParams["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	update, err := pb.GetLastUpdate(shelterId)
 	if err != nil {
@@ -96,11 +105,14 @@ func APIv1GetShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1PostShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	var animals []*pb.Animal
-	err := unmarshalRequestBody(r, &animals)
-	if err != nil {
+	if err := unmarshalRequestBody(r, &animals); err != nil {
 		badRequest(w, err)
 		return
 	}
@@ -125,9 +137,11 @@ func APIv1PostShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	routeParams := mux.Vars(r)
-	shelterId := routeParams["shelterId"]
-	updateId := routeParams["updateId"]
+	shelterId, updateId, err := shelterIdUpdateIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	if err := pb.DeleteAnimals(shelterId, updateId); err != nil {
 		internalServerError(w, err)
@@ -138,10 +152,11 @@ func APIv1DeleteShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Reque
 }
 
 func APIv1GetShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Request) {
-	routeParams := mux.Vars(r)
-	shelterId := routeParams["shelterId"]
-	updateId := routeParams["updateId"]
-	animalId := routeParams["animalId"]
+	shelterId, updateId, animalId, err := shelterIdUpdateIdAnimalIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	a, err := pb.GetAnimal(shelterId, updateId, animalId)
 	if err != nil {
@@ -153,10 +168,11 @@ func APIv1GetShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Request) 
 }
 
 func APIv1DeleteShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Request) {
-	routeParams := mux.Vars(r)
-	shelterId := routeParams["shelterId"]
-	updateId := routeParams["updateId"]
-	animalId := routeParams["animalId"]
+	shelterId, updateId, animalId, err := shelterIdUpdateIdAnimalIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	if err := pb.DeleteAnimal(shelterId, updateId, animalId); err != nil {
 		internalServerError(w, err)
@@ -167,42 +183,15 @@ func APIv1DeleteShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Reques
 }
 
 func APIv1SyncShelterSourcesHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
-
-	animals, err := fetchAnimals(shelterId)
+	shelterId, err := shelterIdFromRequest(r)
 	if err != nil {
 		badRequest(w, err)
 		return
 	}
 
-	var catsCounter int
-	var dogsCounter int
-
-	u := pb.NewUpdate(shelterId)
-	for _, a := range animals {
-		if len(a.Type) > 0 {
-			switch a.Type {
-			case "cat":
-				catsCounter = catsCounter + 1
-			case "dog":
-				dogsCounter = dogsCounter + 1
-			}
-		}
-
-		a.UpdateId = u.Id
-		a.ShelterId = shelterId
-	}
-
-	if _, err := pb.PutAnimals(animals); err != nil {
-		internalServerError(w, err)
-		return
-	}
-
-	u.Cats = catsCounter
-	u.Dogs = dogsCounter
-
-	if err := pb.PutUpdate(u); err != nil {
-		internalServerError(w, err)
+	animals, err := pb.RunShelterSync(shelterId)
+	if err != nil {
+		badRequest(w, err)
 		return
 	}
 
@@ -210,7 +199,11 @@ func APIv1SyncShelterSourcesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	updates, err := pb.GetUpdates(shelterId)
 	if err != nil {
@@ -222,7 +215,11 @@ func APIv1GetShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	if err := pb.DeleteUpdates(shelterId); err != nil {
 		badRequest(w, err)
@@ -233,7 +230,11 @@ func APIv1DeleteShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetShelterLastUpdateHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	u, err := pb.GetLastUpdate(shelterId)
 	if err != nil {
@@ -245,7 +246,11 @@ func APIv1GetShelterLastUpdateHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteShelterLastUpdateHandler(w http.ResponseWriter, r *http.Request) {
-	shelterId := mux.Vars(r)["shelterId"]
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	u, err := pb.GetLastUpdate(shelterId)
 	if err != nil {
@@ -262,9 +267,11 @@ func APIv1DeleteShelterLastUpdateHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func APIv1GetShelterUpdateHandler(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	shelterId := params["shelterId"]
-	updateId := params["updateId"]
+	shelterId, updateId, err := shelterIdUpdateIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	update, err := pb.GetUpdate(shelterId, updateId)
 	if err != nil {
@@ -276,9 +283,11 @@ func APIv1GetShelterUpdateHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteShelterUpdateHandler(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	shelterId := params["shelterId"]
-	updateId := params["updateId"]
+	shelterId, updateId, err := shelterIdUpdateIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	if err := pb.DeleteUpdate(shelterId, updateId); err != nil {
 		badRequest(w, err)
@@ -300,9 +309,11 @@ func APIv1GetShelterUpdatesDiffHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	shelterId := params["shelterId"]
-	updateId := params["updateId"]
+	shelterId, updateId, err := shelterIdUpdateIdFromRequest(r)
+	if err != nil {
+		badRequest(w, err)
+		return
+	}
 
 	animals, err := pb.GetAnimals(shelterId, updateId, r.URL.Query().Get("type"))
 	if err != nil {

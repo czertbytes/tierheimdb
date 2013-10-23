@@ -101,3 +101,19 @@ func RedisDeleteUpdate(shelterId, updateId string) error {
 
 	return c.Send("EXEC")
 }
+
+func RedisExistsUpdate(shelterId, updateId string) error {
+	c := RedisPool.Get()
+	defer c.Close()
+
+	k := fmt.Sprintf(REDIS_UPDATE, shelterId, updateId)
+	kExists, err := RedisKeyExists(c, k)
+	if err != nil {
+		return err
+	}
+	if kExists != true {
+		return fmt.Errorf("Deleting Update with key: %s failed! Update with that key does not exists!", k)
+	}
+
+	return nil
+}

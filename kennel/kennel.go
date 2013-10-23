@@ -19,8 +19,7 @@ func main() {
 
 	filterRouter := new(FilterRouter)
 	router := mux.NewRouter()
-	apiRouter := router.PathPrefix("/api").Subrouter()
-	v1Router = apiRouter.PathPrefix("/v1").Subrouter()
+	v1Router = router.PathPrefix("/v1").Subrouter()
 
 	v1Router.HandleFunc("/animals", APIv1GetAnimalsHandler).Methods("GET")
 	v1Router.HandleFunc("/shelters", APIv1GetSheltersHandler).Methods("GET")

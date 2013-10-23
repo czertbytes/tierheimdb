@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gorilla/mux"
+
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
@@ -41,6 +43,75 @@ func remoteIpAddress(r *http.Request) string {
 	}
 
 	return ipAddress
+}
+
+func shelterIdFromRequest(r *http.Request) (string, error) {
+	shelterId := parameterFromRequest("shelterId", r)
+	if err := validateShelterId(shelterId); err != nil {
+		return "", err
+	}
+
+	return shelterId, nil
+}
+
+func updateIdFromRequest(shelterId string, r *http.Request) (string, error) {
+	updateId := parameterFromRequest("updateId", r)
+	if err := validateUpdateId(shelterId, updateId); err != nil {
+		return "", err
+	}
+
+	return updateId, nil
+}
+
+func shelterIdUpdateIdFromRequest(r *http.Request) (string, string, error) {
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		return "", "", err
+	}
+
+	updateId, err := updateIdFromRequest(shelterId, r)
+	if err != nil {
+		return "", "", err
+	}
+
+	return shelterId, updateId, nil
+}
+
+func animalIdFromRequest(shelterId, updateId string, r *http.Request) (string, error) {
+	animalId := parameterFromRequest("animalId", r)
+	if err := validateAnimalId(shelterId, updateId, animalId); err != nil {
+		return "", err
+	}
+
+	return animalId, nil
+}
+
+func shelterIdUpdateIdAnimalIdFromRequest(r *http.Request) (string, string, string, error) {
+	shelterId, err := shelterIdFromRequest(r)
+	if err != nil {
+		return "", "", "", err
+	}
+
+	updateId, err := updateIdFromRequest(shelterId, r)
+	if err != nil {
+		return "", "", "", err
+	}
+
+	animalId, err := animalIdFromRequest(shelterId, updateId, r)
+	if err != nil {
+		return "", "", "", err
+	}
+
+	return shelterId, updateId, animalId, nil
+}
+
+func parameterFromRequest(name string, r *http.Request) string {
+	param := mux.Vars(r)[name]
+	if len(param) > 0 {
+		return strings.ToLower(param)
+	}
+
+	return ""
 }
 
 type ErrorResponse struct {
