@@ -114,7 +114,7 @@ func backup(catnipName string, animals []*Animal) error {
 func commitChange(catnipName string) error {
 	backupFile := fmt.Sprintf("%s.json", catnipName)
 	backupDir := fmt.Sprintf("%s/backup", tdbRoot)
-	backupMessage := fmt.Sprintf("\"Sync at %s\"", time.Now().Format("Jan 2, 2006 at 3:04pm"))
+	backupMessage := fmt.Sprintf("Sync %s", time.Now().Format("Jan 2, 2006 at 3:04pm"))
 
 	cmd := exec.Command("git", "commit", "-i", backupFile, "-m", backupMessage)
 	cmd.Dir = backupDir

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
@@ -56,8 +55,7 @@ func main() {
 		log.Fatalf("Parsing arguments failed! Error: %s", err)
 	}
 
-	animals, err := pb.RunShelterSync(shelterId)
-	if err != nil {
+	if _, err := pb.RunShelterSync(shelterId); err != nil {
 		log.Fatalf("Crawling %s failed! Error: %s", shelterId, err)
 	}
 }
