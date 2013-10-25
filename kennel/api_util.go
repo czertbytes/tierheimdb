@@ -4,17 +4,46 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
-func parseAnimalsHandlerQuery(r *http.Request) (string, string, int, int) {
-	latlon := validateStringQueryParam("latlon", r)
+func parseTypedParams(r *http.Request) string {
 	animalType := validateStringQueryParam("type", r)
-	limit := validateIntQueryParam("limit", r)
-	offset := validateIntQueryParam("offset", r)
 
-	return latlon, animalType, limit, offset
+	for _, t := range []string{"cat", "dog"} {
+		if animalType == t {
+			return animalType
+		}
+	}
+
+	return ""
+}
+
+func parseLatLonedParams(r *http.Request) string {
+	return validateStringQueryParam("latlon", r)
+}
+
+func parsePaginationParams(r *http.Request) pb.Pagination {
+	offset := validateIntQueryParam("offset", r)
+	limit := validateIntQueryParam("limit", r)
+
+	if offset < 0 {
+		offset = 0
+	}
+
+	if limit == 0 {
+		limit = 100
+	}
+	if limit > 300 {
+		limit = 300
+	}
+
+	return pb.Pagination{
+		offset,
+		limit,
+	}
 }
 
 func validateStringQueryParam(name string, r *http.Request) string {
@@ -23,7 +52,7 @@ func validateStringQueryParam(name string, r *http.Request) string {
 		param = ""
 	}
 
-	return param
+	return strings.ToLower(param)
 }
 
 func validateIntQueryParam(name string, r *http.Request) int {

@@ -24,14 +24,14 @@ func RedisPersistImages(c redis.Conn, a *Animal) error {
 	return nil
 }
 
-func RedisGetImages(c redis.Conn, a Animal) ([]Image, error) {
+func RedisGetImages(c redis.Conn, a Animal) (Images, error) {
 	imagesKey := fmt.Sprintf(REDIS_IMAGES, a.ShelterId, a.UpdateId, a.Id)
 	kExists, err := RedisKeyExists(c, imagesKey)
 	if err != nil {
 		return nil, err
 	}
 
-	images := []Image{}
+	images := Images{}
 	if kExists {
 		imageKeys, err := RedisGetIndexKeys(imagesKey)
 		if err != nil {

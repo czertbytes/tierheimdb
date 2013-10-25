@@ -63,19 +63,19 @@ traits:
         description: Sets maximum results returned
         example: 10
         required: false
-  - locationed:
+  - latLoned:
     queryParameters:
       latlon:
         displayName: Location
         type: string
-        description: Latitude, longitude location separated by semicolon
-        example: 53,12;14,24
+        description: Latitude, longitude location separated by comma
+        example: 53.12,14.24
         required: false
 /animals:
   type:
     collection:
       schema: animal
-  is: [ typed, paged, locationed ]
+  is: [ typed, paged, latLoned ]
   get:
     displayName: Retrieve Animals collection
     description: Retrieve Animals collection by latitude and longitude parameters
@@ -88,7 +88,7 @@ traits:
   type:
     collection:
       schema: shelter
-  is: [ typed, paged, locationed ]
+  is: [ typed, paged, latLoned ]
   get:
     displayName: Retrieve Shelters collection
     description: Retrieve Shelters collection
@@ -140,7 +140,7 @@ traits:
       typed:
         collection:
           schema: animal
-      is: [ typeable, pageable ]
+      is: [ typed, paged ]
       get:
         displayName: Retrieve Animals collection
         description: Retrieve Animals collection in a Shelter from last Update
@@ -185,7 +185,7 @@ traits:
       type:
         collection:
           schema: update
-      is: [ pageable ]
+      is: [ paged ]
       get:
         displayName: Retrieve Updates collection
         description: Retrieve Updates collection in a Shelter sorted by create time
@@ -237,7 +237,7 @@ traits:
           type:
             collection:
               schema: animal
-          is: [ typeable, pageable ]
+          is: [ typed, paged ]
           get:
             displayName: Retrieve Animals collection
             description: Retrieve Animals collection in a Shelter from an Update

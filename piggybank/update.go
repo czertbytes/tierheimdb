@@ -7,32 +7,6 @@ import (
 	"github.com/nu7hatch/gouuid"
 )
 
-type Update struct {
-	Id        string `json:"id" redis:"id"`
-	Created   string `json:"created" redis:"created"`
-	ShelterId string `json:"shelterId" redis:"shelterId"`
-	Cats      int    `json:"cats" redis:"cats"`
-	Dogs      int    `json:"dogs" redis:"dogs"`
-}
-
-type Updates []Update
-
-func (us Updates) Len() int {
-	return len(us)
-}
-
-func (us Updates) Swap(i, j int) {
-	us[i], us[j] = us[j], us[i]
-}
-
-type ByDate struct {
-	Updates
-}
-
-func (s ByDate) Less(i, j int) bool {
-	return s.Updates[i].Created > s.Updates[j].Created
-}
-
 func NewUpdate(shelterId string) *Update {
 	return &Update{
 		Id:        makeUpdateId(),
@@ -54,13 +28,18 @@ func PutUpdate(u *Update) error {
 	return RedisPersistUpdate(fmt.Sprintf(REDIS_UPDATE, u.ShelterId, u.Id), u)
 }
 
-func GetUpdates(shelterId string) (Updates, error) {
+func GetUpdates(shelterId string, pagination Pagination) (Updates, error) {
 	keys, err := RedisGetIndexKeys(fmt.Sprintf(REDIS_UPDATES, shelterId))
 	if err != nil {
 		return nil, err
 	}
 
-	return RedisGetUpdates(keys)
+	updates, err := RedisGetUpdates(keys)
+	if err != nil {
+		return nil, err
+	}
+
+	return updates.Paginate(pagination), nil
 }
 
 func GetUpdate(shelterId, id string) (Update, error) {
@@ -97,8 +76,8 @@ func getUpdate(k string) (Update, error) {
 	return updates[0], nil
 }
 
-func DeleteUpdates(shelterId string) error {
-	updates, err := GetUpdates(shelterId)
+func DeleteUpdates(shelterId string, pagination Pagination) error {
+	updates, err := GetUpdates(shelterId, pagination)
 	if err != nil {
 		return err
 	}

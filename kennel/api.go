@@ -7,7 +7,11 @@ import (
 )
 
 func APIv1GetAnimalsHandler(w http.ResponseWriter, r *http.Request) {
-	animals, err := pb.SearchAnimals(parseAnimalsHandlerQuery(r))
+	animalType := parseTypedParams(r)
+	latLon := parseLatLonedParams(r)
+	pagination := parsePaginationParams(r)
+
+	animals, err := pb.SearchAnimals(latLon, animalType, pagination)
 	if err != nil {
 		internalServerError(w, err)
 		return
@@ -17,7 +21,11 @@ func APIv1GetAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1GetSheltersHandler(w http.ResponseWriter, r *http.Request) {
-	shelters, err := pb.GetEnabledShelters()
+	animalType := parseTypedParams(r)
+	latLon := parseLatLonedParams(r)
+	pagination := parsePaginationParams(r)
+
+	shelters, err := pb.GetShelters(latLon, animalType, pagination)
 	if err != nil {
 		internalServerError(w, err)
 		return
@@ -43,7 +51,11 @@ func APIv1PostSheltersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func APIv1DeleteSheltersHandler(w http.ResponseWriter, r *http.Request) {
-	if err := pb.DeleteEnabledShelters(); err != nil {
+	animalType := parseTypedParams(r)
+	latLon := parseLatLonedParams(r)
+	pagination := parsePaginationParams(r)
+
+	if err := pb.DeleteEnabledShelters(latLon, animalType, pagination); err != nil {
 		internalServerError(w, err)
 		return
 	}
@@ -95,7 +107,10 @@ func APIv1GetShelterAnimalsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	animals, err := pb.GetAnimals(shelterId, update.Id, r.URL.Query().Get("type"))
+	animalType := parseTypedParams(r)
+	pagination := parsePaginationParams(r)
+
+	animals, err := pb.GetAnimals(shelterId, update.Id, animalType, pagination)
 	if err != nil {
 		internalServerError(w, err)
 		return
@@ -143,7 +158,10 @@ func APIv1DeleteShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	if err := pb.DeleteAnimals(shelterId, updateId); err != nil {
+	animalType := parseTypedParams(r)
+	pagination := parsePaginationParams(r)
+
+	if err := pb.DeleteAnimals(shelterId, updateId, animalType, pagination); err != nil {
 		internalServerError(w, err)
 		return
 	}
@@ -205,7 +223,9 @@ func APIv1GetShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	updates, err := pb.GetUpdates(shelterId)
+	pagination := parsePaginationParams(r)
+
+	updates, err := pb.GetUpdates(shelterId, pagination)
 	if err != nil {
 		badRequest(w, err)
 		return
@@ -221,7 +241,9 @@ func APIv1DeleteShelterUpdatesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := pb.DeleteUpdates(shelterId); err != nil {
+	pagination := parsePaginationParams(r)
+
+	if err := pb.DeleteUpdates(shelterId, pagination); err != nil {
 		badRequest(w, err)
 		return
 	}
@@ -315,7 +337,10 @@ func APIv1GetShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	animals, err := pb.GetAnimals(shelterId, updateId, r.URL.Query().Get("type"))
+	animalType := parseTypedParams(r)
+	pagination := parsePaginationParams(r)
+
+	animals, err := pb.GetAnimals(shelterId, updateId, animalType, pagination)
 	if err != nil {
 		badRequest(w, err)
 		return

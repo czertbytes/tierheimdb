@@ -5,31 +5,8 @@ import (
 	"time"
 )
 
-type Animal struct {
-	Id        string  `json:"id" redis:"id"`
-	Created   string  `json:"created" redis:"created"`
-	Name      string  `json:"name" redis:"name"`
-	URL       string  `json:"url" redis:"url"`
-	Priority  int     `json:"priority" redis:"priority"`
-	Type      string  `json:"type" redis:"type"`
-	Breed     string  `json:"breed" redis:"breed"`
-	Sex       string  `json:"sex" redis:"sex"`
-	ShortDesc string  `json:"shortDesc" redis:"shortDesc"`
-	LongDesc  string  `json:"longDesc" redis:"longDesc"`
-	Images    []Image `json:"images" redis:"-"`
-	ShelterId string  `json:"shelterId" redis:"shelterId"`
-	UpdateId  string  `json:"updateId" redis:"updateId"`
-}
-
-type Image struct {
-	Width   int    `json:"width" redis:"width"`
-	Height  int    `json:"height" redis:"height"`
-	URL     string `json:"url" redis:"url"`
-	Comment string `json:"comment" redis:"comment"`
-}
-
-func PutAnimals(animals []*Animal) ([]string, error) {
-	ids := []string{}
+func PutAnimals(animals []*Animal) (Ids, error) {
+	ids := Ids{}
 	for _, a := range uniqueAnimals(animals) {
 		if err := PutAnimal(a); err != nil {
 			return nil, err
@@ -47,68 +24,54 @@ func PutAnimal(a *Animal) error {
 	return RedisPersistAnimal(fmt.Sprintf(REDIS_ANIMAL, a.ShelterId, a.UpdateId, a.Id), a)
 }
 
-func SearchAnimals(latLon, animalType string, limit, offset int) ([]Animal, error) {
-    shelters, err := GetSheltersNear(latLon, 100)
-    if err != nil {
-        return nil, err
-    }
+func SearchAnimals(latLon, animalType string, pagination Pagination) (Animals, error) {
+	shelters, err := GetShelters(latLon, animalType, maxPagination)
+	if err != nil {
+		return nil, err
+	}
 
-    if len(animalType) > 0 {
-        sheltersWithType := Shelters{}
-        for _, s := range shelters {
-            if s.HasAnimalType(animalType) {
-                sheltersWithType = append(sheltersWithType, s)
-            }
-        }
+	animals := Animals{}
+	for _, s := range shelters {
+		u, err := GetLastUpdate(s.Id)
+		if err != nil {
+			return nil, err
+		}
 
-        shelters = sheltersWithType
-    }
+		as, err := GetAnimals(s.Id, u.Id, animalType, maxPagination)
+		if err != nil {
+			return nil, err
+		}
 
-    animals := []Animal{}
-    for _, s := range shelters {
-        u, err := GetLastUpdate(s.Id)
-        if err != nil {
-            return nil, err
-        }
+		animals = append(animals, as...)
+	}
 
-        as, err := GetAnimals(s.Id, u.Id, animalType)
-        if err != nil {
-            return nil, err
-        }
-
-        animals = append(animals, as...)
-    }
-
-    if offset > len(animals) {
-        offset = len(animals)
-    }
-
-    if limit > len(animals) {
-        limit = len(animals)
-    }
-
-    return animals[offset:limit], nil
+	return animals.Paginate(pagination), nil
 }
 
-func GetAnimals(shelterId, updateId, animalType string) ([]Animal, error) {
+func GetAnimals(shelterId, updateId, animalType string, pagination Pagination) (Animals, error) {
 	keys, err := RedisGetIndexKeys(fmt.Sprintf(animalsRedisKey(animalType), shelterId, updateId))
 	if err != nil {
 		return nil, err
 	}
 
-	return RedisGetAnimals(keys)
+	animals, err := RedisGetAnimals(keys)
+	if err != nil {
+		return nil, err
+	}
+
+	return animals.Paginate(pagination), nil
 }
 
-func GetAllAnimals(shelterId, updateId string) ([]Animal, error) {
-	return GetAnimals(shelterId, updateId, "")
+func GetAllAnimals(shelterId, updateId string, pagination Pagination) (Animals, error) {
+	return GetAnimals(shelterId, updateId, "", pagination)
 }
 
-func GetCats(shelterId, updateId string) ([]Animal, error) {
-	return GetAnimals(shelterId, updateId, "cat")
+func GetCats(shelterId, updateId string, pagination Pagination) (Animals, error) {
+	return GetAnimals(shelterId, updateId, "cat", pagination)
 }
 
-func GetDogs(shelterId, updateId string) ([]Animal, error) {
-	return GetAnimals(shelterId, updateId, "dog")
+func GetDogs(shelterId, updateId string, pagination Pagination) (Animals, error) {
+	return GetAnimals(shelterId, updateId, "dog", pagination)
 }
 
 func animalsRedisKey(animalType string) string {
@@ -131,7 +94,7 @@ func GetAnimal(shelterId, updateId, id string) (Animal, error) {
 	}
 
 	k := fmt.Sprintf(REDIS_ANIMAL, shelterId, updateId, id)
-	animals, err := RedisGetAnimals([]string{k})
+	animals, err := RedisGetAnimals(Keys{k})
 	if err != nil {
 		return Animal{}, err
 	}
@@ -143,8 +106,8 @@ func GetAnimal(shelterId, updateId, id string) (Animal, error) {
 	return animals[0], nil
 }
 
-func DeleteAnimals(shelterId, updateId string) error {
-	animals, err := GetAllAnimals(shelterId, updateId)
+func DeleteAnimals(shelterId, updateId, animalType string, pagination Pagination) error {
+	animals, err := GetAnimals(shelterId, updateId, animalType, pagination)
 	if err != nil {
 		return err
 	}

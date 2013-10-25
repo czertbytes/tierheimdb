@@ -45,11 +45,11 @@ func RedisPersistAnimal(k string, a *Animal) error {
 	return c.Send("EXEC")
 }
 
-func RedisGetAnimals(keys []string) ([]Animal, error) {
+func RedisGetAnimals(keys []string) (Animals, error) {
 	c := RedisPool.Get()
 	defer c.Close()
 
-	animals := []Animal{}
+	animals := Animals{}
 	for _, k := range keys {
 		kExists, err := RedisKeyExists(c, k)
 		if err != nil {
@@ -83,6 +83,7 @@ func RedisGetAnimals(keys []string) ([]Animal, error) {
 }
 
 func RedisUpdateAnimal(shelterId, updateId, animalId string, a *Animal) error {
+  //  TODO: implement me!
 	return nil
 }
 

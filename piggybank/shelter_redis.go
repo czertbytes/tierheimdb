@@ -66,7 +66,7 @@ func RedisGetShelters(keys []string) (Shelters, error) {
 
 		shelters = append(shelters, s)
 	}
-	sort.Sort(ByName{shelters})
+	sort.Sort(SheltersByName{shelters})
 
 	return shelters, nil
 }
