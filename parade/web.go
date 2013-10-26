@@ -150,7 +150,7 @@ func GetSitemapHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		as, err := pb.GetAllAnimals(s.Id, update.Id)
+		as, err := pb.GetAnimals(s.Id, update.Id, "", pb.Pagination{0, 999})
 		if err != nil {
 			log.Println(err)
 			return

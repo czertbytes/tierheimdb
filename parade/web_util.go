@@ -86,7 +86,7 @@ func selectedShelter(shelters Shelters, shelterId, animalType string) (Shelter, 
 		if s.PBShelter.Id == shelterId {
 
 			animals := []pb.Animal{}
-			animals, err := pb.GetAnimals(s.PBShelter.Id, s.PBUpdate.Id, animalType)
+			animals, err := pb.GetAnimals(s.PBShelter.Id, s.PBUpdate.Id, animalType, pb.Pagination{0, 999})
 			if err != nil {
 				return Shelter{}, err
 			}
