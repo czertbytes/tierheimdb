@@ -53,9 +53,9 @@ func TestParseLatLon(t *testing.T) {
 	inputs := []string{
 		"",
 		"abcdef",
-		"12.22;54.12",
-		"12.22;abcde",
-		"abcde;fghij",
+		"12.22,54.12",
+		"12.22,abcde",
+		"abcde,fghij",
 	}
 	results := [][]float64{
 		{0, 0},
@@ -68,7 +68,7 @@ func TestParseLatLon(t *testing.T) {
 	for i := 0; i < len(inputs); i++ {
 		lat, lon, _ := parseLatLon(inputs[i])
 		if lat != results[i][0] || lon != results[i][1] {
-			t.Errorf("parseLatLon failed! Exp: '%f;%f' Got: '%v'\n", lat, lon, results[i])
+			t.Errorf("parseLatLon failed! Exp: '%f,%f' Got: '%v'\n", lat, lon, results[i])
 			return
 		}
 	}

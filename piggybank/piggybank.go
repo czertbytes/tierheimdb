@@ -59,14 +59,19 @@ func (ss Shelters) Paginate(p Pagination) Shelters {
 	resLength := len(ss)
 
 	if offset > resLength {
-		offset = resLength
+		return Shelters{}
 	}
 
+	if limit < 1 {
+		return Shelters{}
+	}
+
+	limit = offset + limit
 	if limit > resLength {
 		limit = resLength
 	}
 
-	return ss[offset:(offset + limit)]
+	return ss[offset:limit]
 }
 
 type SheltersByName struct {
@@ -109,14 +114,19 @@ func (as Animals) Paginate(p Pagination) Animals {
 	resLength := len(as)
 
 	if offset > resLength {
-		offset = resLength
+		return Animals{}
 	}
 
+	if limit < 1 {
+		return Animals{}
+	}
+
+	limit = offset + limit
 	if limit > resLength {
 		limit = resLength
 	}
 
-	return as[offset:(offset + limit)]
+	return as[offset:limit]
 }
 
 type AnimalsByName struct {
@@ -160,14 +170,19 @@ func (us Updates) Paginate(p Pagination) Updates {
 	resLength := len(us)
 
 	if offset > resLength {
-		offset = resLength
+		return Updates{}
 	}
 
+	if limit < 1 {
+		return Updates{}
+	}
+
+	limit = offset + limit
 	if limit > resLength {
 		limit = resLength
 	}
 
-	return us[offset:(offset + limit)]
+	return us[offset:limit]
 }
 
 type ByDate struct {
