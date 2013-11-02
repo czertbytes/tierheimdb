@@ -5,7 +5,7 @@
         "Animal": "cat"
     },
     {
-        "URL":    "http://tierschutzverein-muenchen.de/de/hundeklein.htm?q=0&acltierdb=2000:0::::0:200::2::0:::::#tierdbliste",
+        "URL":    "http://tierschutzverein-muenchen.de/de/hundeklein.htm?q=0&acltierdb=2000:0::::0:200::1::0:::::#tierdbliste",
         "Type":   "detail",
         "Animal": "dog"
     },
@@ -15,7 +15,7 @@
         "Animal": "dog"
     },
     {
-        "URL":    "http://tierschutzverein-muenchen.de/de/hundegross.htm?q=0&acltierdb=2000:0::::0:200::2::0:::::#tierdbliste",
+        "URL":    "http://tierschutzverein-muenchen.de/de/hundegross.htm?q=0&acltierdb=2000:0::::0:200::3::0:::::#tierdbliste",
         "Type":   "detail",
         "Animal": "dog"
     }
