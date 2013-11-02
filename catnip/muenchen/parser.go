@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"regexp"
 	"strings"
 
@@ -21,6 +22,10 @@ var (
 type Parser struct {
 }
 
+func init() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+}
+
 func NewParser() *Parser {
 	return &Parser{}
 }
@@ -30,18 +35,24 @@ func (p *Parser) ParsePagination(r io.Reader) (int, int, int, error) {
 }
 
 func (p *Parser) ParseList(r io.Reader) ([]*pb.Animal, error) {
+	var animals []*pb.Animal
+
 	doc, err := html.Parse(r)
 	if err != nil {
 		return nil, err
 	}
 
-	//  parse animals from list page
-	animals := []*pb.Animal{}
 	for _, animalNode := range p.listAnimalNodes(doc) {
+		name := cp.NormalizeName(p.parseName(animalNode))
 		link := p.parseListAnimalLink(animalNode)
-		if len(link) > 0 {
+
+		if len(name) > 0 && len(link) > 0 {
 			animals = append(animals, &pb.Animal{
-				URL: link,
+				Id:    cp.NormalizeId(name),
+				Name:  name,
+				Sex:   cp.NormalizeSex(p.parseSex(animalNode)),
+				Breed: cp.NormalizeBreed(p.parseBreed(animalNode)),
+				URL:   link,
 			})
 		}
 	}
@@ -61,12 +72,7 @@ func (p *Parser) ParseDetail(r io.Reader) (*pb.Animal, error) {
 	}
 
 	animalNode := animalNodes[0]
-	name := p.parseName(animalNode)
 	return &pb.Animal{
-		Id:       cp.NormalizeId(name),
-		Name:     name,
-		Sex:      cp.NormalizeSex(p.parseSex(animalNode)),
-		Breed:    cp.NormalizeBreed(p.parseBreed(animalNode)),
 		LongDesc: p.parseLongDesc(animalNode),
 		Images:   p.parseImages(s),
 	}, nil
@@ -94,15 +100,23 @@ func (p *Parser) parseContent(r io.Reader) (string, *html.Node, error) {
 func (p *Parser) parseName(node *html.Node) string {
 	nameNodes := p.nameNodes(node)
 	if len(nameNodes) != 1 {
+		log.Println("Parse error! NameNode not found!")
 		return ""
 	}
 
-	name := nameNodes[0].FirstChild.Data
-	name = strings.Split(name, " ")[1]
-	name = strings.ToLower(name)
-	name = strings.ToUpper(name[0:1]) + name[1:]
+	if nameNodes[0].FirstChild != nil {
+		name := nameNodes[0].FirstChild.Data
+		if len(name) > 8 {
+			splittedName := strings.Split(name, " ")
+			if len(splittedName) == 2 && len(splittedName[1]) > 0 {
+				name = strings.ToLower(splittedName[1])
+				return strings.ToUpper(name[0:1]) + name[1:]
+			}
+		}
+	}
 
-	return name
+	log.Println("Parse error! Name not found!")
+	return ""
 }
 
 func (p *Parser) parseSex(node *html.Node) string {
