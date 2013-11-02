@@ -1,4 +1,6 @@
-* { font-family: 'FiraSans'; }
+* {
+    font-family: 'FiraSans';
+}
 
 @font-face {
   font-family: 'FiraSans';
@@ -37,202 +39,34 @@
   font-style: normal;
 }
 
-body {
-    color: #2B2B2B;
+label > input[type="checkbox"] {
+  display: none;
 }
 
-a {
-    color: #2B2B2B;
+.page-content{
+  padding-top: 80px;
 }
 
-#layout {
-    padding-left: 150px;
-    position: relative;
+#animal-list{
 }
 
-#layout-with-shelters {
-    padding-left: 500px;
-    position: relative;
-}
-
-#main-nav,
-#main-shelter-nav,
-#shelters {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    overflow: auto;
-}
-#layout > #main-nav {
-    margin-left: -150px;
-    width: 150px;
-    background: #2B2B2B;
-    text-align: center;
-    padding: 2em 0;
-}
-#layout-with-shelters > #main-nav {
-    margin-left: -500px;
-    width: 150px;
-    background: #2B2B2B;
-    text-align: center;
-    padding: 2em 0;
-}
-
-#main-nav .pure-menu {
-    background: transparent;
-    border: none;
-    text-align: left;
-}
-#main-nav .pure-menu a {
-    font-weight: bold;
-    color: #fff;
-}
-#main-nav .pure-menu a.selected {
-    color: #C17325;
-    background: #4D4D4D;
-}
-#main-nav .pure-menu a:hover,
-#main-nav .pure-menu a:focus {
-    color: #DA8C3F;
-    background: #4D4D4D;
-}
-#main-nav .pure-menu-heading {
-    border-bottom: none;
-    font-size:110%;
-    color: rgb(75, 113, 151);
-}
-#main-nav h1 {
-    color: #C17325;
-}
-#main-nav .nav-menu-button {
-    display: none;
-}
-
-#shelters {
-    margin-left: -350px;
-    width: 350px;
-    border-right: 1px solid #ddd;
-}
-
-#shelters > a {
-    display: block;
-}
-
-#shelters section {
-    padding: 0.9em 1em;
-    border-bottom: 1px solid #ddd;
-    border-left: 6px solid transparent;
-    background: #FFF;
-}
-#shelters section:hover,
-#shelters section.selected {
-    background: #EBE7E0;
-}
-#shelters section a {
-    text-decoration: none;
-    color: #000;
-}
-#shelters img {
-    border-radius: 3px;
-    margin-right: 0.5em;
-    width: 64px;
-}
-#shelters h4 {
-    margin: 0;
-}
-#shelters h4 {
-    text-transform: uppercase;
-}
-#shelters div.city {
-    color: #999;
-}
-#shelters div.offers {
-    font-size: 80%;
-    margin: 0.4em 0;
-}
-
-
-#hero {
-    text-align: center;
-    margin: 1em auto 1em;
-}
-
-#hero h1 {
-    font-size: 700%;
-    font-weight: 50;
-    color: #C17325;
-}
-
-#hero h2 {
-    letter-spacing: 0em;
-    font-size: 200%;
-    color: #2B2B2B;
-}
-
-#marketing {
-    margin: 0em 8em;
-}
-
-#marketing section {
-    margin: 3em 0;
-    text-align: center;
-}
-
-#marketing section h3 {
-    color: #C17325;
-}
-
-#about {
-    margin: 2em 3em;
-}
-
-#content header {
-    padding: 1em 2em;
-}
-#content header h1 {
-    margin: 0.5em 0 0;
-}
-#content header p {
-    font-size: 1em;
-    margin: 0;
-    font-weight: normal;
-}
-#content header div div:last-child {
-    margin-top: 2em;
-    text-align: right;
-}
-#content header div div:last-child .pure-button {
-    font-size: 85%;
-}
-#content p {
-  margin: 2em;
-  line-height: 1.7em;
-  text-align: justify;
-
-  /*
-  -moz-column-count: 2;
-  -moz-column-gap: 34px;
-  */
-}
-#content ul {
+#animal-list ul {
     float: left;
     list-style: none;
 }
-#content ul li {
+#animal-list ul li {
     display: inline-block;
     padding: 0 2px 8px 2px;
 }
-#content ul li a {
+#animal-list ul li a {
     padding: 4px;
     line-height: 1.428571429;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
     overflow: hidden;
     background-position: center center;
     background-size: cover;
@@ -241,13 +75,11 @@ a {
     -webkit-background-clip: content;
     background-clip: content-box;
 }
-#content ul li a span {
+#animal-list ul li a span {
     visibility: hidden;
 }
-#content footer {
-    clear: both;
-    font-size: 60%;
+
+.busy {
+  text-align: center;
 }
-#content footer p {
-    text-align: center;
-}
+

@@ -1,0 +1,53 @@
+<div ng-controller="AnimalListCtrl" ng-init="init()">
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">TierheimDB</a>
+      </div>
+      <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-left" role="search">
+              <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      {{currentCity}}<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li ng-repeat="city in cities">
+                          <a ng-click="setCurrentCity(city)">{{city}}</a>
+                      </li>
+                    </ul>
+              </div>
+              <div class="btn-group">
+                  <label class="btn btn-primary" ng-class="{active: typeFilter.cats==true}">
+                      <input type="checkbox" ng-model="typeFilter.cats">{{cats}} Katzen
+                  </label>
+                  <label class="btn btn-primary" ng-class="{active: typeFilter.dogs==true}">
+                      <input type="checkbox" ng-model="typeFilter.dogs">{{dogs}} Hunde
+                  </label>
+              </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="/">Tiere</a></li>
+              <li><a href="/docs">Docs</a></li>
+              <li><a href="/about">About</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="container">
+        <div id="animal-list">
+            <ul infinite-scroll='fetchNextAnimals()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
+                <li ng-repeat="animal in animals">
+                  <a ng-href="/{{animal.shelterId}}/{{animal.updateId}}/{{animal.id}}" style="background-image: url('{{animal.images[0].url}}')"><span>{{animal.name}}</span></a>
+                </li>
+            </ul>
+        </div>
+        <h3 class="busy" ng-show='busy'>Loading ...</h3>
+    </div>
+  </div>
+</div>

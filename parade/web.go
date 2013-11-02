@@ -8,7 +8,7 @@ import (
 	"os"
 	t_template "text/template"
 
-	"github.com/gorilla/mux"
+	_ "github.com/gorilla/mux"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
@@ -72,6 +72,7 @@ func init() {
 			ParseGlob(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/tmpl/*.html.tmpl", tdbRoot)))
 }
 
+/*
 func GetHomeHandler(w http.ResponseWriter, r *http.Request) {
 	shelters, err := makeShelters()
 	if err != nil {
@@ -134,7 +135,7 @@ func GetAboutHandler(w http.ResponseWriter, r *http.Request) {
 		shelters,
 	})
 }
-
+*/
 func GetSitemapHandler(w http.ResponseWriter, r *http.Request) {
 	shelters, err := pb.GetEnabledShelters()
 	if err != nil {

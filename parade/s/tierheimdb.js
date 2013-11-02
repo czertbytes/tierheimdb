@@ -4,9 +4,9 @@
   var apiBase = 'http://api.tierheimdb.de/v1';
   var animalsLimit = 20;
 
-  var app = angular.module('tdb', ['infinite-scroll']);
+  var app = angular.module('TierheimDB', ['infinite-scroll']);
 
-  app.config(['$routeProvider', function($routeProvider) {
+  app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/home', {
         templateUrl: 'partials/home.html',
@@ -27,6 +27,8 @@
       .otherwise({
         redirectTo: '/home'
       });
+
+    $locationProvider.html5Mode(true);
   }]);
 
   app.controller('AnimalListCtrl', function AnimalListCtrl($scope, $http, $q) {
@@ -42,10 +44,11 @@
       cats: true,
       dogs: true
     };
-    $scope.busy = false;
+    $scope.busy = true;
     $scope.busyCounter = 0;
 
     $scope.$watch('typeFilter', function() {
+      $scope.page = 0;
       $scope.fetchAnimals();
     }, true);
 
@@ -61,8 +64,8 @@
 
     var extractCities = function(shelters) {
       var cities = {};
-      $.each(shelters, function(index, value) {
-        cities[value.city] = true;
+      angular.forEach(shelters, function(shelter, index) {
+        cities[shelter.city] = true;
       });
 
       return Object.keys(cities);
@@ -92,9 +95,9 @@
     $scope.fetchLastUpdate = function() {
       var promises = [];
 
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
-          var url = apiBase + '/shelter/' + value.id + '/updates?limit=1';
+      angular.forEach($scope.shelters, function(shelter, index) {
+        if (shelter.city == $scope.currentCity) {
+          var url = apiBase + '/shelter/' + shelter.id + '/updates?limit=1';
           promises.push($http.get(url).then($scope.updateAnimalCounters));
         }
       });
@@ -115,7 +118,7 @@
 
     $scope.updateAnimals = function(result) {
       if (result.status == 200) {
-        $.each(result.data, function(index, animal) {
+        angular.forEach(result.data, function(animal, index) {
           $scope.animals.push(prepareAnimal(animal));
         });
       }
@@ -130,9 +133,9 @@
       var promises = [];
 
       $scope.animals = [];
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
-          var url = apiBase + '/shelter/' + value.id + '/animals?limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
+      angular.forEach($scope.shelters, function(shelter, index) {
+        if (shelter.city == $scope.currentCity) {
+          var url = apiBase + '/shelter/' + shelter.id + '/animals?limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
           promises.push($http.get(url).then($scope.updateAnimals));
         }
       });
@@ -157,10 +160,10 @@
       $scope.busy = true;
       $scope.busyCounter = 0;
 
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
+      angular.forEach($scope.shelters, function(shelter, index) {
+        if (shelter.city == $scope.currentCity) {
           $scope.busyCounter += 1;
-          var url = apiBase + '/shelter/' + value.id + '/animals?offset=' + offset + '&limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
+          var url = apiBase + '/shelter/' + shelter.id + '/animals?offset=' + offset + '&limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
           promises.push($http.get(url).then($scope.updateAnimals));
         }
       });

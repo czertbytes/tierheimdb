@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
+	_ "github.com/gorilla/mux"
 
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
@@ -30,19 +30,18 @@ func main() {
 		return
 	}
 
-	router := mux.NewRouter()
-	router.HandleFunc("/", GetHomeHandler).Methods("GET")
+	//router := mux.NewRouter()
 	serveFile("/favicon.ico", "favicon.ico")
 	serveFile("/robots.txt", "robots.txt")
 	serveFile("/humans.txt", "humans.txt")
-	router.HandleFunc("/sitemap.xml", GetSitemapHandler).Methods("GET")
+	http.HandleFunc("/sitemap.xml", GetSitemapHandler)
 
-	router.HandleFunc("/about", GetAboutHandler).Methods("GET")
-	router.HandleFunc("/{shelterId}", GetShelterHandler).Methods("GET")
-	router.HandleFunc("/{shelterId}/{updateId}/{animalId}", GetAnimalHandler).Methods("GET")
-
-	http.Handle("/", router)
 	http.Handle("/s/", http.StripPrefix("/s/", http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/s", tdbRoot)))))
+	http.Handle("/partials/", http.StripPrefix("/partials/", http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/partials", tdbRoot)))))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/partials/index.html", tdbRoot))
+	})
 
 	log.Println("Running Parade")
 	log.Fatalf("Failed to run webserver: %s", http.ListenAndServe(":8081", nil))
