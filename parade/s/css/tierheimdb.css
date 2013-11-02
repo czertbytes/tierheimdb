@@ -40,22 +40,25 @@
 }
 
 label > input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
-
-#gallery{
-    padding-top: 80px;
+.page-content{
+  padding-top: 80px;
 }
-#gallery ul {
+
+#animal-list{
+}
+
+#animal-list ul {
     float: left;
     list-style: none;
 }
-#gallery ul li {
+#animal-list ul li {
     display: inline-block;
     padding: 0 2px 8px 2px;
 }
-#gallery ul li a {
+#animal-list ul li a {
     padding: 4px;
     line-height: 1.428571429;
     background-color: #fff;
@@ -72,7 +75,15 @@ label > input[type="checkbox"] {
     -webkit-background-clip: content;
     background-clip: content-box;
 }
-#gallery ul li a span {
+#animal-list ul li a span {
     visibility: hidden;
+}
+
+.busy {
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
 }
 

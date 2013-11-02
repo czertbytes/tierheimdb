@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/gorilla/mux"
-
 	pb "github.com/czertbytes/tierheimdb/piggybank"
 )
 
@@ -30,17 +28,18 @@ func main() {
 		return
 	}
 
-	//router := mux.NewRouter()
+	http.HandleFunc("/sitemap.xml", GetSitemapHandler)
+
 	serveFile("/favicon.ico", "favicon.ico")
 	serveFile("/robots.txt", "robots.txt")
 	serveFile("/humans.txt", "humans.txt")
-	http.HandleFunc("/sitemap.xml", GetSitemapHandler)
 
-	http.Handle("/s/", http.StripPrefix("/s/", http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/s", tdbRoot)))))
-	http.Handle("/partials/", http.StripPrefix("/partials/", http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/partials", tdbRoot)))))
+	for _, path := range []string{"/s/", "/s/css/", "/s/js/", "/app/", "/app/partials/"} {
+		http.Handle(path, http.StripPrefix(path, http.FileServer(http.Dir(fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade%s", tdbRoot, path)))))
+	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/partials/index.html", tdbRoot))
+		http.ServeFile(w, r, fmt.Sprintf("%s/src/github.com/czertbytes/tierheimdb/parade/app/partials/index.html", tdbRoot))
 	})
 
 	log.Println("Running Parade")

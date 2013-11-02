@@ -32,7 +32,7 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="/">Tiere</a></li>
-              <li><a href="/docs">Docs</a></li>
+              <!--<li><a href="/docs">Docs</a></li>-->
               <li><a href="/about">About</a></li>
           </ul>
       </div>
@@ -40,14 +40,19 @@
   </div>
   <div class="page-content">
     <div class="container">
-        <div id="animal-list">
-            <ul infinite-scroll='fetchNextAnimals()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-                <li ng-repeat="animal in animals">
-                  <a ng-href="/{{animal.shelterId}}/{{animal.updateId}}/{{animal.id}}" style="background-image: url('{{animal.images[0].url}}')"><span>{{animal.name}}</span></a>
-                </li>
-            </ul>
+      <div id="animal-list">
+        <ul infinite-scroll='fetchNextAnimals()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
+          <li ng-repeat="animal in animals">
+            <a ng-href="/{{animal.shelterId}}/{{animal.updateId}}/{{animal.id}}" style="background-image: url('{{animal.images[0].url}}')"><span>{{animal.name}}</span></a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="busy" ng-show='busy'>Loading ...</h3>
+      <div class="row">
+        <div class="footer">
+          <small>Animal images and related text are subjects of copyright {{shelterFullNames()}}</small>
         </div>
-        <h3 class="busy" ng-show='busy'>Loading ...</h3>
+      </div>
     </div>
   </div>
 </div>

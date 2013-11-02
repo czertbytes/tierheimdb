@@ -4,32 +4,34 @@
   var apiBase = 'http://api.tierheimdb.de/v1';
   var animalsLimit = 20;
 
-  var app = angular.module('tdb', ['infinite-scroll']);
+  var app = angular.module('TierheimDB', ['infinite-scroll']);
 
-  app.config(['$routeProvider', function($routeProvider) {
+  app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/home', {
-        templateUrl: 'partials/home.html',
+      .when('/tiere', {
+        templateUrl: 'app/partials/tiere.html',
         controller: 'AnimalListCtrl'
       })
       .when('/docs', {
-        templateUrl: 'partials/docs.html',
+        templateUrl: 'app/partials/docs.html',
         controller: 'DocsCtrl'
       })
       .when('/about', {
-        templateUrl: 'partials/about.html',
+        templateUrl: 'app/partials/about.html',
         controller: 'AboutCtrl'
       })
       .when('/:shelterId/:updateId/:animalId', {
-        templateUrl: 'partials/animal-detail.html',
+        templateUrl: 'app/partials/animal-detail.html',
         controller: 'AnimalDetailCtrl'
       })
       .otherwise({
-        redirectTo: '/home'
+        redirectTo: '/tiere'
       });
+
+    $locationProvider.html5Mode(true);
   }]);
 
-  app.controller('AnimalListCtrl', function AnimalListCtrl($scope, $http, $q) {
+  app.controller('AnimalListCtrl', ['$scope', '$http', '$q', function AnimalListCtrl($scope, $http, $q) {
     $scope.shelters = [];
     $scope.cities = [];
     $scope.animals = [];
@@ -38,14 +40,16 @@
 
     $scope.page = 0;
     $scope.currentCity = 'Loading ...';
+    $scope.currentShelters = [];
     $scope.typeFilter = {
       cats: true,
       dogs: true
     };
-    $scope.busy = false;
+    $scope.busy = true;
     $scope.busyCounter = 0;
 
     $scope.$watch('typeFilter', function() {
+      $scope.page = 0;
       $scope.fetchAnimals();
     }, true);
 
@@ -61,8 +65,8 @@
 
     var extractCities = function(shelters) {
       var cities = {};
-      $.each(shelters, function(index, value) {
-        cities[value.city] = true;
+      angular.forEach(shelters, function(shelter, index) {
+        cities[shelter.city] = true;
       });
 
       return Object.keys(cities);
@@ -72,9 +76,7 @@
       if (result.status == 200) {
         $scope.shelters = result.data;
         $scope.cities = extractCities($scope.shelters);
-        $scope.currentCity = $scope.cities[0];
-
-        $scope.refreshGallery();
+        $scope.setCurrentCity($scope.cities[0]);
       }
     }
 
@@ -92,18 +94,18 @@
     $scope.fetchLastUpdate = function() {
       var promises = [];
 
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
-          var url = apiBase + '/shelter/' + value.id + '/updates?limit=1';
-          promises.push($http.get(url).then($scope.updateAnimalCounters));
-        }
+      angular.forEach($scope.currentShelters, function(shelter, index) {
+        var url = apiBase + '/shelter/' + shelter.id + '/updates?limit=1';
+        promises.push($http.get(url).then($scope.updateAnimalCounters));
       });
 
       return $q.all(promises);
     }
 
     var prepareAnimal = function(animal) {
-      if (animal.images == null || animal.images.length == 0) {
+      if (animal.images && animal.images.length > 0) {
+        return animal;
+      } else {
           animal.images = [];
           animal.images.push({
             url: 'http://placehold.it/260x260&text=' + animal.name
@@ -115,7 +117,7 @@
 
     $scope.updateAnimals = function(result) {
       if (result.status == 200) {
-        $.each(result.data, function(index, animal) {
+        angular.forEach(result.data, function(animal, index) {
           $scope.animals.push(prepareAnimal(animal));
         });
       }
@@ -130,11 +132,9 @@
       var promises = [];
 
       $scope.animals = [];
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
-          var url = apiBase + '/shelter/' + value.id + '/animals?limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
-          promises.push($http.get(url).then($scope.updateAnimals));
-        }
+      angular.forEach($scope.currentShelters, function(shelter, index) {
+        var url = apiBase + '/shelter/' + shelter.id + '/animals?limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
+        promises.push($http.get(url).then($scope.updateAnimals));
       });
 
       return $q.all(promises);
@@ -149,7 +149,6 @@
 
       $scope.page += 1;
       var offset = $scope.page * animalsLimit;
-      // tohle potrebuje fixnout!
       if (offset >= ($scope.cats + $scope.dogs)) {
         return;
       }
@@ -157,12 +156,10 @@
       $scope.busy = true;
       $scope.busyCounter = 0;
 
-      $.each($scope.shelters, function(index, value) {
-        if (value.city == $scope.currentCity) {
-          $scope.busyCounter += 1;
-          var url = apiBase + '/shelter/' + value.id + '/animals?offset=' + offset + '&limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
-          promises.push($http.get(url).then($scope.updateAnimals));
-        }
+      angular.forEach($scope.currentShelters, function(shelter, index) {
+        $scope.busyCounter += 1;
+        var url = apiBase + '/shelter/' + shelter.id + '/animals?offset=' + offset + '&limit=' + animalsLimit + '&type=' + $scope.getAnimalTypesParam();
+        promises.push($http.get(url).then($scope.updateAnimals));
       });
 
       return $q.all(promises);
@@ -180,14 +177,35 @@
       return animalTypes.join(",");
     }
 
+    $scope.setCurrentShelters = function() {
+      $scope.currentShelters = [];
+      angular.forEach($scope.shelters, function(shelter, index) {
+        if (shelter.city == $scope.currentCity) {
+          $scope.currentShelters.push(shelter);
+        }
+      });
+    }
+
     $scope.setCurrentCity = function(city) {
       $scope.currentCity = city;
+      $scope.setCurrentShelters();
+
       $scope.page = 0;
       $scope.cats = 0;
       $scope.dogs = 0;
       $scope.refreshGallery();
     }
-  });
+
+    $scope.shelterFullNames = function() {
+      var fullNames = [];
+      angular.forEach($scope.currentShelters, function(shelter, index) {
+        fullNames.push(shelter.fullName);
+      });
+
+      return fullNames.join(", ");
+    }
+
+  }]);
 
   app.controller('AnimalDetailCtrl', function AnimalDetailCtrl($scope, $http, $routeParams, $q) {
     $scope.animal = {};
