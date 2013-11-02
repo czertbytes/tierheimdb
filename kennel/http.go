@@ -119,6 +119,12 @@ type ErrorResponse struct {
 }
 
 func response(w http.ResponseWriter, i interface{}) {
+	w.Header().Add("Cache-Control", "no-cache")
+	responseStatus(w, http.StatusOK, i)
+}
+
+func cachedResponse(w http.ResponseWriter, i interface{}) {
+	w.Header().Add("Cache-Control", "max-age=2592000")
 	responseStatus(w, http.StatusOK, i)
 }
 

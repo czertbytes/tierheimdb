@@ -22,11 +22,14 @@
                     </ul>
               </div>
               <div class="btn-group">
-                  <label class="btn btn-primary" ng-class="{active: typeFilter.cats==true}">
-                      <input type="checkbox" ng-model="typeFilter.cats">{{cats}} Katzen
+                  <label class="btn btn-primary" ng-class="{active: typeFilter=='all'}">
+                      <input type="radio" value="all" ng-model="typeFilter">{{cats + dogs}} Alle
                   </label>
-                  <label class="btn btn-primary" ng-class="{active: typeFilter.dogs==true}">
-                      <input type="checkbox" ng-model="typeFilter.dogs">{{dogs}} Hunde
+                  <label class="btn btn-primary" ng-class="{active: typeFilter=='cat'}">
+                      <input type="radio" value="cat" ng-model="typeFilter">{{cats}} Katzen
+                  </label>
+                  <label class="btn btn-primary" ng-class="{active: typeFilter=='dog'}">
+                      <input type="radio" value="dog" ng-model="typeFilter">{{dogs}} Hunde
                   </label>
               </div>
           </form>

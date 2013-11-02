@@ -41,17 +41,14 @@
     $scope.page = 0;
     $scope.currentCity = 'Loading ...';
     $scope.currentShelters = [];
-    $scope.typeFilter = {
-      cats: true,
-      dogs: true
-    };
+    $scope.typeFilter = 'all';
     $scope.busy = true;
     $scope.busyCounter = 0;
 
     $scope.$watch('typeFilter', function() {
       $scope.page = 0;
       $scope.fetchAnimals();
-    }, true);
+    });
 
     $scope.init = function() {
       $scope.fetchShelters();
@@ -166,15 +163,11 @@
     }
 
     $scope.getAnimalTypesParam = function() {
-      var animalTypes = [];
-      if ($scope.typeFilter.cats == true) {
-          animalTypes.push("cat");
-      }
-      if ($scope.typeFilter.dogs == true) {
-          animalTypes.push("dog");
+      if ($scope.typeFilter == 'cat' || $scope.typeFilter == 'dog') {
+        return $scope.typeFilter;
       }
 
-      return animalTypes.join(",");
+      return "";
     }
 
     $scope.setCurrentShelters = function() {

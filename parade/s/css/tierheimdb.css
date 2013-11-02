@@ -39,7 +39,7 @@
   font-style: normal;
 }
 
-label > input[type="checkbox"] {
+label > input[type="radio"] {
   display: none;
 }
 

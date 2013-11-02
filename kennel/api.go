@@ -182,7 +182,7 @@ func APIv1GetShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	response(w, a)
+	cachedResponse(w, a)
 }
 
 func APIv1DeleteShelterUpdateAnimalHandler(w http.ResponseWriter, r *http.Request) {
@@ -346,5 +346,5 @@ func APIv1GetShelterUpdateAnimalsHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	response(w, animals)
+	cachedResponse(w, animals)
 }
