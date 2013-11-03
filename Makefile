@@ -12,6 +12,7 @@ install:
 	go install github.com/czertbytes/tierheimdb/catnip/heppenheim
 	go install github.com/czertbytes/tierheimdb/catnip/muenchen
 	go install github.com/czertbytes/tierheimdb/catnip/samtpfotenneukoelln
+	go install github.com/czertbytes/tierheimdb/catnip/verlorenwasser
 	go install github.com/czertbytes/tierheimdb/watchdog
 	go install github.com/czertbytes/tierheimdb/kennel
 	go install github.com/czertbytes/tierheimdb/parade
