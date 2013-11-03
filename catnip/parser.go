@@ -121,9 +121,11 @@ func PrepareStringChunk(s string) string {
 	}
 
 	t := strings.Trim(ToUTF8(s), " ")
-	for _, s := range []string{"\u0009", "\u000A", "\u00A0", "\u0084", "\u0093"} {
+	t = strings.Replace(t, "\u00A0", " ", -1)
+	for _, s := range []string{"\u0009", "\u000A", "\u0084", "\u0093"} {
 		t = strings.Replace(t, s, "", -1)
 	}
+	t = strings.Replace(t, "  ", " ", -1)
 	t = strings.Trim(t, " ")
 
 	return t

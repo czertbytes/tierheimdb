@@ -19,6 +19,7 @@ var (
 		"heppenheim",
 		"muenchen",
 		"samtpfoten-neukoelln",
+		"verlorenwasser",
 	}
 
 	tdbRoot = ""

@@ -1,0 +1,12 @@
+[
+    {
+        "URL":    "http://www.tierheim-verlorenwasser.de/unsere-tiere/katzen.feed?type=rss",
+        "Type":   "detail",
+        "Animal": "cat"
+    },
+    {
+        "URL":    "http://www.tierheim-verlorenwasser.de/unsere-tiere/hunde.feed?type=rss",
+        "Type":   "detail",
+        "Animal": "dog"
+    }
+]

@@ -195,5 +195,27 @@
         "street": "Außerhalb",
         "streetNumber": "65",
         "url": "http://www.tierheim-heppenheim.de"
+    },
+    {
+        "animalTypes": [
+            "cat",
+            "dog"
+        ],
+        "city": "Bad Belzig",
+        "email": "info@tierheim-heppenheim.de",
+        "enabled": true,
+        "fullName": "Tierfreunde Berlin-Brandenburg e.V.",
+        "id": "verlorenwasser",
+        "latLon": "52.1969,12.4789",
+        "logoUrl": "",
+        "longDesc": "",
+        "name": "Tierheim Verlorenwasser",
+        "note": "",
+        "phone": "033-84741890",
+        "postalCode": "14806",
+        "shortDesc": "",
+        "street": "Verlorenwasser",
+        "streetNumber": "17",
+        "url": "http://www.tierheim-verlorenwasser.de"
     }
 ]
