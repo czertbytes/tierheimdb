@@ -19,6 +19,7 @@ type Shelter struct {
 	StreetNumber   string   `json:"streetNumber" redis:"streetNumber"`
 	PostalCode     string   `json:"postalCode" redis:"postalCode"`
 	City           string   `json:"city" redis:"city"`
+	State          string   `json:"state" redis:"state"`
 	LatLon         string   `json:"latLon" redis:"latLon"`
 	Note           string   `json:"note" redis:"note"`
 	AnimalTypes    []string `json:"animalTypes" redis:"-"`
