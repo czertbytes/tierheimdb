@@ -4,6 +4,7 @@
             "cat"
         ],
         "city": "Berlin",
+        "state": "Berlin",
         "email": "kontakt@samtpfoten-neukoelln.com",
         "enabled": true,
         "fullName": "Samtpfoten Neuk\u00f6lln e.V.",
@@ -26,6 +27,7 @@
             "dog"
         ],
         "city": "Hamburg",
+        "state": "Hamburg",
         "email": "info@franziskustierheim.de",
         "enabled": true,
         "fullName": "Franziskus-Tierheim, Bund gegen Missbrauch der Tiere e. V.",
@@ -48,6 +50,7 @@
             "dog"
         ],
         "city": "Dresden",
+        "state": "Saxony",
         "email": "tierheim@dresden.de",
         "enabled": true,
         "fullName": "Tierschutzverein Dresden e.V.",
@@ -70,6 +73,7 @@
             "dog"
         ],
         "city": "M\u00fcnchen",
+        "state": "Bayern",
         "email": "http://www.tierschutzverein-muenchen.de/de/kontakt.htm",
         "enabled": true,
         "fullName": "Tierschutzverein M\u00fcnchen e.V.",
@@ -92,6 +96,7 @@
             "dog"
         ],
         "city": "Berlin",
+        "state": "Berlin",
         "email": "info@tierschutz-berlin.de",
         "enabled": true,
         "fullName": "Tierschutzverein f\u00fcr Berlin und Umgebung Corporation e.V.",
@@ -114,6 +119,7 @@
             "dog"
         ],
         "city": "K\u00f6ln",
+        "state": "Nordrhein-Westfalen",
         "email": "tierheim-dellbrueck@gmx.de",
         "enabled": true,
         "fullName": "bmt Tierheim Köln-Dellbrück e.V.",
@@ -136,6 +142,7 @@
             "dog"
         ],
         "city": "Frankfurt am Main",
+        "state": "Hesse",
         "email": "service@tsv-frankfurt.de",
         "enabled": true,
         "fullName": "Tierschutzverein Frankfurt am Main und Umgebung von 1841 e. V.",
@@ -158,6 +165,7 @@
             "dog"
         ],
         "city": "Stuhr-Brinkum",
+        "state": "Niedersachsen",
         "email": "th-arche-noah@bmt-tierschutz.de",
         "enabled": true,
         "fullName": "Tierheim Arche Noah",
@@ -180,6 +188,7 @@
             "dog"
         ],
         "city": "Heppenheim",
+        "state": "Hesse",
         "email": "info@tierheim-heppenheim.de",
         "enabled": true,
         "fullName": "Tierschutzverein Heppenheim und Umgebung e.V.",
@@ -202,6 +211,7 @@
             "dog"
         ],
         "city": "Bad Belzig",
+        "state": "Brandenburg",
         "email": "info@tierheim-heppenheim.de",
         "enabled": true,
         "fullName": "Tierfreunde Berlin-Brandenburg e.V.",
