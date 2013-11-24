@@ -210,10 +210,6 @@ func (p *Parser) listAnimalNodes(doc *html.Node) []*html.Node {
 	return cp.NodeSelect(doc, p.selector([]string{
 		"tr",
 		"td",
-		"table",
-		"tbody",
-		"tr",
-		"td",
 		"span",
 		"a",
 	}))
