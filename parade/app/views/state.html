@@ -1,0 +1,33 @@
+<div class="container" ng-init="init()">
+  <form class="navbar-form navbar-left" role="search">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        {{current.state}}<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="state in states">
+          <a ng-click="setCurrentState(state)">{{state}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <label class="btn btn-primary" ng-class="{active: current.type=='cat'}">
+        <input type="radio" value="cat" ng-model="current.type">Katzen
+      </label>
+      <label class="btn btn-primary" ng-class="{active: current.type=='dog'}">
+        <input type="radio" value="dog" ng-model="current.type">Hunde
+      </label>
+      <label class="btn btn-primary" ng-class="{active: current.type=='all'}">
+        <input type="radio" value="all" ng-model="current.type">Alle
+      </label>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <ul>
+    <li ng-repeat="shelter in shelters">
+      <a href="{{current.state.toLowerCase()}}/{{shelter.id}}">{{shelter.fullName}}</a>
+    </li>
+  </ul>
+</div>
+<div ng-include="'views/browser.html'"></div>

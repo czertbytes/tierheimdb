@@ -1,0 +1,70 @@
+{{define "browser-main"}}
+<div class="navbar navbar-default navbar-static-top" style="padding-top:50px">
+      <div class="container">
+        <form class="navbar-form navbar-left">
+
+          <div class="btn-group dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <label class="btn btn-primary active">
+              <input type="radio" value="cat" name="type">12 Katzen
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" value="dog" name="type">34 Hunde
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" value="all" name="type">46 Alle
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<div class="container" style="padding-top: 60px">
+  <div class="row">
+    <ul id="browser">
+      {{with .Shelter}}
+        {{with .PBAnimals}}
+          {{range .}}
+            <li>
+              {{$name := .Name}}
+              {{$shelterId := .ShelterId}}
+              {{$updateId := .UpdateId}}
+              {{$animalId := .Id}}
+              {{range $index, $img := .Images}}
+                {{if not $index }}
+                  <a href="/{{$shelterId}}/{{$updateId}}/{{$animalId}}" style="background-image: url({{$img.URL}})"><span>{{$name}}</span></a>
+                {{end}}
+              {{end}}
+            </li>
+          {{end}}
+        {{end}}
+      {{end}}
+    </ul>
+  </div>
+</div>
+{{end}}

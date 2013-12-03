@@ -1,4 +1,4 @@
 .DS_Store
 *.test
 .tmp/
-parade/app/node_modules/
+parade/node_modules/
