@@ -37,11 +37,12 @@ module.exports = (grunt) ->
 
     cssmin:
       dist:
+        keepSpecialComments: 0
         files:
           'public/styles.min.css': [
-            'app/assets/css/bootstrap.min.css'
-            'app/assets/css/bootstrap-theme.min.css'
+            'app/assets/css/bootstrap-readable.min.css'
             'app/styles/tierheimdb.css'
+            'app/styles/fadingbars.css'
           ]
 
     copy:
