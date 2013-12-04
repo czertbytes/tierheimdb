@@ -1,6 +1,11 @@
-angular.module('tdbApp', ['ngRoute', 'infinite-scroll'])
-.config ['$routeProvider', '$locationProvider'
-, ($routeProvider, $locationProvider) ->
+angular.module('tdbApp',
+[
+  'ngRoute'
+  'infinite-scroll'
+  'angular-google-analytics'
+])
+.config ['$routeProvider', '$locationProvider', 'AnalyticsProvider'
+, ($routeProvider, $locationProvider, AnalyticsProvider) ->
   $locationProvider.html5Mode on
 
   route = $routeProvider.when
@@ -27,4 +32,6 @@ angular.module('tdbApp', ['ngRoute', 'infinite-scroll'])
 
   $routeProvider.otherwise
     redirectTo: '/berlin'
+
+  AnalyticsProvider.setAccount 'UA-44691876-1'
 ]

@@ -28,4 +28,6 @@ angular.module('tdbApp')
         return shelter
     shelters[0]
 
+  $scope.copyrightOwners = () ->
+    $scope.current.shelter.fullName
 ]

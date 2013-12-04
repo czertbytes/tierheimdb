@@ -43,4 +43,6 @@ angular.module('tdbApp')
     $scope.current.state = state
     $location.path state.toLowerCase()
 
+  $scope.copyrightOwners = () ->
+    (shelter.fullName for shelter in $scope.shelters).join(', ')
 ]

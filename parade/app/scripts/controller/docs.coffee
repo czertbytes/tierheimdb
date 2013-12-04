@@ -4,4 +4,5 @@ angular.module('tdbApp')
   $scope
 ) ->
 
+  $scope.init = ->
 ]

@@ -31,6 +31,7 @@ module.exports = (grunt) ->
             'app/assets/js/angular-route.min.js'
             'app/assets/js/bootstrap.min.js'
             'app/assets/js/infscroll.js'
+            'app/assets/js/angular-google-analytics.js'
             'app/assets/js/tierheimdb.js'
             '.tmp/app.js'
           ]
