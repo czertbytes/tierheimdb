@@ -50,7 +50,7 @@
             "dog"
         ],
         "city": "Dresden",
-        "state": "Saxony",
+        "state": "Sachsen",
         "email": "tierheim@dresden.de",
         "enabled": true,
         "fullName": "Tierschutzverein Dresden e.V.",
@@ -142,7 +142,7 @@
             "dog"
         ],
         "city": "Frankfurt am Main",
-        "state": "Hesse",
+        "state": "Hessen",
         "email": "service@tsv-frankfurt.de",
         "enabled": true,
         "fullName": "Tierschutzverein Frankfurt am Main und Umgebung von 1841 e. V.",
@@ -188,7 +188,7 @@
             "dog"
         ],
         "city": "Heppenheim",
-        "state": "Hesse",
+        "state": "Hessen",
         "email": "info@tierheim-heppenheim.de",
         "enabled": true,
         "fullName": "Tierschutzverein Heppenheim und Umgebung e.V.",

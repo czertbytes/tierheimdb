@@ -1,4 +1,4 @@
-<div class="container" ng-controller="BrowserCtrl" ng-init="init()">
+<div ng-controller="BrowserCtrl" ng-init="init()">
   <div class="row">
     <div class="col-lg-12">
       <div id="browser">
@@ -12,16 +12,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <div id="fadingBarsG" class="center-block busy" ng-show="busy">
-        <div id="fadingBarsG_1" class="fadingBarsG"></div>
-        <div id="fadingBarsG_2" class="fadingBarsG"></div>
-        <div id="fadingBarsG_3" class="fadingBarsG"></div>
-        <div id="fadingBarsG_4" class="fadingBarsG"></div>
-        <div id="fadingBarsG_5" class="fadingBarsG"></div>
-        <div id="fadingBarsG_6" class="fadingBarsG"></div>
-        <div id="fadingBarsG_7" class="fadingBarsG"></div>
-        <div id="fadingBarsG_8" class="fadingBarsG"></div>
-      </div>
+      <div loading class="center-block busy" ng-show="busy"></div>
     </div>
   </div>
   <div class="row">

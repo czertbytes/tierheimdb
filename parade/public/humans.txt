@@ -1,0 +1,12 @@
+/* TEAM */
+  Developer: Daniel Hodan
+  Contact: daniel.hodan [at] czertbytes.de
+  From: Berlin, Germany
+
+/* SITE */
+  Last update: 2013/12/04
+  Language: Deutsch / English
+  Doctype: HTML5
+  Standards: HTML5, CSS3
+  Components: AngularJS, jQuery, Bootstrap
+  Editor: VIM
