@@ -24,12 +24,15 @@ module.exports = (grunt) ->
 
     uglify:
       dist:
+        options:
+          report: 'min'
+          preserveComments: 'false'
         files:
           'public/scripts.min.js': [
             'app/assets/js/jquery-2.0.3.min.js'
             'app/assets/js/angular.min.js'
             'app/assets/js/angular-route.min.js'
-            'app/assets/js/bootstrap.min.js'
+            'app/assets/js/dropdown.js'
             'app/assets/js/infscroll.js'
             'app/assets/js/angular-google-analytics.js'
             'app/assets/js/tierheimdb.js'
