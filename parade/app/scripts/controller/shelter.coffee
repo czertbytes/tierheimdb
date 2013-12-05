@@ -23,7 +23,7 @@ angular.module('tdbApp')
     , true)
 
     $scope.init = ->
-      Analytics.trackPage "/{{$routeParams.stateId}}/{{$routeParams.shelterId}}"
+      Analytics.trackPage "/#{$routeParams.stateId}/#{$routeParams.shelterId}"
       Analytics.trackTrans()
 
       Shelters.getAll().then (shelters) ->

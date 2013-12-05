@@ -22,7 +22,7 @@ angular.module('tdbApp')
       updateId = $routeParams.updateId
       animalId = $routeParams.animalId
 
-      Analytics.trackPage "/{{shelterId}}/{{updateId}}/{{animalId}}"
+      Analytics.trackPage "/#{shelterId}/#{updateId}/#{animalId}"
       Analytics.trackTrans()
 
       Animals.get(shelterId, updateId, animalId).then setAnimal

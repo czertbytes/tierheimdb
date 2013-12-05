@@ -9,16 +9,26 @@
   src: local('Raleway Bold'), local('Raleway-Bold'), url('fonts/Raleway-Bold.woff') format('woff');
 }
 
+a {
+  color: rgb(51, 153, 243);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none outside none;
+  padding-left: 0;
+}
+
+label > input[type="radio"] {
+  display: none;
+}
+
 #browser {
+  line-height: 0;
 }
 
 #browser ul {
-  list-style: none outside none;
   margin-top: 14px;
-}
-
-.shelters ul {
-  list-style: none outside none;
 }
 
 #browser ul li {
@@ -43,16 +53,6 @@
 
 #browser ul li a span {
   visibility: hidden;
-}
-
-a {
-  color: rgb(51, 153, 243);
-  text-decoration: none;
-}
-
-
-label > input[type="radio"] {
-  display: none;
 }
 
 .page-content{

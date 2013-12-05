@@ -14,7 +14,6 @@ angular.module('tdbApp')
     Analytics
   ) ->
 
-
     $scope.states = []
     $scope.shelters = []
     $scope.shelterIds = []
@@ -27,7 +26,7 @@ angular.module('tdbApp')
     , true)
 
     $scope.init = ->
-      Analytics.trackPage "/{{$routeParams.stateId}}"
+      Analytics.trackPage "/#{$routeParams.stateId}"
       Analytics.trackTrans()
 
       Shelters.getStatesMap().then (statesMap) ->

@@ -4,7 +4,7 @@
   From: Berlin, Germany
 
 /* SITE */
-  Last update: 2013/12/04
+  Last update: 2013/12/05
   Language: Deutsch / English
   Doctype: HTML5
   Standards: HTML5, CSS3
