@@ -36,6 +36,9 @@ module.exports = (grunt) ->
             'app/assets/js/infscroll.js'
             'app/assets/js/angular-google-analytics.js'
             'app/assets/js/tierheimdb.js'
+            'app/assets/js/plusone.js'
+            'app/assets/js/facebook.js'
+            'app/assets/js/social.js'
             '.tmp/app.js'
           ]
 
